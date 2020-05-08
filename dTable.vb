@@ -7,6 +7,7 @@
 
         Dim i, j As Integer
         Dim row As DataRow
+
         'Adding the Columns
         For i = 0 To _colCount - 1
             _dt.Columns.Add(_rng.Value(0, i))
@@ -35,7 +36,7 @@
     '===================================================================================      
     '                === Format DataGridView ===
     '===================================================================================
-    Sub DGV_format(_dtName As String)
+    Sub DGV_format(_dtName As String, _color As Color)
 
         mainForm.DGV.Columns(0).Width = 40
         mainForm.DGV.Columns(1).Width = 175
@@ -54,7 +55,7 @@
         For i = 0 To mainForm.DGV.Rows.Count - 2
 
             'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
-            mainForm.DGV.RowsDefaultCellStyle.BackColor = Color.FromArgb(252, 228, 214)
+            mainForm.DGV.RowsDefaultCellStyle.BackColor = _color
             mainForm.DGV.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i

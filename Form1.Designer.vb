@@ -43,6 +43,12 @@ Partial Class mainForm
         Me.ComboBox1 = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
+        Me.btn_prev = New System.Windows.Forms.Button()
+        Me.btn_next = New System.Windows.Forms.Button()
+        Me.btn_add = New System.Windows.Forms.Button()
+        Me.btn_del = New System.Windows.Forms.Button()
+        Me.btn_update = New System.Windows.Forms.Button()
+        Me.btn_save = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -81,6 +87,12 @@ Partial Class mainForm
         '
         'TabPage1
         '
+        Me.TabPage1.Controls.Add(Me.btn_save)
+        Me.TabPage1.Controls.Add(Me.btn_update)
+        Me.TabPage1.Controls.Add(Me.btn_del)
+        Me.TabPage1.Controls.Add(Me.btn_add)
+        Me.TabPage1.Controls.Add(Me.btn_next)
+        Me.TabPage1.Controls.Add(Me.btn_prev)
         Me.TabPage1.Controls.Add(Me.txt_qty3)
         Me.TabPage1.Controls.Add(Me.txt_qty2)
         Me.TabPage1.Controls.Add(Me.txt_qty1)
@@ -244,6 +256,60 @@ Partial Class mainForm
         '
         Me.OFD.FileName = "OpenFileDialog1"
         '
+        'btn_prev
+        '
+        Me.btn_prev.Location = New System.Drawing.Point(28, 586)
+        Me.btn_prev.Name = "btn_prev"
+        Me.btn_prev.Size = New System.Drawing.Size(75, 23)
+        Me.btn_prev.TabIndex = 14
+        Me.btn_prev.Text = "<<<"
+        Me.btn_prev.UseVisualStyleBackColor = True
+        '
+        'btn_next
+        '
+        Me.btn_next.Location = New System.Drawing.Point(109, 586)
+        Me.btn_next.Name = "btn_next"
+        Me.btn_next.Size = New System.Drawing.Size(75, 23)
+        Me.btn_next.TabIndex = 14
+        Me.btn_next.Text = ">>>"
+        Me.btn_next.UseVisualStyleBackColor = True
+        '
+        'btn_add
+        '
+        Me.btn_add.Location = New System.Drawing.Point(652, 586)
+        Me.btn_add.Name = "btn_add"
+        Me.btn_add.Size = New System.Drawing.Size(75, 23)
+        Me.btn_add.TabIndex = 14
+        Me.btn_add.Text = "Add"
+        Me.btn_add.UseVisualStyleBackColor = True
+        '
+        'btn_del
+        '
+        Me.btn_del.Location = New System.Drawing.Point(734, 586)
+        Me.btn_del.Name = "btn_del"
+        Me.btn_del.Size = New System.Drawing.Size(75, 23)
+        Me.btn_del.TabIndex = 14
+        Me.btn_del.Text = "Delete"
+        Me.btn_del.UseVisualStyleBackColor = True
+        '
+        'btn_update
+        '
+        Me.btn_update.Location = New System.Drawing.Point(816, 586)
+        Me.btn_update.Name = "btn_update"
+        Me.btn_update.Size = New System.Drawing.Size(75, 23)
+        Me.btn_update.TabIndex = 14
+        Me.btn_update.Text = "Update"
+        Me.btn_update.UseVisualStyleBackColor = True
+        '
+        'btn_save
+        '
+        Me.btn_save.Location = New System.Drawing.Point(898, 586)
+        Me.btn_save.Name = "btn_save"
+        Me.btn_save.Size = New System.Drawing.Size(75, 23)
+        Me.btn_save.TabIndex = 14
+        Me.btn_save.Text = "Save"
+        Me.btn_save.UseVisualStyleBackColor = True
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -282,4 +348,10 @@ Partial Class mainForm
     Friend WithEvents txt_qty2 As TextBox
     Friend WithEvents txt_qty1 As TextBox
     Friend WithEvents txt_qty As TextBox
+    Friend WithEvents btn_save As Button
+    Friend WithEvents btn_update As Button
+    Friend WithEvents btn_del As Button
+    Friend WithEvents btn_add As Button
+    Friend WithEvents btn_next As Button
+    Friend WithEvents btn_prev As Button
 End Class

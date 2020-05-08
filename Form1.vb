@@ -23,6 +23,7 @@ Public Class mainForm
     Public c_movHeads_belimlight, c_movHeads_PRLighting As Integer
     Public c_movHeads_blackout, c_movHeads_vision As Integer
 
+
     Public adr_movHeads_belimlight, adr_movHeads_PRlighting As String
     Public adr_movHeads_blackout, adr_movHeads_vision As String
 
@@ -30,6 +31,9 @@ Public Class mainForm
     Public rng_movHeads_blackout, rng_movHeads_vision As ExcelRange
 
     Public obj_excelLight, obj_excelFileLight As Object         '   Global vars to use in function "Save"
+
+    Public selectedCompany() As String = {"belimlight", "PRlighting", "blackout", "vision"}
+    Public selComp As String = ""
 
     '===================================================================================      
     '                === Load button ===
@@ -93,11 +97,81 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_belIm_Click(sender As Object, e As EventArgs) Handles btn_belIm.Click
 
+        selComp = selectedCompany(0)
+
+        Dim c As Color = Color.FromArgb(252, 228, 214)
+        dt_movHeads_belimlight = New DataTable
         create_datatable(r_movHeads_belimlight, c_movHeads_belimlight, rng_movHeads_belimlight, dt_movHeads_belimlight, "belimlight")
         DGV.DataSource = dt_movHeads_belimlight
-        DGV_format("belimlight")
+        DGV_format("belimlight", c)
+
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
     End Sub
+    '===================================================================================      
+    '                === PRLighting button ===
+    '===================================================================================
+
+    Private Sub btn_prLight_Click(sender As Object, e As EventArgs) Handles btn_prLight.Click
+
+        selComp = selectedCompany(1)
+
+        Dim c As Color = Color.FromArgb(221, 235, 247)
+        dt_movHeads_PRLighting = New DataTable
+        create_datatable(r_movHeads_PRLighting, c_movHeads_PRLighting, rng_movHeads_PRlighting, dt_movHeads_PRLighting, "PRLighting")
+        DGV.DataSource = dt_movHeads_PRLighting
+        DGV_format("PRLighting", c)
+
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
+
+    End Sub
+    '===================================================================================      
+    '                === Blackout button ===
+    '===================================================================================
+    Private Sub btn_blackOut_Click(sender As Object, e As EventArgs) Handles btn_blackOut.Click
+
+        selComp = selectedCompany(2)
+
+        Dim c As Color = Color.FromArgb(237, 237, 237)
+        dt_movHeads_blackout = New DataTable
+        create_datatable(r_movHeads_blackout, c_movHeads_blackout, rng_movHeads_blackout, dt_movHeads_blackout, "blackout")
+        DGV.DataSource = dt_movHeads_blackout
+        DGV_format("blackout", c)
+
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
+
+    End Sub
+
+
+    '===================================================================================      
+    '                === Vision button ===
+    '===================================================================================
+    Private Sub btn_vision_Click(sender As Object, e As EventArgs) Handles btn_vision.Click
+
+        selComp = selectedCompany(0)
+
+        Dim c As Color = Color.FromArgb(226, 239, 218)
+        dt_movHeads_vision = New DataTable
+        create_datatable(r_movHeads_vision, c_movHeads_vision, rng_movHeads_vision, dt_movHeads_vision, "vision")
+        DGV.DataSource = dt_movHeads_vision
+        DGV_format("vision", c)
+
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
+
+    End Sub
+
 
     '===================================================================================
     '             === CellClick on DGV ===
