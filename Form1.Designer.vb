@@ -40,7 +40,7 @@ Partial Class mainForm
         Me.btn_prLight = New System.Windows.Forms.Button()
         Me.btn_belIm = New System.Windows.Forms.Button()
         Me.Label1 = New System.Windows.Forms.Label()
-        Me.ComboBox1 = New System.Windows.Forms.ComboBox()
+        Me.cmb_category = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
         Me.btn_prev = New System.Windows.Forms.Button()
@@ -107,7 +107,7 @@ Partial Class mainForm
         Me.TabPage1.Controls.Add(Me.btn_prLight)
         Me.TabPage1.Controls.Add(Me.btn_belIm)
         Me.TabPage1.Controls.Add(Me.Label1)
-        Me.TabPage1.Controls.Add(Me.ComboBox1)
+        Me.TabPage1.Controls.Add(Me.cmb_category)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
@@ -233,14 +233,14 @@ Partial Class mainForm
         Me.Label1.TabIndex = 1
         Me.Label1.Text = "Категория"
         '
-        'ComboBox1
+        'cmb_category
         '
-        Me.ComboBox1.FormattingEnabled = True
-        Me.ComboBox1.Items.AddRange(New Object() {"Головы/Moving heads", "Стробоскопы/strobes, Прожектора следящего света/followspots", "Пары, блайндера/PAR's, blinders", "Архитектурный свет/Architecture fixtures", "Светодиодные приборы/LED fixtures", "Дым, туман, вентиляторы, прочее/Fog, Haze, fans, rest", "Пульты/lighting desks", "Системы связи/Intercoms and radios"})
-        Me.ComboBox1.Location = New System.Drawing.Point(24, 30)
-        Me.ComboBox1.Name = "ComboBox1"
-        Me.ComboBox1.Size = New System.Drawing.Size(282, 21)
-        Me.ComboBox1.TabIndex = 0
+        Me.cmb_category.FormattingEnabled = True
+        Me.cmb_category.Items.AddRange(New Object() {"Головы/Moving heads", "Стробоскопы/strobes, Прожектора следящего света/followspots", "Пары, блайндера/PAR's, blinders", "Архитектурный свет/Architecture fixtures", "Светодиодные приборы/LED fixtures", "Дым, туман, вентиляторы, прочее/Fog, Haze, fans, rest", "Пульты/lighting desks", "Системы связи/Intercoms and radios"})
+        Me.cmb_category.Location = New System.Drawing.Point(24, 30)
+        Me.cmb_category.Name = "cmb_category"
+        Me.cmb_category.Size = New System.Drawing.Size(282, 21)
+        Me.cmb_category.TabIndex = 0
         '
         'TabPage2
         '
@@ -330,7 +330,7 @@ Partial Class mainForm
     Friend WithEvents tabControl As TabControl
     Friend WithEvents TabPage1 As TabPage
     Friend WithEvents Label1 As Label
-    Friend WithEvents ComboBox1 As ComboBox
+    Friend WithEvents cmb_category As ComboBox
     Friend WithEvents TabPage2 As TabPage
     Friend WithEvents DGV As DataGridView
     Friend WithEvents btn_vision As Button

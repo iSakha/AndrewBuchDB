@@ -8,27 +8,45 @@ Public Class mainForm
     Public sFileName_DB As String
 
     Public wsMovHeads As ExcelWorksheet
+    Public wsStrobes As ExcelWorksheet
 
     Public tbl_Light_Collection As ExcelTableCollection
 
     Public tbl_movHeads_belimlight, tbl_movHeads_PRLighting As ExcelTable
     Public tbl_movHeads_blackout, tbl_movHeads_vision As ExcelTable
 
+    Public tbl_strobes_belimlight, tbl_strobes_PRLighting As ExcelTable
+    Public tbl_strobes_blackout, tbl_strobes_vision As ExcelTable
+
     Public dt_movHeads_belimlight, dt_movHeads_PRLighting As New DataTable()
     Public dt_movHeads_blackout, dt_movHeads_vision As New DataTable()
+
+    Public dt_strobes_belimlight, dt_strobes_PRLighting As New DataTable()
+    Public dt_strobes_blackout, dt_strobes_vision As New DataTable()
 
     Public r_movHeads_belimlight, r_movHeads_PRLighting As Integer
     Public r_movHeads_blackout, r_movHeads_vision As Integer
 
+    Public r_strobes_belimlight, r_strobes_PRLighting As Integer
+    Public r_strobes_blackout, r_strobes_vision As Integer
+
     Public c_movHeads_belimlight, c_movHeads_PRLighting As Integer
     Public c_movHeads_blackout, c_movHeads_vision As Integer
 
+    Public c_strobes_belimlight, c_strobes_PRLighting As Integer
+    Public c_strobes_blackout, c_strobes_vision As Integer
 
     Public adr_movHeads_belimlight, adr_movHeads_PRlighting As String
     Public adr_movHeads_blackout, adr_movHeads_vision As String
 
+    Public adr_strobes_belimlight, adr_strobes_PRlighting As String
+    Public adr_strobes_blackout, adr_strobes_vision As String
+
     Public rng_movHeads_belimlight, rng_movHeads_PRlighting As ExcelRange
     Public rng_movHeads_blackout, rng_movHeads_vision As ExcelRange
+
+    Public rng_strobes_belimlight, rng_strobes_PRlighting As ExcelRange
+    Public rng_strobes_blackout, rng_strobes_vision As ExcelRange
 
     Public obj_excelLight, obj_excelFileLight As Object         '   Global vars to use in function "Save"
 
@@ -59,34 +77,12 @@ Public Class mainForm
 
 
             wsMovHeads = Excel.Workbook.Worksheets(0)
+            wsStrobes = Excel.Workbook.Worksheets(1)
 
             tbl_Light_Collection = wsMovHeads.Tables
-
-            tbl_movHeads_belimlight = tbl_Light_Collection.Item("movHeads_belimlight")
-            tbl_movHeads_PRLighting = tbl_Light_Collection.Item("movHeads_PRlighting")
-            tbl_movHeads_blackout = tbl_Light_Collection.Item("movHeads_blackout")
-            tbl_movHeads_vision = tbl_Light_Collection.Item("movHeads_vision")
-
-            r_movHeads_belimlight = tbl_movHeads_belimlight.Address.Rows
-            r_movHeads_PRLighting = tbl_movHeads_PRLighting.Address.Rows
-            r_movHeads_blackout = tbl_movHeads_blackout.Address.Rows
-            r_movHeads_vision = tbl_movHeads_vision.Address.Rows
-
-            c_movHeads_belimlight = tbl_movHeads_belimlight.Address.Columns
-            c_movHeads_PRLighting = tbl_movHeads_PRLighting.Address.Columns
-            c_movHeads_blackout = tbl_movHeads_blackout.Address.Columns
-            c_movHeads_vision = tbl_movHeads_vision.Address.Columns
-
-            adr_movHeads_belimlight = tbl_movHeads_belimlight.Address.Address
-            adr_movHeads_PRlighting = tbl_movHeads_PRLighting.Address.Address
-            adr_movHeads_blackout = tbl_movHeads_blackout.Address.Address
-            adr_movHeads_vision = tbl_movHeads_vision.Address.Address
-
-            rng_movHeads_belimlight = wsMovHeads.Cells(adr_movHeads_belimlight)
-            rng_movHeads_PRlighting = wsMovHeads.Cells(adr_movHeads_PRlighting)
-            rng_movHeads_blackout = wsMovHeads.Cells(adr_movHeads_blackout)
-            rng_movHeads_vision = wsMovHeads.Cells(adr_movHeads_vision)
-
+            initMovHeads()
+            tbl_Light_Collection = wsStrobes.Tables
+            initStrobes()
             tabControl.SelectedIndex = 1
 
         End If
@@ -99,16 +95,35 @@ Public Class mainForm
 
         selComp = selectedCompany(0)
 
-        Dim c As Color = Color.FromArgb(252, 228, 214)
-        dt_movHeads_belimlight = New DataTable
-        create_datatable(r_movHeads_belimlight, c_movHeads_belimlight, rng_movHeads_belimlight, dt_movHeads_belimlight, "belimlight")
-        DGV.DataSource = dt_movHeads_belimlight
-        DGV_format("belimlight", c)
+        Select Case cmb_category.SelectedIndex
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+            Case 0
+
+                Dim c As Color = Color.FromArgb(252, 228, 214)
+                dt_movHeads_belimlight = New DataTable
+                create_datatable(r_movHeads_belimlight, c_movHeads_belimlight, rng_movHeads_belimlight, dt_movHeads_belimlight, "movHeads_belimlight")
+                DGV.DataSource = dt_movHeads_belimlight
+                DGV_format("movHeads_belimlight", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+            Case 1
+
+                Dim c As Color = Color.FromArgb(252, 228, 214)
+                dt_strobes_belimlight = New DataTable
+                create_datatable(r_strobes_belimlight, c_strobes_belimlight, rng_strobes_belimlight, dt_strobes_belimlight, "strobes_belimlight")
+                DGV.DataSource = dt_strobes_belimlight
+                DGV_format("strobes_belimlight", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+        End Select
 
     End Sub
     '===================================================================================      
@@ -119,16 +134,35 @@ Public Class mainForm
 
         selComp = selectedCompany(1)
 
-        Dim c As Color = Color.FromArgb(221, 235, 247)
-        dt_movHeads_PRLighting = New DataTable
-        create_datatable(r_movHeads_PRLighting, c_movHeads_PRLighting, rng_movHeads_PRlighting, dt_movHeads_PRLighting, "PRLighting")
-        DGV.DataSource = dt_movHeads_PRLighting
-        DGV_format("PRLighting", c)
+        Select Case cmb_category.SelectedIndex
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+            Case 0
+
+                Dim c As Color = Color.FromArgb(221, 235, 247)
+                dt_movHeads_PRLighting = New DataTable
+                create_datatable(r_movHeads_PRLighting, c_movHeads_PRLighting, rng_movHeads_PRlighting, dt_movHeads_PRLighting, "movHeads_PRLighting")
+                DGV.DataSource = dt_movHeads_PRLighting
+                DGV_format("PRLighting", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+            Case 1
+
+                Dim c As Color = Color.FromArgb(221, 235, 247)
+                dt_strobes_PRLighting = New DataTable
+                create_datatable(r_strobes_PRLighting, c_strobes_PRLighting, rng_strobes_PRlighting, dt_strobes_PRLighting, "strobes_PRLighting")
+                DGV.DataSource = dt_strobes_PRLighting
+                DGV_format("strobes_PRLighting", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+        End Select
 
     End Sub
     '===================================================================================      
@@ -138,16 +172,35 @@ Public Class mainForm
 
         selComp = selectedCompany(2)
 
-        Dim c As Color = Color.FromArgb(237, 237, 237)
-        dt_movHeads_blackout = New DataTable
-        create_datatable(r_movHeads_blackout, c_movHeads_blackout, rng_movHeads_blackout, dt_movHeads_blackout, "blackout")
-        DGV.DataSource = dt_movHeads_blackout
-        DGV_format("blackout", c)
+        Select Case cmb_category.SelectedIndex
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+            Case 0
+
+                Dim c As Color = Color.FromArgb(237, 237, 237)
+                dt_movHeads_blackout = New DataTable
+                create_datatable(r_movHeads_blackout, c_movHeads_blackout, rng_movHeads_blackout, dt_movHeads_blackout, "movHeads_blackout")
+                DGV.DataSource = dt_movHeads_blackout
+                DGV_format("movHeads_blackout", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+            Case 1
+
+                Dim c As Color = Color.FromArgb(237, 237, 237)
+                dt_strobes_blackout = New DataTable
+                create_datatable(r_strobes_blackout, c_strobes_blackout, rng_strobes_blackout, dt_strobes_blackout, "strobes_movHeads_blackout")
+                DGV.DataSource = dt_strobes_blackout
+                DGV_format("strobes_blackout", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+        End Select
 
     End Sub
 
@@ -159,16 +212,35 @@ Public Class mainForm
 
         selComp = selectedCompany(0)
 
-        Dim c As Color = Color.FromArgb(226, 239, 218)
-        dt_movHeads_vision = New DataTable
-        create_datatable(r_movHeads_vision, c_movHeads_vision, rng_movHeads_vision, dt_movHeads_vision, "vision")
-        DGV.DataSource = dt_movHeads_vision
-        DGV_format("vision", c)
+        Select Case cmb_category.SelectedIndex
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+            Case 0
+
+                Dim c As Color = Color.FromArgb(226, 239, 218)
+                dt_movHeads_vision = New DataTable
+                create_datatable(r_movHeads_vision, c_movHeads_vision, rng_movHeads_vision, dt_movHeads_vision, "movHeads_vision")
+                DGV.DataSource = dt_movHeads_vision
+                DGV_format("movHeads_vision", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+            Case 1
+
+                Dim c As Color = Color.FromArgb(226, 239, 218)
+                dt_strobes_vision = New DataTable
+                create_datatable(r_strobes_vision, c_strobes_vision, rng_strobes_vision, dt_strobes_vision, "strobes_vision")
+                DGV.DataSource = dt_strobes_vision
+                DGV_format("strobes_vision", c)
+
+                rtb_fixtureName.BackColor = c
+                rtb_FirstName.BackColor = c
+                rtb_SecondName.BackColor = c
+                rtb_ThirdName.BackColor = c
+
+        End Select
 
     End Sub
 
