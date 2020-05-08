@@ -1,0 +1,14 @@
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\AndrewBuch.exe.config
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\AndrewBuch.exe
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\AndrewBuch.pdb
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\AndrewBuch.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.vbprojAssemblyReference.cache
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.Resources.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.vbproj.GenerateResource.cache
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.exe
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.pdb
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\EPPlus.dll
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\Debug\EPPlus.xml
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.mainForm.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.vbproj.CopyComplete
