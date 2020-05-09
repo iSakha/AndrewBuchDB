@@ -74,7 +74,7 @@ Public Class mainForm
     Public dt_intercom_belimlight, dt_intercom_PRLighting As New DataTable()
     Public dt_intercom_blackout, dt_intercom_vision As New DataTable()
 
-    Public dt_Lighting(3, 7) As Object
+    Public dt_Lighting(7, 3) As Object
 
     '=================================  Rows and columns  ==================================================
 
@@ -102,7 +102,7 @@ Public Class mainForm
     Public r_intercom_belimlight, r_intercom_PRLighting As Integer
     Public r_intercom_blackout, r_intercom_vision As Integer
 
-
+    Public r_Light_tbl(7, 3) As Integer
 
     Public c_movHeads_belimlight, c_movHeads_PRLighting As Integer
     Public c_movHeads_blackout, c_movHeads_vision As Integer
@@ -127,6 +127,8 @@ Public Class mainForm
 
     Public c_intercom_belimlight, c_intercom_PRLighting As Integer
     Public c_intercom_blackout, c_intercom_vision As Integer
+
+    Public c_Light_tbl(7, 3) As Integer
 
     '=================================      Address        ==================================================
 
@@ -154,6 +156,8 @@ Public Class mainForm
     Public adr_intercom_belimlight, adr_intercom_PRLighting As String
     Public adr_intercom_blackout, adr_intercom_vision As String
 
+    Public adr_Light_tbl(7, 3) As String
+
     '=================================      ExcelRange       =================================================
 
     Public rng_movHeads_belimlight, rng_movHeads_PRLighting As ExcelRange
@@ -179,6 +183,8 @@ Public Class mainForm
 
     Public rng_intercom_belimlight, rng_intercom_PRLighting As ExcelRange
     Public rng_intercom_blackout, rng_intercom_vision As ExcelRange
+
+    Public rng_Light_tbl(7, 3) As ExcelRange
 
     '=================================      Others       =================================================
 
@@ -209,25 +215,40 @@ Public Class mainForm
             obj_excel = Excel                            '   Global vars to use in function "Save"
             obj_excelFile = excelFile
 
-            initWorksheets()
+            initLightWorksheets()
+            initLightTables()
 
+            Dim i, j As Integer
 
-            tbl_Light_Collection = wsLight(0).Tables
-            initMovHeads()
-            tbl_Light_Collection = wsLight(1).Tables
-            initStrobes()
-            tbl_Light_Collection = wsLight(2).Tables
-            initBlinders()
-            tbl_Light_Collection = wsLight(3).Tables
-            initArch()
-            tbl_Light_Collection = wsLight(4).Tables
-            initLED()
-            tbl_Light_Collection = wsLight(5).Tables
-            initSmoke()
-            tbl_Light_Collection = wsLight(6).Tables
-            initConsoles()
-            tbl_Light_Collection = wsLight(7).Tables
-            initIntercom()
+            For i = 0 To 7
+
+                For j = 0 To 3
+
+                    r_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Rows
+                    c_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Columns
+                    adr_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Address
+                    rng_Light_tbl(i, j) = wsMovHeads.Cells(adr_Light_tbl(i, j))
+
+                Next j
+
+            Next i
+
+            'tbl_Light_Collection = wsLight(0).Tables
+            'initMovHeads()
+            'tbl_Light_Collection = wsLight(1).Tables
+            'initStrobes()
+            'tbl_Light_Collection = wsLight(2).Tables
+            'initBlinders()
+            'tbl_Light_Collection = wsLight(3).Tables
+            'initArch()
+            'tbl_Light_Collection = wsLight(4).Tables
+            'initLED()
+            'tbl_Light_Collection = wsLight(5).Tables
+            'initSmoke()
+            'tbl_Light_Collection = wsLight(6).Tables
+            'initConsoles()
+            'tbl_Light_Collection = wsLight(7).Tables
+            'initIntercom()
 
             tabControl.SelectedIndex = 1
 
@@ -241,113 +262,127 @@ Public Class mainForm
 
         selComp = selectedCompany(0)
 
-        Select Case cmb_category.SelectedIndex
+        Dim c As Color = Color.FromArgb(252, 228, 214)
 
-            Case 0
+        dt_movHeads_belimlight = New DataTable
+        dt_Lighting(0, 0) = dt_movHeads_belimlight
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_movHeads_belimlight = New DataTable
-                create_datatable(r_movHeads_belimlight, c_movHeads_belimlight, rng_movHeads_belimlight, dt_movHeads_belimlight, "movHeads_belimlight")
-                DGV.DataSource = dt_movHeads_belimlight
-                DGV_format("movHeads_belimlight", c)
+        create_datatable(r_Light_tbl(0, 0), c_Light_tbl(0, 0), rng_Light_tbl(0, 0), dt_Lighting(0, 0), "movHeads_belimlight")
+        DGV.DataSource = dt_Lighting(0, 0)
+        DGV_format("movHeads_belimlight", c)
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
-            Case 1
+        'Select Case cmb_category.SelectedIndex
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_strobes_belimlight = New DataTable
-                create_datatable(r_strobes_belimlight, c_strobes_belimlight, rng_strobes_belimlight, dt_strobes_belimlight, "strobes_belimlight")
-                DGV.DataSource = dt_strobes_belimlight
-                DGV_format("strobes_belimlight", c)
+        '    Case 0
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_movHeads_belimlight = New DataTable
+        '        create_datatable(r_movHeads_belimlight, c_movHeads_belimlight, rng_movHeads_belimlight, dt_movHeads_belimlight, "movHeads_belimlight")
+        '        DGV.DataSource = dt_movHeads_belimlight
+        '        DGV_format("movHeads_belimlight", c)
 
-            Case 2
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_blinders_belimlight = New DataTable
-                create_datatable(r_blinders_belimlight, c_blinders_belimlight, rng_blinders_belimlight, dt_blinders_belimlight, "blinders_belimlight")
-                DGV.DataSource = dt_blinders_belimlight
-                DGV_format("blinders_belimlight", c)
+        '    Case 1
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_strobes_belimlight = New DataTable
+        '        create_datatable(r_strobes_belimlight, c_strobes_belimlight, rng_strobes_belimlight, dt_strobes_belimlight, "strobes_belimlight")
+        '        DGV.DataSource = dt_strobes_belimlight
+        '        DGV_format("strobes_belimlight", c)
 
-            Case 3
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_arch_belimlight = New DataTable
-                create_datatable(r_arch_belimlight, c_arch_belimlight, rng_arch_belimlight, dt_arch_belimlight, "arch_belimlight")
-                DGV.DataSource = dt_arch_belimlight
-                DGV_format("arch_belimlight", c)
+        '    Case 2
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_blinders_belimlight = New DataTable
+        '        create_datatable(r_blinders_belimlight, c_blinders_belimlight, rng_blinders_belimlight, dt_blinders_belimlight, "blinders_belimlight")
+        '        DGV.DataSource = dt_blinders_belimlight
+        '        DGV_format("blinders_belimlight", c)
 
-            Case 4
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_LED_belimlight = New DataTable
-                create_datatable(r_LED_belimlight, c_LED_belimlight, rng_LED_belimlight, dt_LED_belimlight, "LED_belimlight")
-                DGV.DataSource = dt_LED_belimlight
-                DGV_format("LED_belimlight", c)
+        '    Case 3
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_arch_belimlight = New DataTable
+        '        create_datatable(r_arch_belimlight, c_arch_belimlight, rng_arch_belimlight, dt_arch_belimlight, "arch_belimlight")
+        '        DGV.DataSource = dt_arch_belimlight
+        '        DGV_format("arch_belimlight", c)
 
-            Case 5
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_smoke_belimlight = New DataTable
-                create_datatable(r_smoke_belimlight, c_smoke_belimlight, rng_smoke_belimlight, dt_smoke_belimlight, "smoke_belimlight")
-                DGV.DataSource = dt_smoke_belimlight
-                DGV_format("smoke_belimlight", c)
+        '    Case 4
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_LED_belimlight = New DataTable
+        '        create_datatable(r_LED_belimlight, c_LED_belimlight, rng_LED_belimlight, dt_LED_belimlight, "LED_belimlight")
+        '        DGV.DataSource = dt_LED_belimlight
+        '        DGV_format("LED_belimlight", c)
 
-            Case 6
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_consoles_belimlight = New DataTable
-                create_datatable(r_consoles_belimlight, c_consoles_belimlight, rng_consoles_belimlight, dt_consoles_belimlight, "consoles_belimlight")
-                DGV.DataSource = dt_consoles_belimlight
-                DGV_format("consoles_belimlight", c)
+        '    Case 5
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_smoke_belimlight = New DataTable
+        '        create_datatable(r_smoke_belimlight, c_smoke_belimlight, rng_smoke_belimlight, dt_smoke_belimlight, "smoke_belimlight")
+        '        DGV.DataSource = dt_smoke_belimlight
+        '        DGV_format("smoke_belimlight", c)
 
-            Case 7
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
 
-                Dim c As Color = Color.FromArgb(252, 228, 214)
-                dt_intercom_belimlight = New DataTable
-                create_datatable(r_intercom_belimlight, c_intercom_belimlight, rng_intercom_belimlight, dt_intercom_belimlight, "intercom_belimlight")
-                DGV.DataSource = dt_intercom_belimlight
-                DGV_format("intercom_belimlight", c)
+        '    Case 6
 
-                rtb_fixtureName.BackColor = c
-                rtb_FirstName.BackColor = c
-                rtb_SecondName.BackColor = c
-                rtb_ThirdName.BackColor = c
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_consoles_belimlight = New DataTable
+        '        create_datatable(r_consoles_belimlight, c_consoles_belimlight, rng_consoles_belimlight, dt_consoles_belimlight, "consoles_belimlight")
+        '        DGV.DataSource = dt_consoles_belimlight
+        '        DGV_format("consoles_belimlight", c)
 
-        End Select
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
+
+        '    Case 7
+
+        '        Dim c As Color = Color.FromArgb(252, 228, 214)
+        '        dt_intercom_belimlight = New DataTable
+        '        create_datatable(r_intercom_belimlight, c_intercom_belimlight, rng_intercom_belimlight, dt_intercom_belimlight, "intercom_belimlight")
+        '        DGV.DataSource = dt_intercom_belimlight
+        '        DGV_format("intercom_belimlight", c)
+
+        '        rtb_fixtureName.BackColor = c
+        '        rtb_FirstName.BackColor = c
+        '        rtb_SecondName.BackColor = c
+        '        rtb_ThirdName.BackColor = c
+
+        'End Select
 
     End Sub
     '===================================================================================      
