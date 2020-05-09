@@ -80,6 +80,7 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="declarations.vb" />
     <Compile Include="dTable.vb" />
     <Compile Include="Form1.vb">
       <SubType>Form</SubType>
