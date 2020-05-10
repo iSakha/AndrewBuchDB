@@ -53,6 +53,8 @@
             mainForm.wsLight(7).Tables.Item("intercom_vision")}
         }
 
+        mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting, mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision}
+
 
         mainForm.dt_Lighting = {
             {mainForm.dt_movHeads_belimlight, mainForm.dt_movHeads_PRLighting,

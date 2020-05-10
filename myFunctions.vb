@@ -1,5 +1,7 @@
 ﻿Module myFunctions
-
+    '===================================================================================
+    '             === Clear controls ===
+    '===================================================================================
     Sub clearControls()
 
         mainForm.rtb_fixtureName.Text = ""
@@ -11,28 +13,37 @@
         mainForm.rtb_ThirdName.Text = ""
         mainForm.txt_qty3.Text = ""
 
-    End Sub
+        mainForm.lbl_qty_belimlight.Text = ""
+        mainForm.lbl_qty_PRLighting.Text = ""
+        mainForm.lbl_qty_blackout.Text = ""
+        mainForm.lbl_qty_vision.Text = ""
+        mainForm.lbl_qtyTotal.Text = ""
+        mainForm.lbl_smeta_qty.Visible = False
 
+    End Sub
+    '===================================================================================
+    '             === Prev record ===
+    '===================================================================================
     Sub prevRecord()
 
         Dim index As Integer
         Dim selectedRow As DataGridViewRow
 
-        index = mainForm.DGV.CurrentRow.Index
+        index = mainForm.DGV_light.CurrentRow.Index
 
-        mainForm.DGV.ClearSelection()
-        mainForm.DGV.CurrentCell = mainForm.DGV.Item(0, index)
-        mainForm.DGV.Rows(index).Selected = True
+        mainForm.DGV_light.ClearSelection()
+        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+        mainForm.DGV_light.Rows(index).Selected = True
 
         If index = 0 Then
-            index = mainForm.DGV.Rows.Count
+            index = mainForm.DGV_light.Rows.Count
         End If
         index = index - 1
-        mainForm.DGV.CurrentCell = mainForm.DGV.Item(0, index)
-        mainForm.DGV.Rows(index).Selected = True
+        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+        mainForm.DGV_light.Rows(index).Selected = True
 
         Try
-            selectedRow = mainForm.DGV.Rows(index)
+            selectedRow = mainForm.DGV_light.Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
@@ -46,26 +57,30 @@
 
         End Try
 
-    End Sub
+        calcQuantity()
 
+    End Sub
+    '===================================================================================
+    '             === Next record ===
+    '===================================================================================
     Sub nextRecord()
         Dim index As Integer
         Dim selectedRow As DataGridViewRow
 
-        index = mainForm.DGV.CurrentRow.Index
+        index = mainForm.DGV_light.CurrentRow.Index
 
-        mainForm.DGV.ClearSelection()
-        mainForm.DGV.CurrentCell = mainForm.DGV.Item(0, index)
-        mainForm.DGV.Rows(index).Selected = True
+        mainForm.DGV_light.ClearSelection()
+        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+        mainForm.DGV_light.Rows(index).Selected = True
 
-        If index = mainForm.DGV.Rows.Count - 1 Then
+        If index = mainForm.DGV_light.Rows.Count - 1 Then
             index = -1
         End If
         index = index + 1
-        mainForm.DGV.CurrentCell = mainForm.DGV.Item(0, index)
-        mainForm.DGV.Rows(index).Selected = True
+        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+        mainForm.DGV_light.Rows(index).Selected = True
         Try
-            selectedRow = mainForm.DGV.Rows(index)
+            selectedRow = mainForm.DGV_light.Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
@@ -78,7 +93,53 @@
         Catch
 
         End Try
+
+        calcQuantity()
     End Sub
 
+    Sub calcQuantity()
+        Dim index As Integer
+        Dim i, j, qty, sum As Integer
+
+        i = mainForm.cmb_category.SelectedIndex
+
+        index = mainForm.DGV_light.CurrentRow.Index
+
+        Dim row As DataRow
+        For j = 0 To 3
+            sum = 0
+            row = mainForm.dt_Lighting(i, j).rows(index)
+
+            If row.Item(4).ToString = "" Then
+                qty = 0
+            Else qty = CInt(row.Item(4))
+
+            End If
+
+            sum = sum + qty
+
+            If row.Item(6).ToString = "" Then
+                qty = 0
+            Else qty = CInt(row.Item(6))
+
+            End If
+
+            sum = sum + qty
+
+            If row.Item(8).ToString = "" Then
+                qty = 0
+            Else qty = CInt(row.Item(8))
+
+            End If
+
+            sum = sum + qty
+
+            mainForm.lblSumQty(j).Text = sum
+        Next j
+
+        mainForm.lbl_qtyTotal.Text = mainForm.txt_qty.Text
+        mainForm.lbl_smeta_qty.Visible = True
+
+    End Sub
 
 End Module

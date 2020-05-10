@@ -193,6 +193,8 @@ Public Class mainForm
     Public selectedCompany() As String = {"belimlight", "PRLighting", "blackout", "vision"}
     Public selComp As String = ""
 
+    Public lblSumQty() As Object
+
     '===================================================================================      
     '                === Load button ===
     '===================================================================================
@@ -220,6 +222,8 @@ Public Class mainForm
 
             tabControl.SelectedIndex = 1
 
+            Console.WriteLine(cmb_category.SelectedIndex)
+
         End If
     End Sub
 
@@ -237,10 +241,16 @@ Public Class mainForm
         i = cmb_category.SelectedIndex
 
         dt_Lighting(i, 0) = New DataTable
-
+        dt_Lighting(i, 1) = New DataTable
+        dt_Lighting(i, 2) = New DataTable
+        dt_Lighting(i, 3) = New DataTable
 
         create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-            DGV.DataSource = dt_Lighting(i, 0)
+        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
+        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
+        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+
+        DGV_light.DataSource = dt_Lighting(i, 0)
             DGV_format(tbl_Lighting_tables(i, 0).Name, c)
 
             rtb_fixtureName.BackColor = c
@@ -248,7 +258,7 @@ Public Class mainForm
             rtb_SecondName.BackColor = c
             rtb_ThirdName.BackColor = c
 
-        DGV.Rows(0).Cells(0).Selected = True
+        DGV_light.Rows(0).Cells(0).Selected = True
 
         clearControls()
 
@@ -267,10 +277,17 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
+        dt_Lighting(i, 0) = New DataTable
         dt_Lighting(i, 1) = New DataTable
+        dt_Lighting(i, 2) = New DataTable
+        dt_Lighting(i, 3) = New DataTable
 
+        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
         create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        DGV.DataSource = dt_Lighting(i, 1)
+        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
+        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+
+        DGV_light.DataSource = dt_Lighting(i, 1)
         DGV_format(tbl_Lighting_tables(i, 1).Name, c)
 
         rtb_fixtureName.BackColor = c
@@ -278,7 +295,7 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
-        DGV.Rows(0).Cells(0).Selected = True
+        DGV_light.Rows(0).Cells(0).Selected = True
         clearControls()
 
     End Sub
@@ -295,10 +312,17 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
+        dt_Lighting(i, 0) = New DataTable
+        dt_Lighting(i, 1) = New DataTable
         dt_Lighting(i, 2) = New DataTable
+        dt_Lighting(i, 3) = New DataTable
 
+        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
         create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        DGV.DataSource = dt_Lighting(i, 2)
+        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+
+        DGV_light.DataSource = dt_Lighting(i, 2)
         DGV_format(tbl_Lighting_tables(i, 2).Name, c)
 
         rtb_fixtureName.BackColor = c
@@ -306,7 +330,7 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
-        DGV.Rows(0).Cells(0).Selected = True
+        DGV_light.Rows(0).Cells(0).Selected = True
         clearControls()
 
     End Sub
@@ -325,10 +349,17 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
+        dt_Lighting(i, 0) = New DataTable
+        dt_Lighting(i, 1) = New DataTable
+        dt_Lighting(i, 2) = New DataTable
         dt_Lighting(i, 3) = New DataTable
 
+        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
+        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
         create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
-        DGV.DataSource = dt_Lighting(i, 3)
+
+        DGV_light.DataSource = dt_Lighting(i, 3)
         DGV_format(tbl_Lighting_tables(i, 3).Name, c)
 
         rtb_fixtureName.BackColor = c
@@ -336,7 +367,7 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
-        DGV.Rows(0).Cells(0).Selected = True
+        DGV_light.Rows(0).Cells(0).Selected = True
         clearControls()
 
     End Sub
@@ -351,14 +382,16 @@ Public Class mainForm
     '===================================================================================
     Private Sub cmb_category_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_category.SelectedIndexChanged
         clearControls()
-        DGV.DataSource = Nothing
+        DGV_light.DataSource = Nothing
+
     End Sub
 
     '===================================================================================
     '             === CellClick on DGV ===
     '===================================================================================
-    Private Sub DGV_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellClick
+    Private Sub DGV_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_light.CellClick
         dgv_clickCell(sender, e)
+        calcQuantity()
     End Sub
 
     '===================================================================================

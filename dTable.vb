@@ -8,8 +8,6 @@
         Dim i, j As Integer
         Dim row As DataRow
 
-
-
         'Adding the Columns
         For i = 0 To _colCount - 1
             _dt.Columns.Add(_rng.Value(0, i))
@@ -40,25 +38,25 @@
     '===================================================================================
     Sub DGV_format(_dtName As String, _color As Color)
 
-        mainForm.DGV.Columns(0).Width = 40
-        mainForm.DGV.Columns(1).Width = 175
-        mainForm.DGV.Columns(2).Width = 40
-        mainForm.DGV.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV.Columns(3).Width = 220
-        mainForm.DGV.Columns(4).Width = 40
-        mainForm.DGV.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV.Columns(5).Width = 220
-        mainForm.DGV.Columns(6).Width = 40
-        mainForm.DGV.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV.Columns(7).Width = 180
-        mainForm.DGV.Columns(8).Width = 40
-        mainForm.DGV.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        mainForm.DGV_light.Columns(0).Width = 40
+        mainForm.DGV_light.Columns(1).Width = 175
+        mainForm.DGV_light.Columns(2).Width = 40
+        mainForm.DGV_light.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        mainForm.DGV_light.Columns(3).Width = 220
+        mainForm.DGV_light.Columns(4).Width = 40
+        mainForm.DGV_light.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        mainForm.DGV_light.Columns(5).Width = 220
+        mainForm.DGV_light.Columns(6).Width = 40
+        mainForm.DGV_light.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        mainForm.DGV_light.Columns(7).Width = 180
+        mainForm.DGV_light.Columns(8).Width = 40
+        mainForm.DGV_light.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-        For i = 0 To mainForm.DGV.Rows.Count - 2
+        For i = 0 To mainForm.DGV_light.Rows.Count - 2
 
             'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
-            mainForm.DGV.RowsDefaultCellStyle.BackColor = _color
-            mainForm.DGV.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
+            mainForm.DGV_light.RowsDefaultCellStyle.BackColor = _color
+            mainForm.DGV_light.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i
 
@@ -83,7 +81,7 @@
         mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
-        mainForm.DGV.Rows(index).Selected = True
+        mainForm.DGV_light.Rows(index).Selected = True
 
     End Sub
 
