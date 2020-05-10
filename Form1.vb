@@ -238,15 +238,19 @@ Public Class mainForm
 
         dt_Lighting(i, 0) = New DataTable
 
+
         create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        DGV.DataSource = dt_Lighting(i, 0)
-        DGV_format(tbl_Lighting_tables(i, 0).Name, c)
+            DGV.DataSource = dt_Lighting(i, 0)
+            DGV_format(tbl_Lighting_tables(i, 0).Name, c)
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+            rtb_fixtureName.BackColor = c
+            rtb_FirstName.BackColor = c
+            rtb_SecondName.BackColor = c
+            rtb_ThirdName.BackColor = c
 
+        DGV.Rows(0).Cells(0).Selected = True
+
+        clearControls()
 
     End Sub
     '===================================================================================      
@@ -274,6 +278,9 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
+        DGV.Rows(0).Cells(0).Selected = True
+        clearControls()
+
     End Sub
     '===================================================================================      
     '                === Blackout button ===
@@ -299,6 +306,8 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
+        DGV.Rows(0).Cells(0).Selected = True
+        clearControls()
 
     End Sub
 
@@ -327,21 +336,42 @@ Public Class mainForm
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
-    End Sub
+        DGV.Rows(0).Cells(0).Selected = True
+        clearControls()
 
+    End Sub
+    '===================================================================================
+    '             === Select page ===
+    '===================================================================================
+    Private Sub tabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl.SelectedIndexChanged
+        cmb_category.SelectedIndex = 0
+    End Sub
     '===================================================================================
     '             === Select category ===
     '===================================================================================
     Private Sub cmb_category_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_category.SelectedIndexChanged
-
+        clearControls()
+        DGV.DataSource = Nothing
     End Sub
-
 
     '===================================================================================
     '             === CellClick on DGV ===
     '===================================================================================
     Private Sub DGV_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV.CellClick
         dgv_clickCell(sender, e)
+    End Sub
+
+    '===================================================================================
+    '             === Prev record ===
+    '===================================================================================
+    Private Sub btn_prev_Click(sender As Object, e As EventArgs) Handles btn_prev.Click
+        prevRecord()
+    End Sub
+    '===================================================================================
+    '             === Next record ===
+    '===================================================================================
+    Private Sub btn_next_Click(sender As Object, e As EventArgs) Handles btn_next.Click
+        nextRecord()
     End Sub
 
 End Class
