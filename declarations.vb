@@ -26,7 +26,8 @@
 
     Sub initLightTables()
 
-        mainForm.tbl_Lighting_tables = {{mainForm.wsLight(0).Tables.Item("movHeads_belimlight"),
+        mainForm.tbl_Lighting_tables = {
+            {mainForm.wsLight(0).Tables.Item("movHeads_belimlight"),
             mainForm.wsLight(0).Tables.Item("movHeads_PRLighting"), mainForm.wsLight(0).Tables.
             Item("movHeads_blackout"), mainForm.wsLight(0).Tables.Item("movHeads_vision")},
             {mainForm.wsLight(1).Tables.Item("strobes_belimlight"), mainForm.wsLight(1).Tables.
@@ -49,22 +50,45 @@
             mainForm.wsLight(6).Tables.Item("consoles_vision")},
             {mainForm.wsLight(7).Tables.Item("intercom_belimlight"), mainForm.wsLight(7).Tables.
             Item("intercom_PRLighting"), mainForm.wsLight(7).Tables.Item("intercom_blackout"),
-            mainForm.wsLight(7).Tables.Item("intercom_vision")}}
+            mainForm.wsLight(7).Tables.Item("intercom_vision")}
+        }
 
-        'Dim i, j As Integer
 
-        'For i = 0 To i < 8
+        mainForm.dt_Lighting = {
+            {mainForm.dt_movHeads_belimlight, mainForm.dt_movHeads_PRLighting,
+            mainForm.dt_movHeads_blackout, mainForm.dt_movHeads_vision},
+            {mainForm.dt_strobes_belimlight, mainForm.dt_strobes_PRLighting,
+            mainForm.dt_strobes_blackout, mainForm.dt_strobes_vision},
+            {mainForm.dt_blinders_belimlight, mainForm.dt_blinders_PRLighting,
+            mainForm.dt_blinders_blackout, mainForm.dt_blinders_vision},
+            {mainForm.dt_arch_belimlight, mainForm.dt_arch_PRLighting,
+            mainForm.dt_arch_blackout, mainForm.dt_arch_vision},
+            {mainForm.dt_LED_belimlight, mainForm.dt_LED_PRLighting,
+            mainForm.dt_LED_blackout, mainForm.dt_LED_vision},
+            {mainForm.dt_smoke_belimlight, mainForm.dt_smoke_PRLighting,
+            mainForm.dt_smoke_blackout, mainForm.dt_smoke_vision},
+            {mainForm.dt_consoles_belimlight, mainForm.dt_consoles_PRLighting,
+            mainForm.dt_consoles_blackout, mainForm.dt_consoles_vision},
+            {mainForm.dt_intercom_belimlight, mainForm.dt_intercom_PRLighting,
+            mainForm.dt_intercom_blackout, mainForm.dt_intercom_vision}
+            }
 
-        '    For j = 0 To j < 4
 
-        '        mainForm.r_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Rows
-        '        mainForm.c_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Columns
-        '        mainForm.adr_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Address
-        '        mainForm.rng_Light_tbl(i, j) = mainForm.wsMovHeads.Cells(mainForm.adr_Light_tbl(i, j))
 
-        '    Next j
+        Dim i, j As Integer
 
-        'Next i
+        For i = 0 To 7
+
+            For j = 0 To 3
+
+                mainForm.r_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Rows
+                mainForm.c_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Columns
+                mainForm.adr_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Address
+                mainForm.rng_Light_tbl(i, j) = mainForm.wsLight(i).Cells(mainForm.adr_Light_tbl(i, j))
+
+            Next j
+
+        Next i
 
     End Sub
 

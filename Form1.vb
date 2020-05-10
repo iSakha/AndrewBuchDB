@@ -218,20 +218,7 @@ Public Class mainForm
             initLightWorksheets()
             initLightTables()
 
-            Dim i, j As Integer
 
-            For i = 0 To 7
-
-                For j = 0 To 3
-
-                    r_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Rows
-                    c_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Columns
-                    adr_Light_tbl(i, j) = tbl_Lighting_tables(i, j).Address.Address
-                    rng_Light_tbl(i, j) = wsMovHeads.Cells(adr_Light_tbl(i, j))
-
-                Next j
-
-            Next i
 
             'tbl_Light_Collection = wsLight(0).Tables
             'initMovHeads()
@@ -264,12 +251,12 @@ Public Class mainForm
 
         Dim c As Color = Color.FromArgb(252, 228, 214)
 
-        dt_movHeads_belimlight = New DataTable
-        dt_Lighting(0, 0) = dt_movHeads_belimlight
+        Dim i As Integer
 
-        create_datatable(r_Light_tbl(0, 0), c_Light_tbl(0, 0), rng_Light_tbl(0, 0), dt_Lighting(0, 0), "movHeads_belimlight")
-        DGV.DataSource = dt_Lighting(0, 0)
-        DGV_format("movHeads_belimlight", c)
+        i = cmb_category.SelectedIndex
+        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        DGV.DataSource = dt_Lighting(i, 0)
+        DGV_format(tbl_Lighting_tables(i, 0).Name, c)
 
         rtb_fixtureName.BackColor = c
         rtb_FirstName.BackColor = c
@@ -736,6 +723,13 @@ Public Class mainForm
                 rtb_ThirdName.BackColor = c
 
         End Select
+
+    End Sub
+
+    '===================================================================================
+    '             === Select category ===
+    '===================================================================================
+    Private Sub cmb_category_SelectedIndexChanged(sender As Object, e As EventArgs) Handles cmb_category.SelectedIndexChanged
 
     End Sub
 
