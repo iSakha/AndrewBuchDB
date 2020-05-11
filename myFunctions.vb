@@ -96,7 +96,9 @@
 
         calcQuantity()
     End Sub
-
+    '===================================================================================
+    '             === Calculate quantity ===
+    '===================================================================================
     Sub calcQuantity()
         Dim index As Integer
         Dim i, j, qty, sum As Integer
@@ -105,20 +107,57 @@
 
         index = mainForm.DGV_light.CurrentRow.Index
 
-        For j = 0 To 3
-            sum = 0
-            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 4)
-            sum = sum + qty
-            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 6)
-            sum = sum + qty
-            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 8)
-            sum = sum + qty
-            mainForm.lblSumQty(j).Text = sum
+        Try
+            For j = 0 To 3
+                sum = 0
+                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 4)
+                sum = sum + qty
+                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 6)
+                sum = sum + qty
+                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 8)
+                sum = sum + qty
+                mainForm.lblSumQty(j).Text = sum
 
-        Next j
-
+            Next j
+        Catch
+        End Try
         mainForm.lbl_qtyTotal.Text = mainForm.txt_qty.Text
         mainForm.lbl_smeta_qty.Visible = True
+
+    End Sub
+
+    '===================================================================================
+    '             === ADD data to DB ===
+    '===================================================================================
+    Sub addData(_dt As DataTable, _dgv As DataGridView)
+
+        Dim rCount As Integer
+        Dim sRow() As String
+        rCount = _dt.Rows.Count
+
+        sRow = New String() {
+                mainForm.rtb_fixtureName.Text,
+                mainForm.txt_qty.Text,
+                mainForm.rtb_FirstName.Text,
+                mainForm.txt_qty1.Text,
+                mainForm.rtb_SecondName.Text,
+                mainForm.txt_qty2.Text,
+                mainForm.rtb_ThirdName.Text,
+                mainForm.txt_qty3.Text
+                }
+
+
+        Dim row As DataRow
+
+        row = _dt.Rows.Add()
+
+        For i As Integer = 0 To sRow.Count - 1
+            row.Item(i + 1) = sRow(i)
+        Next i
+
+        row.Item(0) = CInt(_dt.Rows(rCount - 1).Item(0)) + 1
+
+        _dgv.DataSource = _dt
 
     End Sub
 

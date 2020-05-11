@@ -191,7 +191,7 @@ Public Class mainForm
     Public obj_excel, obj_excelFile As Object         '   Global vars to use in function "Save"
 
     Public selectedCompany() As String = {"belimlight", "PRLighting", "blackout", "vision"}
-    Public selComp As String = ""
+    Public selCompIndex As Integer = 0
 
     Public lblSumQty() As Object
 
@@ -232,7 +232,7 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_belIm_Click(sender As Object, e As EventArgs) Handles btn_belIm.Click
 
-        selComp = selectedCompany(0)
+        selCompIndex = 0
 
         Dim c As Color = Color.FromArgb(252, 228, 214)
 
@@ -269,7 +269,7 @@ Public Class mainForm
 
     Private Sub btn_prLight_Click(sender As Object, e As EventArgs) Handles btn_prLight.Click
 
-        selComp = selectedCompany(1)
+        selCompIndex = 1
 
         Dim c As Color = Color.FromArgb(221, 235, 247)
 
@@ -277,15 +277,9 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        'dt_Lighting(i, 0) = New DataTable
         dt_Lighting(i, 1) = New DataTable
-        'dt_Lighting(i, 2) = New DataTable
-        'dt_Lighting(i, 3) = New DataTable
 
-        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
         create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 1)
         DGV_format(tbl_Lighting_tables(i, 1).Name, c)
@@ -304,7 +298,7 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_blackOut_Click(sender As Object, e As EventArgs) Handles btn_blackOut.Click
 
-        selComp = selectedCompany(2)
+        selCompIndex = 2
 
         Dim c As Color = Color.FromArgb(237, 237, 237)
 
@@ -312,15 +306,9 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        'dt_Lighting(i, 0) = New DataTable
-        'dt_Lighting(i, 1) = New DataTable
         dt_Lighting(i, 2) = New DataTable
-        'dt_Lighting(i, 3) = New DataTable
 
-        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
         create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 2)
         DGV_format(tbl_Lighting_tables(i, 2).Name, c)
@@ -341,7 +329,7 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_vision_Click(sender As Object, e As EventArgs) Handles btn_vision.Click
 
-        selComp = selectedCompany(3)
+        selCompIndex = 3
 
         Dim c As Color = Color.FromArgb(226, 239, 218)
 
@@ -349,14 +337,8 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        'dt_Lighting(i, 0) = New DataTable
-        'dt_Lighting(i, 1) = New DataTable
-        'dt_Lighting(i, 2) = New DataTable
         dt_Lighting(i, 3) = New DataTable
 
-        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
         create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 3)
@@ -406,5 +388,40 @@ Public Class mainForm
     Private Sub btn_next_Click(sender As Object, e As EventArgs) Handles btn_next.Click
         nextRecord()
     End Sub
+    '===================================================================================
+    '             === ADD data to DB ===
+    '===================================================================================
+    Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
+
+        Dim i, j As Integer
+
+        i = cmb_category.SelectedIndex
+        j = selCompIndex
+
+        Console.WriteLine(dt_Lighting(i, j))
+        addData(dt_Lighting(i, j), DGV_light)
+
+    End Sub
+    '===================================================================================
+    '             === UPDATE data in DB ===
+    '===================================================================================
+    Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+
+    End Sub
+    '===================================================================================
+    '             === DELETE data from DB ===
+    '===================================================================================
+    Private Sub btn_del_Click(sender As Object, e As EventArgs) Handles btn_del.Click
+
+    End Sub
+    '===================================================================================
+    '             === SAVE data to DB ===
+    '===================================================================================
+    Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
+
+    End Sub
+
+
+
 
 End Class

@@ -26,6 +26,12 @@ Partial Class mainForm
         Me.TabPage3 = New System.Windows.Forms.TabPage()
         Me.btn_loadDB = New System.Windows.Forms.Button()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
+        Me.lbl_qtyTotal = New System.Windows.Forms.Label()
+        Me.lbl_smeta_qty = New System.Windows.Forms.Label()
+        Me.lbl_qty_vision = New System.Windows.Forms.Label()
+        Me.lbl_qty_blackout = New System.Windows.Forms.Label()
+        Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
+        Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
         Me.txt_qty3 = New System.Windows.Forms.TextBox()
         Me.txt_qty2 = New System.Windows.Forms.TextBox()
         Me.txt_qty1 = New System.Windows.Forms.TextBox()
@@ -42,6 +48,10 @@ Partial Class mainForm
         Me.lbl_category = New System.Windows.Forms.Label()
         Me.cmb_category = New System.Windows.Forms.ComboBox()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.TabPage4 = New System.Windows.Forms.TabPage()
+        Me.TabPage5 = New System.Windows.Forms.TabPage()
+        Me.TabPage6 = New System.Windows.Forms.TabPage()
+        Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.btn_save = New System.Windows.Forms.Button()
         Me.btn_update = New System.Windows.Forms.Button()
         Me.btn_del = New System.Windows.Forms.Button()
@@ -49,16 +59,6 @@ Partial Class mainForm
         Me.btn_next = New System.Windows.Forms.Button()
         Me.btn_prev = New System.Windows.Forms.Button()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
-        Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
-        Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
-        Me.lbl_qty_blackout = New System.Windows.Forms.Label()
-        Me.lbl_qty_vision = New System.Windows.Forms.Label()
-        Me.lbl_smeta_qty = New System.Windows.Forms.Label()
-        Me.lbl_qtyTotal = New System.Windows.Forms.Label()
-        Me.TabPage4 = New System.Windows.Forms.TabPage()
-        Me.TabPage5 = New System.Windows.Forms.TabPage()
-        Me.TabPage6 = New System.Windows.Forms.TabPage()
-        Me.TabPage7 = New System.Windows.Forms.TabPage()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -129,6 +129,73 @@ Partial Class mainForm
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Свет"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'lbl_qtyTotal
+        '
+        Me.lbl_qtyTotal.AutoSize = True
+        Me.lbl_qtyTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
+        Me.lbl_qtyTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qtyTotal.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qtyTotal.Location = New System.Drawing.Point(226, 68)
+        Me.lbl_qtyTotal.Name = "lbl_qtyTotal"
+        Me.lbl_qtyTotal.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qtyTotal.TabIndex = 16
+        '
+        'lbl_smeta_qty
+        '
+        Me.lbl_smeta_qty.AutoSize = True
+        Me.lbl_smeta_qty.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_smeta_qty.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_smeta_qty.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_smeta_qty.Location = New System.Drawing.Point(36, 68)
+        Me.lbl_smeta_qty.Name = "lbl_smeta_qty"
+        Me.lbl_smeta_qty.Size = New System.Drawing.Size(167, 25)
+        Me.lbl_smeta_qty.TabIndex = 15
+        Me.lbl_smeta_qty.Text = "Всего из сметы"
+        '
+        'lbl_qty_vision
+        '
+        Me.lbl_qty_vision.AutoSize = True
+        Me.lbl_qty_vision.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_qty_vision.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qty_vision.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qty_vision.Location = New System.Drawing.Point(810, 68)
+        Me.lbl_qty_vision.Name = "lbl_qty_vision"
+        Me.lbl_qty_vision.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qty_vision.TabIndex = 14
+        '
+        'lbl_qty_blackout
+        '
+        Me.lbl_qty_blackout.AutoSize = True
+        Me.lbl_qty_blackout.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_qty_blackout.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qty_blackout.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qty_blackout.Location = New System.Drawing.Point(668, 68)
+        Me.lbl_qty_blackout.Name = "lbl_qty_blackout"
+        Me.lbl_qty_blackout.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qty_blackout.TabIndex = 14
+        '
+        'lbl_qty_PRLighting
+        '
+        Me.lbl_qty_PRLighting.AutoSize = True
+        Me.lbl_qty_PRLighting.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_qty_PRLighting.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qty_PRLighting.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qty_PRLighting.Location = New System.Drawing.Point(528, 68)
+        Me.lbl_qty_PRLighting.Name = "lbl_qty_PRLighting"
+        Me.lbl_qty_PRLighting.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qty_PRLighting.TabIndex = 14
+        '
+        'lbl_qty_belimlight
+        '
+        Me.lbl_qty_belimlight.AutoSize = True
+        Me.lbl_qty_belimlight.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_qty_belimlight.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qty_belimlight.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qty_belimlight.Location = New System.Drawing.Point(377, 68)
+        Me.lbl_qty_belimlight.Name = "lbl_qty_belimlight"
+        Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qty_belimlight.TabIndex = 14
         '
         'txt_qty3
         '
@@ -266,6 +333,42 @@ Partial Class mainForm
         Me.TabPage2.Text = "Экран"
         Me.TabPage2.UseVisualStyleBackColor = True
         '
+        'TabPage4
+        '
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1059, 633)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Коммутация"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(1059, 633)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Фермы,моторы"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(1059, 633)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "Конструктив"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TabPage7
+        '
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(1059, 633)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Звук"
+        Me.TabPage7.UseVisualStyleBackColor = True
+        '
         'btn_save
         '
         Me.btn_save.Location = New System.Drawing.Point(902, 688)
@@ -323,109 +426,6 @@ Partial Class mainForm
         'OFD
         '
         Me.OFD.FileName = "OpenFileDialog1"
-        '
-        'lbl_qty_belimlight
-        '
-        Me.lbl_qty_belimlight.AutoSize = True
-        Me.lbl_qty_belimlight.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_qty_belimlight.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qty_belimlight.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qty_belimlight.Location = New System.Drawing.Point(377, 68)
-        Me.lbl_qty_belimlight.Name = "lbl_qty_belimlight"
-        Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qty_belimlight.TabIndex = 14
-        '
-        'lbl_qty_PRLighting
-        '
-        Me.lbl_qty_PRLighting.AutoSize = True
-        Me.lbl_qty_PRLighting.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_qty_PRLighting.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qty_PRLighting.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qty_PRLighting.Location = New System.Drawing.Point(528, 68)
-        Me.lbl_qty_PRLighting.Name = "lbl_qty_PRLighting"
-        Me.lbl_qty_PRLighting.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qty_PRLighting.TabIndex = 14
-        '
-        'lbl_qty_blackout
-        '
-        Me.lbl_qty_blackout.AutoSize = True
-        Me.lbl_qty_blackout.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_qty_blackout.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qty_blackout.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qty_blackout.Location = New System.Drawing.Point(668, 68)
-        Me.lbl_qty_blackout.Name = "lbl_qty_blackout"
-        Me.lbl_qty_blackout.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qty_blackout.TabIndex = 14
-        '
-        'lbl_qty_vision
-        '
-        Me.lbl_qty_vision.AutoSize = True
-        Me.lbl_qty_vision.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_qty_vision.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qty_vision.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qty_vision.Location = New System.Drawing.Point(810, 68)
-        Me.lbl_qty_vision.Name = "lbl_qty_vision"
-        Me.lbl_qty_vision.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qty_vision.TabIndex = 14
-        '
-        'lbl_smeta_qty
-        '
-        Me.lbl_smeta_qty.AutoSize = True
-        Me.lbl_smeta_qty.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_smeta_qty.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_smeta_qty.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_smeta_qty.Location = New System.Drawing.Point(36, 68)
-        Me.lbl_smeta_qty.Name = "lbl_smeta_qty"
-        Me.lbl_smeta_qty.Size = New System.Drawing.Size(167, 25)
-        Me.lbl_smeta_qty.TabIndex = 15
-        Me.lbl_smeta_qty.Text = "Всего из сметы"
-        '
-        'lbl_qtyTotal
-        '
-        Me.lbl_qtyTotal.AutoSize = True
-        Me.lbl_qtyTotal.BackColor = System.Drawing.Color.FromArgb(CType(CType(255, Byte), Integer), CType(CType(255, Byte), Integer), CType(CType(128, Byte), Integer))
-        Me.lbl_qtyTotal.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qtyTotal.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qtyTotal.Location = New System.Drawing.Point(226, 68)
-        Me.lbl_qtyTotal.Name = "lbl_qtyTotal"
-        Me.lbl_qtyTotal.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qtyTotal.TabIndex = 16
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(1059, 633)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Коммутация"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(1059, 633)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Фермы,моторы"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'TabPage6
-        '
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(1059, 633)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Конструктив"
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TabPage7
-        '
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(1059, 633)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Звук"
-        Me.TabPage7.UseVisualStyleBackColor = True
         '
         'mainForm
         '
