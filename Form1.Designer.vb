@@ -371,6 +371,8 @@ Partial Class mainForm
         '
         'btn_save
         '
+        Me.btn_save.FlatAppearance.BorderColor = System.Drawing.Color.Red
+        Me.btn_save.FlatAppearance.BorderSize = 2
         Me.btn_save.Location = New System.Drawing.Point(902, 688)
         Me.btn_save.Name = "btn_save"
         Me.btn_save.Size = New System.Drawing.Size(75, 23)

@@ -241,14 +241,8 @@ Public Class mainForm
         i = cmb_category.SelectedIndex
 
         dt_Lighting(i, 0) = New DataTable
-        'dt_Lighting(i, 1) = New DataTable
-        'dt_Lighting(i, 2) = New DataTable
-        'dt_Lighting(i, 3) = New DataTable
 
         create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 0)
             DGV_format(tbl_Lighting_tables(i, 0).Name, c)
@@ -401,11 +395,22 @@ Public Class mainForm
         Console.WriteLine(dt_Lighting(i, j))
         addData(dt_Lighting(i, j), DGV_light)
 
+        btn_save.FlatStyle = FlatStyle.Flat
+
     End Sub
     '===================================================================================
     '             === UPDATE data in DB ===
     '===================================================================================
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+        Dim i, j, index As Integer
+
+        i = cmb_category.SelectedIndex
+        j = selCompIndex
+        index = DGV_light.CurrentRow.Index
+
+        updateData(dt_Lighting(i, j), DGV_light, index)
+
+        btn_save.FlatStyle = FlatStyle.Flat
 
     End Sub
     '===================================================================================
@@ -413,12 +418,27 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_del_Click(sender As Object, e As EventArgs) Handles btn_del.Click
 
+        Dim i, j, index As Integer
+
+        i = cmb_category.SelectedIndex
+        j = selCompIndex
+        index = DGV_light.CurrentRow.Index
+        deleteData(dt_Lighting(i, j), DGV_light, index)
+
+        btn_save.FlatStyle = FlatStyle.Flat
+
     End Sub
     '===================================================================================
     '             === SAVE data to DB ===
     '===================================================================================
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
+        Dim i, j As Integer
 
+        i = cmb_category.SelectedIndex
+        j = selCompIndex
+
+
+        btn_save.FlatStyle = FlatStyle.Flat
     End Sub
 
 

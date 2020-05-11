@@ -160,5 +160,49 @@
         _dgv.DataSource = _dt
 
     End Sub
+    '===================================================================================
+    '             === UPDATE data in DB ===
+    '===================================================================================
+    Sub updateData(_dt As DataTable, _dgv As DataGridView, _index As Integer)
 
+        Dim row As DataRow
+        row = _dt.Rows(_index)
+        Dim sRow() As String
+
+
+
+        sRow = New String() {
+                mainForm.rtb_fixtureName.Text,
+                mainForm.txt_qty.Text,
+                mainForm.rtb_FirstName.Text,
+                mainForm.txt_qty1.Text,
+                mainForm.rtb_SecondName.Text,
+                mainForm.txt_qty2.Text,
+                mainForm.rtb_ThirdName.Text,
+                mainForm.txt_qty3.Text
+            }
+
+        For colIndex As Integer = 1 To 8
+            row.Item(colIndex) = sRow(colIndex - 1)
+        Next colIndex
+        _dgv.DataSource = _dt
+    End Sub
+
+    '===================================================================================
+    '             === DELETE data from DB ===
+    '===================================================================================
+
+    Sub deleteData(_dt As DataTable, _dgv As DataGridView, _index As Integer)
+        Dim rowCollection As DataRowCollection = _dt.Rows
+        rowCollection.RemoveAt(_index)
+        _dgv.DataSource = _dt
+    End Sub
+
+    '===================================================================================
+    '             === SAVE data to DB ===
+    '===================================================================================
+
+    Sub saveData()
+
+    End Sub
 End Module
