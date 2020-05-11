@@ -38,7 +38,7 @@
         If index = 0 Then
             index = mainForm.DGV_light.Rows.Count
         End If
-        index = index - 1
+        index = index - 2
         mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
         mainForm.DGV_light.Rows(index).Selected = True
 
@@ -73,7 +73,7 @@
         mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
         mainForm.DGV_light.Rows(index).Selected = True
 
-        If index = mainForm.DGV_light.Rows.Count - 1 Then
+        If index = mainForm.DGV_light.Rows.Count - 2 Then
             index = -1
         End If
         index = index + 1
@@ -105,36 +105,16 @@
 
         index = mainForm.DGV_light.CurrentRow.Index
 
-        Dim row As DataRow
         For j = 0 To 3
             sum = 0
-            row = mainForm.dt_Lighting(i, j).rows(index)
-
-            If row.Item(4).ToString = "" Then
-                qty = 0
-            Else qty = CInt(row.Item(4))
-
-            End If
-
+            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 4)
             sum = sum + qty
-
-            If row.Item(6).ToString = "" Then
-                qty = 0
-            Else qty = CInt(row.Item(6))
-
-            End If
-
+            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 6)
             sum = sum + qty
-
-            If row.Item(8).ToString = "" Then
-                qty = 0
-            Else qty = CInt(row.Item(8))
-
-            End If
-
+            qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 8)
             sum = sum + qty
-
             mainForm.lblSumQty(j).Text = sum
+
         Next j
 
         mainForm.lbl_qtyTotal.Text = mainForm.txt_qty.Text

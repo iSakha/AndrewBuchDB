@@ -241,14 +241,14 @@ Public Class mainForm
         i = cmb_category.SelectedIndex
 
         dt_Lighting(i, 0) = New DataTable
-        dt_Lighting(i, 1) = New DataTable
-        dt_Lighting(i, 2) = New DataTable
-        dt_Lighting(i, 3) = New DataTable
+        'dt_Lighting(i, 1) = New DataTable
+        'dt_Lighting(i, 2) = New DataTable
+        'dt_Lighting(i, 3) = New DataTable
 
         create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
+        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
+        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 0)
             DGV_format(tbl_Lighting_tables(i, 0).Name, c)
@@ -277,15 +277,15 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        dt_Lighting(i, 0) = New DataTable
+        'dt_Lighting(i, 0) = New DataTable
         dt_Lighting(i, 1) = New DataTable
-        dt_Lighting(i, 2) = New DataTable
-        dt_Lighting(i, 3) = New DataTable
+        'dt_Lighting(i, 2) = New DataTable
+        'dt_Lighting(i, 3) = New DataTable
 
-        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
         create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
+        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 1)
         DGV_format(tbl_Lighting_tables(i, 1).Name, c)
@@ -312,15 +312,15 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        dt_Lighting(i, 0) = New DataTable
-        dt_Lighting(i, 1) = New DataTable
+        'dt_Lighting(i, 0) = New DataTable
+        'dt_Lighting(i, 1) = New DataTable
         dt_Lighting(i, 2) = New DataTable
-        dt_Lighting(i, 3) = New DataTable
+        'dt_Lighting(i, 3) = New DataTable
 
-        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
+        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
         create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
-        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
+        'create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 2)
         DGV_format(tbl_Lighting_tables(i, 2).Name, c)
@@ -349,14 +349,14 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        dt_Lighting(i, 0) = New DataTable
-        dt_Lighting(i, 1) = New DataTable
-        dt_Lighting(i, 2) = New DataTable
+        'dt_Lighting(i, 0) = New DataTable
+        'dt_Lighting(i, 1) = New DataTable
+        'dt_Lighting(i, 2) = New DataTable
         dt_Lighting(i, 3) = New DataTable
 
-        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
-        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
+        'create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
+        'create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
+        'create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
         create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 3)
