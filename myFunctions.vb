@@ -1,4 +1,6 @@
-﻿Module myFunctions
+﻿Imports OfficeOpenXml
+
+Module myFunctions
     '===================================================================================
     '             === Clear controls ===
     '===================================================================================
@@ -202,7 +204,66 @@
     '             === SAVE data to DB ===
     '===================================================================================
 
-    Sub saveData()
+    Sub saveData(_i As Integer, _j As Integer)
 
+        Select Case mainForm.selEditModeIndex
+            Case 0
+                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
+                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+            Case 1
+                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
+                Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+                Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
+                oldAddr = mainForm.tbl_Lighting_tables(_i, _j).Address
+                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)
+                mainForm.tbl_Lighting_tables(_i, _j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, _j).
+                    TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+
+            Case 2
+                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
+                Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+                Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
+                oldAddr = mainForm.tbl_Lighting_tables(_i, _j).Address
+                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
+                mainForm.tbl_Lighting_tables(_i, _j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, _j).
+                    TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+
+        End Select
+
+        mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
+
+    End Sub
+
+    Sub blockCompanyButtons()
+        mainForm.btn_belIm.Enabled = False
+        mainForm.btn_prLight.Enabled = False
+        mainForm.btn_blackOut.Enabled = False
+        mainForm.btn_vision.Enabled = False
+    End Sub
+
+    Sub unblockCompanyButtons()
+        mainForm.btn_belIm.Enabled = True
+        mainForm.btn_prLight.Enabled = True
+        mainForm.btn_blackOut.Enabled = True
+        mainForm.btn_vision.Enabled = True
+    End Sub
+
+    Sub blockEditButtons()
+        mainForm.btn_add.Enabled = False
+        mainForm.btn_update.Enabled = False
+        mainForm.btn_del.Enabled = False
+
+    End Sub
+
+    Sub unblockEditButtons()
+        mainForm.btn_add.Enabled = True
+        mainForm.btn_update.Enabled = True
+        mainForm.btn_del.Enabled = True
     End Sub
 End Module

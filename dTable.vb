@@ -1,4 +1,6 @@
-﻿Module dTable
+﻿Imports OfficeOpenXml
+
+Module dTable
     '===================================================================================      
     '                === Create datatable ===
     '===================================================================================
@@ -82,6 +84,38 @@
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
         mainForm.DGV_light.Rows(index).Selected = True
+
+    End Sub
+
+
+    Sub formatExcelTable(_i As Integer, _j As Integer)
+
+        Dim rng As ExcelRange
+        Dim startRow, startColumn, endRow As Integer
+        startRow = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Row
+        startColumn = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Column
+        endRow = mainForm.tbl_Lighting_tables(_i, _j).Address.End.Row
+        rng = mainForm.wsLight(_i).Cells(startRow + 1, startColumn + 2, endRow, startColumn + 2)
+        rng.Style.Numberformat.Format = "0"
+        'rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        'rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+
+        rng = mainForm.wsLight(_i).Cells(startRow + 1, startColumn + 4, endRow, startColumn + 4)
+        rng.Style.Numberformat.Format = "0"
+        'rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        'rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+
+        rng = mainForm.wsLight(_i).Cells(startRow + 1, startColumn + 6, endRow, startColumn + 6)
+        rng.Style.Numberformat.Format = "0"
+        'rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        'rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+
+        rng = mainForm.wsLight(_i).Cells(startRow + 1, startColumn + 8, endRow, startColumn + 8)
+        rng.Style.Numberformat.Format = "0"
+        'rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        'rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+
+        mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
 
     End Sub
 

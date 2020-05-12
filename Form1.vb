@@ -195,6 +195,9 @@ Public Class mainForm
 
     Public lblSumQty() As Object
 
+    Public editMode() As String = {"Update", "Delete", "Add"}
+    Public selEditModeIndex As Integer = 0
+
     '===================================================================================      
     '                === Load button ===
     '===================================================================================
@@ -387,6 +390,8 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
 
+        selEditModeIndex = 2
+
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
@@ -396,12 +401,16 @@ Public Class mainForm
         addData(dt_Lighting(i, j), DGV_light)
 
         btn_save.FlatStyle = FlatStyle.Flat
-
+        blockCompanyButtons()
+        blockEditButtons()
     End Sub
     '===================================================================================
     '             === UPDATE data in DB ===
     '===================================================================================
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+
+        selEditModeIndex = 0
+
         Dim i, j, index As Integer
 
         i = cmb_category.SelectedIndex
@@ -411,12 +420,15 @@ Public Class mainForm
         updateData(dt_Lighting(i, j), DGV_light, index)
 
         btn_save.FlatStyle = FlatStyle.Flat
-
+        blockCompanyButtons()
+        blockEditButtons()
     End Sub
     '===================================================================================
     '             === DELETE data from DB ===
     '===================================================================================
     Private Sub btn_del_Click(sender As Object, e As EventArgs) Handles btn_del.Click
+
+        selEditModeIndex = 1
 
         Dim i, j, index As Integer
 
@@ -426,22 +438,65 @@ Public Class mainForm
         deleteData(dt_Lighting(i, j), DGV_light, index)
 
         btn_save.FlatStyle = FlatStyle.Flat
-
+        blockCompanyButtons()
+        blockEditButtons()
     End Sub
     '===================================================================================
     '             === SAVE data to DB ===
     '===================================================================================
     Private Sub btn_save_Click(sender As Object, e As EventArgs) Handles btn_save.Click
+
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
         j = selCompIndex
 
+        saveData(i, j)
 
-        btn_save.FlatStyle = FlatStyle.Flat
+
+        clearControls()
+
+        btn_save.FlatStyle = FlatStyle.Standard
+        unblockCompanyButtons()
+        unblockEditButtons()
+
+        Dim excelFile = New FileInfo(sFileName_DB)
+
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+        obj_excel = Excel                            '   Global vars to use in function "Save"
+        obj_excelFile = excelFile
+
+        initLightWorksheets()
+        initLightTables()
+        formatExcelTable(i, j)
+
     End Sub
 
 
+    Private Sub Button1_Click(sender As Object, e As EventArgs) Handles Button1.Click
+        Dim rng As ExcelRange
+        Dim startRow, startColumn As Integer
+        Dim endRow As Integer
 
+        rng = wsLight(0).Cells(tbl_Lighting_tables(0, 0).Address.Address)
+        startRow = tbl_Lighting_tables(0, 0).Address.Start.Row
+        startColumn = tbl_Lighting_tables(0, 0).Address.Start.Column
+        endRow = tbl_Lighting_tables(0, 0).Address.End.Row
+
+        rng = wsLight(0).Cells(startRow + 1, startColumn + 3, endRow, startColumn + 3)
+
+        'rng = wsLight(0).Cells(1, 1, 12, 2)
+        rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+
+
+        'rng.Style.Fill.PatternType = Style.ExcelFillStyle.Solid
+        'rng.Style.Fill.BackgroundColor.SetColor(ColorTranslator.FromHtml("#FF0000"))
+        'rng.Style.Numberformat.Format = "@"
+        obj_excel.SaveAs(obj_excelFile)
+
+    End Sub
 
 End Class

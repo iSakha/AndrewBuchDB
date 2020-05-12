@@ -59,6 +59,7 @@ Partial Class mainForm
         Me.btn_next = New System.Windows.Forms.Button()
         Me.btn_prev = New System.Windows.Forms.Button()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
+        Me.Button1 = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -429,11 +430,21 @@ Partial Class mainForm
         '
         Me.OFD.FileName = "OpenFileDialog1"
         '
+        'Button1
+        '
+        Me.Button1.Location = New System.Drawing.Point(323, 689)
+        Me.Button1.Name = "Button1"
+        Me.Button1.Size = New System.Drawing.Size(75, 23)
+        Me.Button1.TabIndex = 15
+        Me.Button1.Text = "Button1"
+        Me.Button1.UseVisualStyleBackColor = True
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1068, 736)
+        Me.Controls.Add(Me.Button1)
         Me.Controls.Add(Me.btn_save)
         Me.Controls.Add(Me.btn_update)
         Me.Controls.Add(Me.tabControl)
@@ -489,4 +500,5 @@ Partial Class mainForm
     Friend WithEvents TabPage5 As TabPage
     Friend WithEvents TabPage6 As TabPage
     Friend WithEvents TabPage7 As TabPage
+    Friend WithEvents Button1 As Button
 End Class
