@@ -451,8 +451,9 @@ Public Class mainForm
         i = cmb_category.SelectedIndex
         j = selCompIndex
 
-        saveData(i, j)
+        clearTable(i, j)
 
+        saveData(i, j)
 
         clearControls()
 
@@ -471,6 +472,18 @@ Public Class mainForm
         initLightWorksheets()
         initLightTables()
         formatExcelTable(i, j)
+
+        Select Case selCompIndex
+            Case 0
+                btn_belIm.PerformClick()
+            Case 1
+                btn_prLight.PerformClick()
+            Case 2
+                btn_blackOut.PerformClick()
+            Case 3
+                btn_vision.PerformClick()
+        End Select
+
 
     End Sub
 

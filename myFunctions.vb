@@ -1,4 +1,5 @@
 ﻿Imports OfficeOpenXml
+Imports OfficeOpenXml.Table
 
 Module myFunctions
     '===================================================================================
@@ -207,9 +208,13 @@ Module myFunctions
     Sub saveData(_i As Integer, _j As Integer)
 
         Select Case mainForm.selEditModeIndex
+
+            '           "Update" selected
             Case 0
                 Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
                 mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+
+            '           "Delete" selected
             Case 1
                 Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
                 Dim oldAddr As OfficeOpenXml.ExcelAddressBase
@@ -221,6 +226,8 @@ Module myFunctions
                     TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
 
                 mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+
+            '           "Add" selected
 
             Case 2
                 Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
@@ -237,6 +244,31 @@ Module myFunctions
         End Select
 
         mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
+
+    End Sub
+
+    Sub clearTable(_i As Integer, _j As Integer)
+
+        Dim table As ExcelTable
+        Dim firstRow, firstColumn, lastRow, lastColumn As Integer
+
+        table = mainForm.tbl_Lighting_tables(_i, _j)
+        firstRow = table.Range.Start.Row
+        lastRow = table.Range.End.Row
+        firstColumn = table.Range.Start.Column
+        lastColumn = table.Range.End.Column
+
+        Dim i, j As Integer
+        For i = firstRow + 1 To lastRow
+
+            For j = firstColumn To lastColumn
+
+                mainForm.wsLight(_i).Cells(i, j).Clear()
+
+            Next j
+
+        Next i
+
 
     End Sub
 
