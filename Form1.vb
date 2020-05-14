@@ -104,6 +104,7 @@ Public Class mainForm
 
     Public r_Light_tbl(7, 4) As Integer
 
+
     Public c_movHeads_belimlight, c_movHeads_PRLighting As Integer
     Public c_movHeads_blackout, c_movHeads_vision, c_movHeads_stage As Integer
 
@@ -530,5 +531,10 @@ Public Class mainForm
 
     End Sub
 
-
+    '===================================================================================
+    '             === Show summary ===
+    '===================================================================================
+    Private Sub btn_summary_Click(sender As Object, e As EventArgs) Handles btn_summary.Click
+        sumForm.Show()
+    End Sub
 End Class

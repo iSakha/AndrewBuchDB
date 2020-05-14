@@ -63,6 +63,7 @@ Partial Class mainForm
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
         Me.lbl_qty_stage = New System.Windows.Forms.Label()
+        Me.btn_summary = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -318,6 +319,7 @@ Partial Class mainForm
         Me.grbx_1.Controls.Add(Me.btn_save)
         Me.grbx_1.Controls.Add(Me.btn_next)
         Me.grbx_1.Controls.Add(Me.btn_update)
+        Me.grbx_1.Controls.Add(Me.btn_summary)
         Me.grbx_1.Controls.Add(Me.btn_add)
         Me.grbx_1.Controls.Add(Me.btn_prev)
         Me.grbx_1.Controls.Add(Me.btn_del)
@@ -485,6 +487,15 @@ Partial Class mainForm
         Me.lbl_qty_stage.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_stage.TabIndex = 23
         '
+        'btn_summary
+        '
+        Me.btn_summary.Location = New System.Drawing.Point(209, 19)
+        Me.btn_summary.Name = "btn_summary"
+        Me.btn_summary.Size = New System.Drawing.Size(87, 23)
+        Me.btn_summary.TabIndex = 14
+        Me.btn_summary.Text = "Summary"
+        Me.btn_summary.UseVisualStyleBackColor = True
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -548,4 +559,5 @@ Partial Class mainForm
     Friend WithEvents btn_vision As Button
     Friend WithEvents lbl_qty_belimlight As Label
     Friend WithEvents lbl_qty_stage As Label
+    Friend WithEvents btn_summary As Button
 End Class
