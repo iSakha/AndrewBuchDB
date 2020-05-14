@@ -143,5 +143,42 @@ Module dTable
         mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
 
     End Sub
+    '===================================================================================      
+    '                === Create summary datatable ===
+    '===================================================================================
+    Sub create_sumDatatable(_rCount As Integer, _colCount As Integer, _rng As Object, _dt As DataTable, _dtName As String)
+        Dim i, j As Integer
+        Dim row As DataRow
+
+        'Adding the Columns
+        For i = 0 To _colCount - 1
+            _dt.Columns.Add(_rng.Value(0, i))
+        Next i
+        _dt.TableName = _dtName
+
+        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(1).DataType = System.Type.GetType("System.String")
+        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(3).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(5).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(7).DataType = System.Type.GetType("System.Int32")
+
+        'Add Rows from Excel table
+
+        For i = 1 To _rCount - 1
+
+            row = _dt.Rows.Add()
+
+            For j = 0 To _colCount - 1
+
+                row.Item(j) = _rng.Value(i, j)
+
+            Next j
+
+        Next i
+
+    End Sub
 
 End Module

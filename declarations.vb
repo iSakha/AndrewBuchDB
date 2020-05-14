@@ -53,6 +53,10 @@
             mainForm.wsLight(7).Tables.Item("intercom_vision"), mainForm.wsLight(7).Tables.Item("intercom_stage")}
         }
 
+        mainForm.tbl_Lighting_sumTables = {mainForm.tbl_movHeads, mainForm.tbl_strobes, mainForm.tbl_blinders,
+            mainForm.tbl_arch, mainForm.tbl_LED, mainForm.tbl_smoke, mainForm.tbl_consoles, mainForm.tbl_intercom}
+
+
         mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting,
             mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision, mainForm.lbl_qty_stage}
 
@@ -77,6 +81,10 @@
             }
 
 
+        mainForm.dt_sumLighting = {mainForm.dt_movHeads, mainForm.dt_strobes, mainForm.dt_blinders,
+            mainForm.dt_arch, mainForm.dt_LED, mainForm.dt_smoke, mainForm.dt_consoles, mainForm.dt_intercom}
+
+
 
         Dim i, j As Integer
 
@@ -90,6 +98,11 @@
                 mainForm.rng_Light_tbl(i, j) = mainForm.wsLight(i).Cells(mainForm.adr_Light_tbl(i, j))
 
             Next j
+
+            mainForm.r_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Rows
+            mainForm.c_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Columns
+            mainForm.adr_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Address
+            mainForm.rng_Light_sumTbl(i) = mainForm.wsLight(i).Cells(mainForm.adr_Light_sumTbl(i))
 
         Next i
 
