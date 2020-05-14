@@ -16,22 +16,43 @@ Module dTable
         Next i
         _dt.TableName = _dtName
 
-        _dt.Columns(0).DataType = System.Type.GetType("System.String")
+        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")
         _dt.Columns(1).DataType = System.Type.GetType("System.String")
-        _dt.Columns(2).DataType = System.Type.GetType("System.String")
+        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")
         _dt.Columns(3).DataType = System.Type.GetType("System.String")
-        _dt.Columns(4).DataType = System.Type.GetType("System.String")
+        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")
         _dt.Columns(5).DataType = System.Type.GetType("System.String")
-        _dt.Columns(6).DataType = System.Type.GetType("System.String")
+        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")
         _dt.Columns(7).DataType = System.Type.GetType("System.String")
-        _dt.Columns(8).DataType = System.Type.GetType("System.String")
+        _dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+
 
         'Add Rows from Excel table
 
         For i = 1 To _rCount - 1
             row = _dt.Rows.Add()
+
             For j = 0 To _colCount - 1
-                row.Item(j) = _rng.Value(i, j)
+
+                If _rng.Value(i, j) = Nothing Then
+                    Select Case j
+                        Case 3
+                            row.Item(j) = ""
+                        Case 4
+                            row.Item(j) = 0
+                        Case 5
+                            row.Item(j) = ""
+                        Case 6
+                            row.Item(j) = 0
+                        Case 7
+                            row.Item(j) = ""
+                        Case 8
+                            row.Item(j) = 0
+                    End Select
+                Else
+                    row.Item(j) = _rng.Value(i, j)
+                End If
+
             Next j
         Next i
     End Sub
@@ -84,6 +105,10 @@ Module dTable
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
         mainForm.DGV_light.Rows(index).Selected = True
+
+        If index = mainForm.DGV_light.Rows.Count - 1 Then
+            writeZeroInQtyTxt()
+        End If
 
     End Sub
 

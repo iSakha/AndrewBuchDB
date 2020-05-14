@@ -39,9 +39,9 @@ Module myFunctions
         mainForm.DGV_light.Rows(index).Selected = True
 
         If index = 0 Then
-            index = mainForm.DGV_light.Rows.Count
+            index = mainForm.DGV_light.Rows.Count - 1
         End If
-        index = index - 2
+        index = index - 1
         mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
         mainForm.DGV_light.Rows(index).Selected = True
 
@@ -297,5 +297,20 @@ Module myFunctions
         mainForm.btn_add.Enabled = True
         mainForm.btn_update.Enabled = True
         mainForm.btn_del.Enabled = True
+    End Sub
+
+    Sub writeZeroInQtyTxt()
+        If mainForm.txt_qty.Text = "" Then
+            mainForm.txt_qty.Text = 0
+        End If
+        If mainForm.txt_qty1.Text = "" Then
+            mainForm.txt_qty1.Text = 0
+        End If
+        If mainForm.txt_qty2.Text = "" Then
+            mainForm.txt_qty2.Text = 0
+        End If
+        If mainForm.txt_qty3.Text = "" Then
+            mainForm.txt_qty3.Text = 0
+        End If
     End Sub
 End Module
