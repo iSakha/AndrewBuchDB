@@ -35,17 +35,22 @@ Module myFunctions
         index = mainForm.DGV_light.CurrentRow.Index
 
         mainForm.DGV_light.ClearSelection()
+        sumForm.dgv_sum.ClearSelection()
         mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
         mainForm.DGV_light.Rows(index).Selected = True
+
 
         If index = 0 Then
             index = mainForm.DGV_light.Rows.Count - 1
         End If
-        index = index - 1
-        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-        mainForm.DGV_light.Rows(index).Selected = True
 
         Try
+
+            index = index - 1
+            mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+            mainForm.DGV_light.Rows(index).Selected = True
+            sumForm.dgv_sum.Rows(index).Selected = True
+
             selectedRow = mainForm.DGV_light.Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
@@ -73,16 +78,21 @@ Module myFunctions
         index = mainForm.DGV_light.CurrentRow.Index
 
         mainForm.DGV_light.ClearSelection()
+        sumForm.dgv_sum.ClearSelection()
         mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
         mainForm.DGV_light.Rows(index).Selected = True
 
         If index = mainForm.DGV_light.Rows.Count - 2 Then
             index = -1
         End If
-        index = index + 1
-        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-        mainForm.DGV_light.Rows(index).Selected = True
+
         Try
+
+            index = index + 1
+            mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
+            mainForm.DGV_light.Rows(index).Selected = True
+            sumForm.dgv_sum.Rows(index).Selected = True
+
             selectedRow = mainForm.DGV_light.Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString

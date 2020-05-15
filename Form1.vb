@@ -597,6 +597,8 @@ Public Class mainForm
 
         create_sumDatatable(r_Light_sumTbl(i), c_Light_sumTbl(i), rng_Light_sumTbl(i), dt_sumLighting(i), tbl_Lighting_sumTables(i).Name)
         sumForm.dgv_sum.DataSource = dt_sumLighting(i)
+        format_sumDGV()
+
     End Sub
 
 End Class

@@ -53,9 +53,19 @@
             mainForm.wsLight(7).Tables.Item("intercom_vision"), mainForm.wsLight(7).Tables.Item("intercom_stage")}
         }
 
+        mainForm.tbl_movHeads = mainForm.wsLight(0).Tables.Item("movHeads_tbl")
+        mainForm.tbl_strobes = mainForm.wsLight(1).Tables.Item("strobes_tbl")
+        mainForm.tbl_blinders = mainForm.wsLight(2).Tables.Item("blinders_tbl")
+        mainForm.tbl_arch = mainForm.wsLight(3).Tables.Item("arch_tbl")
+        mainForm.tbl_LED = mainForm.wsLight(4).Tables.Item("LED_tbl")
+        mainForm.tbl_smoke = mainForm.wsLight(5).Tables.Item("smoke_tbl")
+        mainForm.tbl_consoles = mainForm.wsLight(6).Tables.Item("consoles_tbl")
+        mainForm.tbl_intercom = mainForm.wsLight(7).Tables.Item("intercom_tbl")
+
         mainForm.tbl_Lighting_sumTables = {mainForm.tbl_movHeads, mainForm.tbl_strobes, mainForm.tbl_blinders,
             mainForm.tbl_arch, mainForm.tbl_LED, mainForm.tbl_smoke, mainForm.tbl_consoles, mainForm.tbl_intercom}
 
+        'Console.WriteLine(mainForm.tbl_Lighting_sumTables(0).Name)
 
         mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting,
             mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision, mainForm.lbl_qty_stage}
@@ -98,10 +108,10 @@
                 mainForm.rng_Light_tbl(i, j) = mainForm.wsLight(i).Cells(mainForm.adr_Light_tbl(i, j))
 
             Next j
-
-            mainForm.r_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Rows
-            mainForm.c_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Columns
-            mainForm.adr_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(j).Address.Address
+            'Console.WriteLine(mainForm.tbl_Lighting_sumTables(0).Name)
+            mainForm.r_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Rows
+            mainForm.c_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Columns
+            mainForm.adr_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Address
             mainForm.rng_Light_sumTbl(i) = mainForm.wsLight(i).Cells(mainForm.adr_Light_sumTbl(i))
 
         Next i

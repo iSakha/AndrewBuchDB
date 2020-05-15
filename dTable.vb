@@ -11,7 +11,7 @@ Module dTable
         Dim row As DataRow
 
         'Adding the Columns
-        For i = 0 To _colCount - 1
+        For i = 0 To _colCount - 2
             _dt.Columns.Add(_rng.Value(0, i))
         Next i
         _dt.TableName = _dtName
@@ -29,10 +29,10 @@ Module dTable
 
         'Add Rows from Excel table
 
-        For i = 1 To _rCount - 1
+        For i = 1 To _rCount - 2
             row = _dt.Rows.Add()
 
-            For j = 0 To _colCount - 1
+            For j = 0 To _colCount - 2
 
                 If _rng.Value(i, j) = Nothing Then
                     Select Case j
@@ -61,18 +61,18 @@ Module dTable
     '===================================================================================
     Sub DGV_format(_dtName As String, _color As Color)
 
-        mainForm.DGV_light.Columns(0).Width = 40
-        mainForm.DGV_light.Columns(1).Width = 175
-        mainForm.DGV_light.Columns(2).Width = 40
+        mainForm.DGV_light.Columns(0).Width = 40                ' #
+        mainForm.DGV_light.Columns(1).Width = 175               ' Fixture
+        mainForm.DGV_light.Columns(2).Width = 40                ' Q-ty
         mainForm.DGV_light.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(3).Width = 220
-        mainForm.DGV_light.Columns(4).Width = 40
+        mainForm.DGV_light.Columns(3).Width = 220               ' BelImlight_1  (PRLightigTouring, BlackOut, Vision, Stage)
+        mainForm.DGV_light.Columns(4).Width = 40                ' Q-ty_1
         mainForm.DGV_light.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(5).Width = 220
-        mainForm.DGV_light.Columns(6).Width = 40
+        mainForm.DGV_light.Columns(5).Width = 220               ' BelImlight_2  (PRLightigTouring, BlackOut, Vision, Stage)
+        mainForm.DGV_light.Columns(6).Width = 40                ' Q-ty_2
         mainForm.DGV_light.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(7).Width = 180
-        mainForm.DGV_light.Columns(8).Width = 40
+        mainForm.DGV_light.Columns(7).Width = 180               ' BelImlight_3  (PRLightigTouring, BlackOut, Vision, Stage)
+        mainForm.DGV_light.Columns(8).Width = 40                ' Q-ty_3
         mainForm.DGV_light.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
         For i = 0 To mainForm.DGV_light.Rows.Count - 2
@@ -104,12 +104,18 @@ Module dTable
         mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
         mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
 
-        mainForm.DGV_light.Rows(index).Selected = True
+        Try
 
-        If index = mainForm.DGV_light.Rows.Count - 1 Then
-            writeZeroInQtyTxt()
-        End If
+            mainForm.DGV_light.Rows(index).Selected = True
+            sumForm.dgv_sum.ClearSelection()
+            sumForm.dgv_sum.Rows(index).Selected = True
 
+            If index = mainForm.DGV_light.Rows.Count - 1 Then
+                writeZeroInQtyTxt()
+            End If
+        Catch
+
+        End Try
     End Sub
 
 
@@ -156,17 +162,17 @@ Module dTable
         Next i
         _dt.TableName = _dtName
 
-        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(1).DataType = System.Type.GetType("System.String")
-        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(3).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(5).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(7).DataType = System.Type.GetType("System.Int32")
+        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
+        _dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
+        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
+        _dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
+        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
+        _dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
+        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
+        _dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
 
         'Add Rows from Excel table
-
+        Console.WriteLine(_rCount)
         For i = 1 To _rCount - 1
 
             row = _dt.Rows.Add()
@@ -176,6 +182,50 @@ Module dTable
                 row.Item(j) = _rng.Value(i, j)
 
             Next j
+
+        Next i
+
+
+    End Sub
+
+    Sub format_sumDGV()
+
+        Dim col() As Color
+
+        col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
+            Color.FromArgb(226, 239, 218), Color.FromArgb(237, 226, 246)}
+
+        '               Format table
+
+        sumForm.dgv_sum.Columns(0).Width = 55                ' #
+        sumForm.dgv_sum.Columns(1).Width = 240               ' Fixture
+        sumForm.dgv_sum.Columns(2).Width = 65                ' Q-ty
+        sumForm.dgv_sum.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(3).Width = 65                ' BelImlight
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(4).Width = 65                ' PRLightigTouring
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(5).Width = 65                ' BlackOut
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(6).Width = 65                ' Vision
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(7).Width = 65                ' Stage
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+        'sumForm.dgv_sum.RowsDefaultCellStyle.BackColor = Color.FromArgb(230, 230, 230)
+
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.BackColor = col(0)
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.BackColor = col(1)
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.BackColor = col(2)
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.BackColor = col(3)
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.BackColor = col(4)
+
+        For i = 0 To sumForm.dgv_sum.Rows.Count - 2
+
+            'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
+
+
+            sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i
 
