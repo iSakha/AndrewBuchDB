@@ -55,7 +55,6 @@ Public Class mainForm
     Public tbl_intercom As ExcelTable
 
 
-
     Public tbl_Lighting_tables(7, 4) As ExcelTable
     Public tbl_Lighting_sumTables(7) As ExcelTable
 
@@ -254,6 +253,9 @@ Public Class mainForm
 
     Public editMode() As String = {"Update", "Delete", "Add"}
     Public selEditModeIndex As Integer = 0
+
+    '=================================      Datasets       =================================================
+    Public lightDataset As DataSet
 
     '===================================================================================      
     '                === Load button ===
@@ -598,6 +600,19 @@ Public Class mainForm
         create_sumDatatable(r_Light_sumTbl(i), c_Light_sumTbl(i), rng_Light_sumTbl(i), dt_sumLighting(i), tbl_Lighting_sumTables(i).Name)
         sumForm.dgv_sum.DataSource = dt_sumLighting(i)
         format_sumDGV()
+
+    End Sub
+    '===================================================================================
+    '             === Show DatasetForm ===
+    '===================================================================================
+
+    Private Sub btn_runDatasetForm_Click(sender As Object, e As EventArgs) Handles btn_runDatasetForm.Click
+
+        datasetForm.Show()
+
+        datasetForm.GroupBox1.Visible = False
+        datasetForm.GroupBox2.Visible = False
+        datasetForm.GroupBox3.Visible = False
 
     End Sub
 

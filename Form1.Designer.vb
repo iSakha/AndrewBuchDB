@@ -49,12 +49,14 @@ Partial Class mainForm
         Me.btn_prev = New System.Windows.Forms.Button()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
         Me.grbx_1 = New System.Windows.Forms.GroupBox()
+        Me.btn_summary = New System.Windows.Forms.Button()
         Me.grbx_2 = New System.Windows.Forms.GroupBox()
         Me.btn_stage = New System.Windows.Forms.Button()
         Me.lbl_qtyTotal = New System.Windows.Forms.Label()
         Me.cmb_category = New System.Windows.Forms.ComboBox()
         Me.lbl_smeta_qty = New System.Windows.Forms.Label()
         Me.btn_belIm = New System.Windows.Forms.Button()
+        Me.lbl_qty_stage = New System.Windows.Forms.Label()
         Me.lbl_qty_vision = New System.Windows.Forms.Label()
         Me.btn_prLight = New System.Windows.Forms.Button()
         Me.lbl_qty_blackout = New System.Windows.Forms.Label()
@@ -62,8 +64,7 @@ Partial Class mainForm
         Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
-        Me.lbl_qty_stage = New System.Windows.Forms.Label()
-        Me.btn_summary = New System.Windows.Forms.Button()
+        Me.btn_runDatasetForm = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -316,6 +317,7 @@ Partial Class mainForm
         '
         'grbx_1
         '
+        Me.grbx_1.Controls.Add(Me.btn_runDatasetForm)
         Me.grbx_1.Controls.Add(Me.btn_save)
         Me.grbx_1.Controls.Add(Me.btn_next)
         Me.grbx_1.Controls.Add(Me.btn_update)
@@ -328,6 +330,15 @@ Partial Class mainForm
         Me.grbx_1.Size = New System.Drawing.Size(1063, 61)
         Me.grbx_1.TabIndex = 15
         Me.grbx_1.TabStop = False
+        '
+        'btn_summary
+        '
+        Me.btn_summary.Location = New System.Drawing.Point(209, 19)
+        Me.btn_summary.Name = "btn_summary"
+        Me.btn_summary.Size = New System.Drawing.Size(87, 23)
+        Me.btn_summary.TabIndex = 14
+        Me.btn_summary.Text = "Summary"
+        Me.btn_summary.UseVisualStyleBackColor = True
         '
         'grbx_2
         '
@@ -401,6 +412,17 @@ Partial Class mainForm
         Me.btn_belIm.TabIndex = 22
         Me.btn_belIm.Text = "Belimlight"
         Me.btn_belIm.UseVisualStyleBackColor = False
+        '
+        'lbl_qty_stage
+        '
+        Me.lbl_qty_stage.AutoSize = True
+        Me.lbl_qty_stage.BackColor = System.Drawing.Color.SeaShell
+        Me.lbl_qty_stage.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
+        Me.lbl_qty_stage.ForeColor = System.Drawing.Color.DarkBlue
+        Me.lbl_qty_stage.Location = New System.Drawing.Point(940, 69)
+        Me.lbl_qty_stage.Name = "lbl_qty_stage"
+        Me.lbl_qty_stage.Size = New System.Drawing.Size(0, 25)
+        Me.lbl_qty_stage.TabIndex = 23
         '
         'lbl_qty_vision
         '
@@ -476,25 +498,14 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
         '
-        'lbl_qty_stage
+        'btn_runDatasetForm
         '
-        Me.lbl_qty_stage.AutoSize = True
-        Me.lbl_qty_stage.BackColor = System.Drawing.Color.SeaShell
-        Me.lbl_qty_stage.Font = New System.Drawing.Font("Microsoft Sans Serif", 15.75!, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, CType(204, Byte))
-        Me.lbl_qty_stage.ForeColor = System.Drawing.Color.DarkBlue
-        Me.lbl_qty_stage.Location = New System.Drawing.Point(940, 69)
-        Me.lbl_qty_stage.Name = "lbl_qty_stage"
-        Me.lbl_qty_stage.Size = New System.Drawing.Size(0, 25)
-        Me.lbl_qty_stage.TabIndex = 23
-        '
-        'btn_summary
-        '
-        Me.btn_summary.Location = New System.Drawing.Point(209, 19)
-        Me.btn_summary.Name = "btn_summary"
-        Me.btn_summary.Size = New System.Drawing.Size(87, 23)
-        Me.btn_summary.TabIndex = 14
-        Me.btn_summary.Text = "Summary"
-        Me.btn_summary.UseVisualStyleBackColor = True
+        Me.btn_runDatasetForm.Location = New System.Drawing.Point(306, 18)
+        Me.btn_runDatasetForm.Name = "btn_runDatasetForm"
+        Me.btn_runDatasetForm.Size = New System.Drawing.Size(117, 23)
+        Me.btn_runDatasetForm.TabIndex = 15
+        Me.btn_runDatasetForm.Text = "DataSetForm"
+        Me.btn_runDatasetForm.UseVisualStyleBackColor = True
         '
         'mainForm
         '
@@ -560,4 +571,5 @@ Partial Class mainForm
     Friend WithEvents lbl_qty_belimlight As Label
     Friend WithEvents lbl_qty_stage As Label
     Friend WithEvents btn_summary As Button
+    Friend WithEvents btn_runDatasetForm As Button
 End Class

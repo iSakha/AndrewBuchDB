@@ -231,4 +231,31 @@ Module dTable
 
     End Sub
 
+    '=========================  functions for datasetform  ================================= 
+    '=======================================================================================
+
+    Sub createLightingDataset()
+
+        mainForm.lightDataset = New DataSet
+
+        Dim i, j As Integer
+
+        For i = 0 To mainForm.wsLight.Count - 1
+
+            For j = 0 To mainForm.selectedCompany.Count - 1
+
+                create_datatable(mainForm.r_Light_tbl(i, j), mainForm.c_Light_tbl(i, j), mainForm.rng_Light_tbl(i, j),
+                                 mainForm.dt_Lighting(i, j), mainForm.tbl_Lighting_tables(i, j).Name)
+
+                mainForm.lightDataset.Tables.Add(mainForm.dt_Lighting(i, j))
+
+            Next j
+
+        Next i
+
+    End Sub
+    '                
+    '=======================================================================================
+    '=======================================================================================
+
 End Module
