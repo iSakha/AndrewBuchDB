@@ -29,7 +29,7 @@ Module dTable
 
         'Add Rows from Excel table
 
-        For i = 1 To _rCount - 2
+        For i = 1 To _rCount - 1
             row = _dt.Rows.Add()
 
             For j = 0 To _colCount - 2

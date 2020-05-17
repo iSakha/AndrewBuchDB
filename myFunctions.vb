@@ -226,31 +226,38 @@ Module myFunctions
 
             '           "Delete" selected
             Case 1
-                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
-                Dim oldAddr As OfficeOpenXml.ExcelAddressBase
-                Dim newAddr As OfficeOpenXml.ExcelAddressBase
 
-                oldAddr = mainForm.tbl_Lighting_tables(_i, _j).Address
-                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)
-                mainForm.tbl_Lighting_tables(_i, _j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, _j).
-                    TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+                Dim j As Integer
+                For j = 0 To mainForm.sCompany.Count - 1
+                    clearTable(_i, _j)
+                    Dim startCell As String = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
+                    Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+                    Dim newAddr As OfficeOpenXml.ExcelAddressBase
 
-                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
+                    oldAddr = mainForm.tbl_Lighting_tables(_i, j).Address
+                    newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)
+                    mainForm.tbl_Lighting_tables(_i, j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, j).
+                        TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                    mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, j), True)
+                Next j
 
             '           "Add" selected
 
             Case 2
-                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
-                Dim oldAddr As OfficeOpenXml.ExcelAddressBase
-                Dim newAddr As OfficeOpenXml.ExcelAddressBase
+                Dim j As Integer
+                For j = 0 To mainForm.sCompany.Count - 1
+                    Dim startCell As String = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
+                    Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+                    Dim newAddr As OfficeOpenXml.ExcelAddressBase
 
-                oldAddr = mainForm.tbl_Lighting_tables(_i, _j).Address
-                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
-                mainForm.tbl_Lighting_tables(_i, _j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, _j).
-                    TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+                    oldAddr = mainForm.tbl_Lighting_tables(_i, j).Address
+                    newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
+                    mainForm.tbl_Lighting_tables(_i, j).TableXml.InnerXml = mainForm.tbl_Lighting_tables(_i, j).
+                        TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
 
-                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
-
+                    mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, j), True)
+                Next j
         End Select
 
         mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
@@ -323,4 +330,18 @@ Module myFunctions
             mainForm.txt_qty3.Text = 0
         End If
     End Sub
+
+
+    Function isEven(_var As Integer)
+
+        Dim result As Boolean
+
+        If _var Mod 2 = 0 Then
+            result = True
+        Else
+            result = False
+        End If
+        Return (result)
+
+    End Function
 End Module

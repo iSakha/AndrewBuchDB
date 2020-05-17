@@ -247,13 +247,16 @@ Public Class mainForm
 
     Public obj_excel, obj_excelFile As Object         '   Global vars to use in function "Save"
 
-    Public selectedCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
+    Public sCompany() As String = {"belimlight", "PRLighting", "blackout", "vision", "stage"}
     Public selCompIndex As Integer = 0
 
     Public lblSumQty() As Object
 
     Public editMode() As String = {"Update", "Delete", "Add"}
     Public selEditModeIndex As Integer = 0
+    Public selectedCategoryIndex As Integer
+
+
 
     '===================================================================================      
     '                === Load button ===
@@ -487,40 +490,24 @@ Public Class mainForm
     '             === ADD data to DB ===
     '===================================================================================
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
-        writeZeroInQtyTxt()
-        selEditModeIndex = 2
 
-        Dim i, j As Integer
+        Dim i As Integer
 
         i = cmb_category.SelectedIndex
-        j = selCompIndex
-
-        Console.WriteLine(dt_Lighting(i, j))
-        addData(dt_Lighting(i, j), DGV_light)
+        selectedCategoryIndex = i
 
         btn_save.FlatStyle = FlatStyle.Flat
         blockCompanyButtons()
         blockEditButtons()
+
+        addNewItemForm.Show()
+        addNewItemForm.cmb_category_addform.SelectedIndex = i
+
     End Sub
     '===================================================================================
     '             === UPDATE data in DB ===
     '===================================================================================
-    Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
-        writeZeroInQtyTxt()
-        selEditModeIndex = 0
 
-        Dim i, j, index As Integer
-
-        i = cmb_category.SelectedIndex
-        j = selCompIndex
-        index = DGV_light.CurrentRow.Index
-
-        updateData(dt_Lighting(i, j), DGV_light, index)
-
-        btn_save.FlatStyle = FlatStyle.Flat
-        blockCompanyButtons()
-        blockEditButtons()
-    End Sub
     '===================================================================================
     '             === DELETE data from DB ===
     '===================================================================================
