@@ -263,41 +263,35 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_loadDB_Click(sender As Object, e As EventArgs) Handles btn_loadDB.Click
 
-        sDir_DB = Directory.GetCurrentDirectory()
 
-        OFD.InitialDirectory = sDir_DB
-        OFD.Title = "Select .omdb file"
 
-        If OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+        loadDataBase()                      '   myFunctions.vb
 
-            sFileName_DB = OFD.FileName
+        initLightWorksheets()               '   declarations.vb
 
-            Dim excelFile = New FileInfo(sFileName_DB)
+        initLightTables()                   '   declarations.vb
 
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+        initDatatables()                    '   declarations.vb
 
-            obj_excel = Excel                            '   Global vars to use in function "Save"
-            obj_excelFile = excelFile
+        initLabels()                        '   declarations.vb
 
-            initLightWorksheets()
-            initLightTables()
 
-            For i = 0 To cmb_category.Items.Count - 1
-                dt_sumLighting(i) = New DataTable
+        '----------------------         Create datatables           ------------------------------
+        '-----------------------------------------------------------------------------------------
+        For i As Integer = 0 To cmb_category.Items.Count - 1
 
-                create_sumDatatable(r_Light_sumTbl(i), c_Light_sumTbl(i),
-            rng_Light_sumTbl(i), dt_sumLighting(i), tbl_Lighting_sumTables(i).Name)
-                'sumForm.dgv_sum.DataSource = mainForm.dt_sumLighting(i)
+            For j As Integer = 0 To sCompany.Count - 1
+                create_datatable(i, j)
 
-            Next i
+            Next j
+            'create_sumDatatable(i)
+            create_sumDatatable_v2(i)
+        Next i
 
-            tabControl.SelectedIndex = 1
-            grbx_1.Visible = True
-            grbx_2.Visible = True
-            'Console.WriteLine(cmb_category.SelectedIndex)
+        tabControl.SelectedIndex = 1
+        grbx_1.Visible = True
+        grbx_2.Visible = True
 
-        End If
     End Sub
 
     '===================================================================================      
@@ -314,10 +308,6 @@ Public Class mainForm
         Dim i As Integer
 
         i = cmb_category.SelectedIndex
-
-        dt_Lighting(i, 0) = New DataTable
-
-        create_datatable(r_Light_tbl(i, 0), c_Light_tbl(i, 0), rng_Light_tbl(i, 0), dt_Lighting(i, 0), tbl_Lighting_tables(i, 0).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 0)
         DGV_format(tbl_Lighting_tables(i, 0).Name, c)
@@ -348,10 +338,6 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        dt_Lighting(i, 1) = New DataTable
-
-        create_datatable(r_Light_tbl(i, 1), c_Light_tbl(i, 1), rng_Light_tbl(i, 1), dt_Lighting(i, 1), tbl_Lighting_tables(i, 1).Name)
-
         DGV_light.DataSource = dt_Lighting(i, 1)
         DGV_format(tbl_Lighting_tables(i, 1).Name, c)
 
@@ -379,10 +365,6 @@ Public Class mainForm
         Dim i As Integer
 
         i = cmb_category.SelectedIndex
-
-        dt_Lighting(i, 2) = New DataTable
-
-        create_datatable(r_Light_tbl(i, 2), c_Light_tbl(i, 2), rng_Light_tbl(i, 2), dt_Lighting(i, 2), tbl_Lighting_tables(i, 2).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 2)
         DGV_format(tbl_Lighting_tables(i, 2).Name, c)
@@ -412,10 +394,6 @@ Public Class mainForm
 
         i = cmb_category.SelectedIndex
 
-        dt_Lighting(i, 3) = New DataTable
-
-        create_datatable(r_Light_tbl(i, 3), c_Light_tbl(i, 3), rng_Light_tbl(i, 3), dt_Lighting(i, 3), tbl_Lighting_tables(i, 3).Name)
-
         DGV_light.DataSource = dt_Lighting(i, 3)
         DGV_format(tbl_Lighting_tables(i, 3).Name, c)
 
@@ -442,10 +420,6 @@ Public Class mainForm
         Dim i As Integer
 
         i = cmb_category.SelectedIndex
-
-        dt_Lighting(i, 4) = New DataTable
-
-        create_datatable(r_Light_tbl(i, 4), c_Light_tbl(i, 4), rng_Light_tbl(i, 4), dt_Lighting(i, 4), tbl_Lighting_tables(i, 4).Name)
 
         DGV_light.DataSource = dt_Lighting(i, 4)
         DGV_format(tbl_Lighting_tables(i, 4).Name, c)

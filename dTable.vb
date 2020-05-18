@@ -2,40 +2,170 @@
 Imports OfficeOpenXml.Table
 
 Module dTable
+
+    '===================================================================================      
+    '                === Create summary datatable ===
+    '===================================================================================
+    Sub create_sumDatatable(_i As Integer)
+
+        Dim i, j As Integer
+        Dim adr As String
+        Dim rCount, cCount As Integer
+        Dim dt As DataTable
+        Dim row As DataRow
+        Dim rng As ExcelRange
+        Dim xlTable As ExcelTable
+
+
+        xlTable = mainForm.tbl_Lighting_sumTables(_i)
+        rCount = xlTable.Address.Rows
+        cCount = xlTable.Address.Columns
+        adr = xlTable.Address.Address
+        rng = mainForm.wsLight(_i).Cells(adr)
+
+        dt = New DataTable
+
+        'Adding the Columns
+        For i = 0 To cCount - 1
+            dt.Columns.Add(rng.Value(0, i))
+        Next i
+        dt.TableName = xlTable.Name
+
+        dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
+        dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
+        dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
+        dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
+        dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
+        dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
+        dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
+        dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
+
+        'Add Rows from Excel table
+
+        For i = 1 To rCount - 1
+
+            row = dt.Rows.Add()
+
+            For j = 0 To cCount - 1
+
+                row.Item(j) = rng.Value(i, j)
+
+            Next j
+
+        Next i
+
+        mainForm.dt_sumLighting(_i) = dt
+
+
+    End Sub
+
+    Sub create_sumDatatable_v2(_i As Integer)
+        Dim i, j As Integer
+        Dim adr As String
+        Dim rCount, cCount As Integer
+        Dim dt0, dt1, dt2, dt3, dt4, dtSum As DataTable
+        Dim row As DataRow
+        Dim rng As ExcelRange
+        Dim xlTable As ExcelTable
+
+
+        xlTable = mainForm.tbl_Lighting_sumTables(_i)
+        rCount = xlTable.Address.Rows
+        cCount = xlTable.Address.Columns
+        adr = xlTable.Address.Address
+        rng = mainForm.wsLight(_i).Cells(adr)
+
+        dt0 = mainForm.dt_Lighting(_i, 0)
+        dt1 = mainForm.dt_Lighting(_i, 1)
+        dt2 = mainForm.dt_Lighting(_i, 2)
+        dt3 = mainForm.dt_Lighting(_i, 3)
+        dt4 = mainForm.dt_Lighting(_i, 4)
+
+        dtSum = New DataTable
+
+        'Adding the Columns
+        For i = 0 To cCount - 1
+            dtSum.Columns.Add(rng.Value(0, i))
+        Next i
+        dtSum.TableName = xlTable.Name
+
+        dtSum.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
+        dtSum.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
+        dtSum.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
+        dtSum.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
+        dtSum.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
+        dtSum.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
+        dtSum.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
+        dtSum.Columns(7).DataType = System.Type.GetType("System.Int32")
+
+        'Add Rows from datatables
+
+        For i = 1 To rCount - 1
+
+            row = dtSum.Rows.Add()
+
+            row.Item(0) = dt0.Rows(i - 1).Item(0)
+            row.Item(1) = dt0.Rows(i - 1).Item(1)
+            row.Item(2) = dt0.Rows(i - 1).Item(2)
+            row.Item(3) = dt0.Rows(i - 1).Item(4) + dt0.Rows(i - 1).Item(6) + dt0.Rows(i - 1).Item(8)
+            row.Item(4) = dt1.Rows(i - 1).Item(4) + dt1.Rows(i - 1).Item(6) + dt1.Rows(i - 1).Item(8)
+            row.Item(5) = dt2.Rows(i - 1).Item(4) + dt2.Rows(i - 1).Item(6) + dt2.Rows(i - 1).Item(8)
+            row.Item(6) = dt3.Rows(i - 1).Item(4) + dt3.Rows(i - 1).Item(6) + dt3.Rows(i - 1).Item(8)
+            row.Item(7) = dt4.Rows(i - 1).Item(4) + dt4.Rows(i - 1).Item(6) + dt4.Rows(i - 1).Item(8)
+
+        Next i
+
+
+        mainForm.dt_sumLighting(_i) = dtSum
+
+    End Sub
     '===================================================================================      
     '                === Create datatable ===
     '===================================================================================
 
-    Sub create_datatable(_rCount As Integer, _colCount As Integer, _rng As Object, _dt As DataTable, _dtName As String)
+    Sub create_datatable(_i As Integer, _j As Integer)
 
         Dim i, j As Integer
+        Dim adr As String
+        Dim rCount, cCount As Integer
+        Dim dt As DataTable
         Dim row As DataRow
+        Dim rng As ExcelRange
+        Dim xlTable As ExcelTable
+
+        xlTable = mainForm.tbl_Lighting_tables(_i, _j)
+        rCount = xlTable.Address.Rows
+        cCount = xlTable.Address.Columns
+        adr = xlTable.Address.Address
+        rng = mainForm.wsLight(_i).Cells(adr)
+
+        dt = New DataTable
 
         'Adding the Columns
-        For i = 0 To _colCount - 2
-            _dt.Columns.Add(_rng.Value(0, i))
+        For i = 0 To cCount - 1
+            dt.Columns.Add(rng.Value(0, i))
         Next i
-        _dt.TableName = _dtName
+        dt.TableName = xlTable.Name
 
-        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(1).DataType = System.Type.GetType("System.String")
-        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(3).DataType = System.Type.GetType("System.String")
-        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(5).DataType = System.Type.GetType("System.String")
-        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        _dt.Columns(7).DataType = System.Type.GetType("System.String")
-        _dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(1).DataType = System.Type.GetType("System.String")
+        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(3).DataType = System.Type.GetType("System.String")
+        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(5).DataType = System.Type.GetType("System.String")
+        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(7).DataType = System.Type.GetType("System.String")
+        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
 
 
         'Add Rows from Excel table
 
-        For i = 1 To _rCount - 1
-            row = _dt.Rows.Add()
+        For i = 1 To rCount - 1
+            row = dt.Rows.Add()
 
-            For j = 0 To _colCount - 2
+            For j = 0 To cCount - 1
 
-                If _rng.Value(i, j) = Nothing Then
+                If rng.Value(i, j) = Nothing Then
                     Select Case j
                         Case 3
                             row.Item(j) = ""
@@ -51,11 +181,14 @@ Module dTable
                             row.Item(j) = 0
                     End Select
                 Else
-                    row.Item(j) = _rng.Value(i, j)
+                    row.Item(j) = rng.Value(i, j)
                 End If
 
             Next j
         Next i
+
+        mainForm.dt_Lighting(_i, _j) = dt
+
     End Sub
     '===================================================================================      
     '                === Format DataGridView ===
@@ -81,6 +214,42 @@ Module dTable
             'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
             mainForm.DGV_light.RowsDefaultCellStyle.BackColor = _color
             mainForm.DGV_light.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
+
+        Next i
+
+    End Sub
+    Sub format_sumDGV()
+
+        Dim col() As Color
+
+        col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
+            Color.FromArgb(226, 239, 218), Color.FromArgb(237, 226, 246)}
+
+        sumForm.dgv_sum.Columns(0).Width = 55                ' #
+        sumForm.dgv_sum.Columns(1).Width = 240               ' Fixture
+        sumForm.dgv_sum.Columns(2).Width = 65                ' Q-ty
+        sumForm.dgv_sum.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(3).Width = 65                ' BelImlight
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(4).Width = 65                ' PRLightigTouring
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(5).Width = 65                ' BlackOut
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(6).Width = 65                ' Vision
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        sumForm.dgv_sum.Columns(7).Width = 65                ' Stage
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+
+        sumForm.dgv_sum.Columns(3).DefaultCellStyle.BackColor = col(0)
+        sumForm.dgv_sum.Columns(4).DefaultCellStyle.BackColor = col(1)
+        sumForm.dgv_sum.Columns(5).DefaultCellStyle.BackColor = col(2)
+        sumForm.dgv_sum.Columns(6).DefaultCellStyle.BackColor = col(3)
+        sumForm.dgv_sum.Columns(7).DefaultCellStyle.BackColor = col(4)
+
+        For i = 0 To sumForm.dgv_sum.Rows.Count - 2
+
+            sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i
 
@@ -150,90 +319,11 @@ Module dTable
         mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
 
     End Sub
-    '===================================================================================      
-    '                === Create summary datatable ===
-    '===================================================================================
-    Sub create_sumDatatable(_rCount As Integer, _colCount As Integer, _rng As Object, _dt As DataTable, _dtName As String)
-        Dim i, j As Integer
-        Dim row As DataRow
-
-        'Adding the Columns
-        For i = 0 To _colCount - 1
-            _dt.Columns.Add(_rng.Value(0, i))
-        Next i
-        _dt.TableName = _dtName
-
-        _dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
-        _dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
-        _dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
-        _dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
-        _dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
-        _dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
-        _dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
-        _dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
-
-        'Add Rows from Excel table
-        Console.WriteLine(_rCount)
-        For i = 1 To _rCount - 1
-
-            row = _dt.Rows.Add()
-
-            For j = 0 To _colCount - 1
-
-                row.Item(j) = _rng.Value(i, j)
-
-            Next j
-
-        Next i
 
 
-    End Sub
 
-    Sub format_sumDGV()
-
-        Dim col() As Color
-
-        col = {Color.FromArgb(252, 228, 214), Color.FromArgb(221, 235, 247), Color.FromArgb(237, 237, 237),
-            Color.FromArgb(226, 239, 218), Color.FromArgb(237, 226, 246)}
-
-        '               Format table
-
-        sumForm.dgv_sum.Columns(0).Width = 55                ' #
-        sumForm.dgv_sum.Columns(1).Width = 240               ' Fixture
-        sumForm.dgv_sum.Columns(2).Width = 65                ' Q-ty
-        sumForm.dgv_sum.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        sumForm.dgv_sum.Columns(3).Width = 65                ' BelImlight
-        sumForm.dgv_sum.Columns(3).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        sumForm.dgv_sum.Columns(4).Width = 65                ' PRLightigTouring
-        sumForm.dgv_sum.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        sumForm.dgv_sum.Columns(5).Width = 65                ' BlackOut
-        sumForm.dgv_sum.Columns(5).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        sumForm.dgv_sum.Columns(6).Width = 65                ' Vision
-        sumForm.dgv_sum.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        sumForm.dgv_sum.Columns(7).Width = 65                ' Stage
-        sumForm.dgv_sum.Columns(7).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-
-        'sumForm.dgv_sum.RowsDefaultCellStyle.BackColor = Color.FromArgb(230, 230, 230)
-
-        sumForm.dgv_sum.Columns(3).DefaultCellStyle.BackColor = col(0)
-        sumForm.dgv_sum.Columns(4).DefaultCellStyle.BackColor = col(1)
-        sumForm.dgv_sum.Columns(5).DefaultCellStyle.BackColor = col(2)
-        sumForm.dgv_sum.Columns(6).DefaultCellStyle.BackColor = col(3)
-        sumForm.dgv_sum.Columns(7).DefaultCellStyle.BackColor = col(4)
-
-        For i = 0 To sumForm.dgv_sum.Rows.Count - 2
-
-            'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
-
-
-            sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
-
-        Next i
-
-    End Sub
 
     Sub changeSumDataTable(_selectedCategoryIndex As Integer)
-
 
 
         Dim i As Integer = _selectedCategoryIndex

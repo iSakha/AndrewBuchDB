@@ -1,7 +1,34 @@
 ﻿Imports OfficeOpenXml
 Imports OfficeOpenXml.Table
+Imports System.IO
 
 Module myFunctions
+    '===================================================================================
+    '             === Load database ===
+    '===================================================================================
+    Sub loadDataBase()
+        mainForm.sDir_DB = Directory.GetCurrentDirectory()
+
+        mainForm.OFD.InitialDirectory = mainForm.sDir_DB
+        mainForm.OFD.Title = "Select .omdb file"
+
+        If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+            mainForm.sFileName_DB = mainForm.OFD.FileName
+
+            Dim excelFile = New FileInfo(mainForm.sFileName_DB)
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+            mainForm.obj_excel = Excel                            '   Global vars to use in function "Save"
+            mainForm.obj_excelFile = excelFile
+
+        End If
+    End Sub
+
+
+
+
     '===================================================================================
     '             === Clear controls ===
     '===================================================================================
@@ -20,6 +47,7 @@ Module myFunctions
         mainForm.lbl_qty_PRLighting.Text = ""
         mainForm.lbl_qty_blackout.Text = ""
         mainForm.lbl_qty_vision.Text = ""
+        mainForm.lbl_qty_stage.Text = ""
         mainForm.lbl_qtyTotal.Text = ""
         mainForm.lbl_smeta_qty.Visible = False
 
@@ -114,6 +142,7 @@ Module myFunctions
     '             === Calculate quantity ===
     '===================================================================================
     Sub calcQuantity()
+
         Dim index As Integer
         Dim i, j, qty, sum As Integer
 
@@ -122,14 +151,15 @@ Module myFunctions
         index = mainForm.DGV_light.CurrentRow.Index
 
         Try
-            For j = 0 To 4
+            For j = 0 To mainForm.sCompany.Count - 1
                 sum = 0
-                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 4)
+                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(4)
                 sum = sum + qty
-                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 6)
+                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(6)
                 sum = sum + qty
-                qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 8)
+                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(8)
                 sum = sum + qty
+
                 mainForm.lblSumQty(j).Text = sum
 
             Next j

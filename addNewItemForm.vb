@@ -62,27 +62,27 @@ Public Class addNewItemForm
             txt_stage3_addform.Text, txt_qty_stage3_addform.Text}
         }
 
-        For j = 0 To mainForm.sCompany.Count - 1
-            mainForm.dt_Lighting(i, j) = New DataTable
-            create_datatable(mainForm.r_Light_tbl(i, j), mainForm.c_Light_tbl(i, j), mainForm.rng_Light_tbl(i, j),
-                             mainForm.dt_Lighting(i, j), mainForm.tbl_Lighting_tables(i, j).Name)
+        'For j = 0 To mainForm.sCompany.Count - 1
+        '    mainForm.dt_Lighting(i, j) = New DataTable
+        '    create_datatable(mainForm.r_Light_tbl(i, j), mainForm.c_Light_tbl(i, j), mainForm.rng_Light_tbl(i, j),
+        '                     mainForm.dt_Lighting(i, j), mainForm.tbl_Lighting_tables(i, j).Name)
 
-            Dim row As DataRow
+        '    Dim row As DataRow
 
-            row = mainForm.dt_Lighting(i, j).Rows.Add()
-            rCount = mainForm.dt_Lighting(i, j).Rows.Count
+        '    row = mainForm.dt_Lighting(i, j).Rows.Add()
+        '    rCount = mainForm.dt_Lighting(i, j).Rows.Count
 
-            For k As Integer = 0 To 7
-                If isEven(k) Then
-                    row.Item(k + 1) = sRow(j, k)
-                Else
-                    row.Item(k + 1) = CInt(sRow(j, k))
-                End If
-            Next k
+        '    For k As Integer = 0 To 7
+        '        If isEven(k) Then
+        '            row.Item(k + 1) = sRow(j, k)
+        '        Else
+        '            row.Item(k + 1) = CInt(sRow(j, k))
+        '        End If
+        '    Next k
 
-            row.Item(0) = CInt(mainForm.dt_Lighting(i, j).Rows(rCount - 2).Item(0)) + 1
+        'row.Item(0) = CInt(mainForm.dt_Lighting(i, j).Rows(rCount - 2).Item(0)) + 1
 
-        Next j
+        'Next j
 
         '+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
@@ -195,7 +195,7 @@ Public Class addNewItemForm
     ''        CInt(txt_qty_belimlight3_addform.Text)
     ''    txt_qty_belimlight.Text = qty_belimlight
     ''End Sub
-    '''           Quantity PRLighting
+
     ''Private Sub txt_qty_PRlighting1_addform_TextChanged(sender As Object, e As EventArgs) Handles txt_qty_PRlighting1_addform.TextChanged
     ''    'txt_qty_PRlighting.Text = CInt(txt_qty_PRlighting1_addform.Text) + CInt(txt_qty_PRlighting2_addform.Text) +
     ''    '    CInt(txt_qty_PRlighting3_addform.Text)

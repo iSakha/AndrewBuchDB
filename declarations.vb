@@ -65,11 +65,9 @@
         mainForm.tbl_Lighting_sumTables = {mainForm.tbl_movHeads, mainForm.tbl_strobes, mainForm.tbl_blinders,
             mainForm.tbl_arch, mainForm.tbl_LED, mainForm.tbl_smoke, mainForm.tbl_consoles, mainForm.tbl_intercom}
 
-        'Console.WriteLine(mainForm.tbl_Lighting_sumTables(0).Name)
 
-        mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting,
-            mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision, mainForm.lbl_qty_stage}
-
+    End Sub
+    Sub initDatatables()
 
         mainForm.dt_Lighting = {
             {mainForm.dt_movHeads_belimlight, mainForm.dt_movHeads_PRLighting,
@@ -94,8 +92,12 @@
         mainForm.dt_sumLighting = {mainForm.dt_movHeads, mainForm.dt_strobes, mainForm.dt_blinders,
             mainForm.dt_arch, mainForm.dt_LED, mainForm.dt_smoke, mainForm.dt_consoles, mainForm.dt_intercom}
 
-
-
+    End Sub
+    Sub initLabels()
+        mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting,
+            mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision, mainForm.lbl_qty_stage}
+    End Sub
+    Sub tempSub_1()
         Dim i, j As Integer
 
         For i = 0 To 7
