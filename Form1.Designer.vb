@@ -64,6 +64,7 @@ Partial Class mainForm
         Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
+        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -315,6 +316,7 @@ Partial Class mainForm
         '
         'grbx_1
         '
+        Me.grbx_1.Controls.Add(Me.btn_cancel)
         Me.grbx_1.Controls.Add(Me.btn_save)
         Me.grbx_1.Controls.Add(Me.btn_next)
         Me.grbx_1.Controls.Add(Me.btn_update)
@@ -327,6 +329,7 @@ Partial Class mainForm
         Me.grbx_1.Size = New System.Drawing.Size(1063, 61)
         Me.grbx_1.TabIndex = 15
         Me.grbx_1.TabStop = False
+        Me.grbx_1.Visible = False
         '
         'btn_summary
         '
@@ -357,6 +360,7 @@ Partial Class mainForm
         Me.grbx_2.Size = New System.Drawing.Size(1056, 110)
         Me.grbx_2.TabIndex = 30
         Me.grbx_2.TabStop = False
+        Me.grbx_2.Visible = False
         '
         'btn_stage
         '
@@ -495,6 +499,17 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
         '
+        'btn_cancel
+        '
+        Me.btn_cancel.FlatAppearance.BorderColor = System.Drawing.Color.Red
+        Me.btn_cancel.FlatAppearance.BorderSize = 2
+        Me.btn_cancel.Location = New System.Drawing.Point(965, 19)
+        Me.btn_cancel.Name = "btn_cancel"
+        Me.btn_cancel.Size = New System.Drawing.Size(75, 23)
+        Me.btn_cancel.TabIndex = 14
+        Me.btn_cancel.Text = "Cancel"
+        Me.btn_cancel.UseVisualStyleBackColor = True
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -559,4 +574,5 @@ Partial Class mainForm
     Friend WithEvents lbl_qty_belimlight As Label
     Friend WithEvents lbl_qty_stage As Label
     Friend WithEvents btn_summary As Button
+    Friend WithEvents btn_cancel As Button
 End Class

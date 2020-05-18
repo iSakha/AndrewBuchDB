@@ -1,4 +1,5 @@
 ﻿Imports OfficeOpenXml
+Imports OfficeOpenXml.Table
 
 Module dTable
     '===================================================================================      
@@ -228,6 +229,43 @@ Module dTable
             sumForm.dgv_sum.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
         Next i
+
+    End Sub
+
+    Sub changeSumDataTable(_selectedCategoryIndex As Integer)
+
+
+
+        Dim i As Integer = _selectedCategoryIndex
+        'add data to summary table
+        Dim row As DataRow
+        Dim iRow() As Integer
+        Dim sRow As String
+        'Index = mainForm.selectedCategoryIndex
+        Dim dt As DataTable
+        iRow = New Integer() {addNewItemForm.qty_belimlight, addNewItemForm.qty_PRlighting,
+            addNewItemForm.qty_blackout, addNewItemForm.qty_vision, addNewItemForm.qty_stage}
+
+        dt = mainForm.dt_sumLighting(i)
+
+        row = dt.Rows.Add()
+
+        For k As Integer = 0 To iRow.Count - 1
+            row.Item(k + 2) = iRow(k)
+        Next k
+
+        Dim xTable As ExcelTable
+        xTable = mainForm.tbl_Lighting_sumTables(i)
+        Dim startCell As String = xTable.Address.Start.Address
+
+        Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+        Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
+        oldAddr = xTable.Address
+        newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
+        xTable.TableXml.InnerXml = xTable.TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+        mainForm.wsLight(i).Cells(startCell).LoadFromDataTable(dt, True)
 
     End Sub
 

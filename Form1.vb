@@ -283,9 +283,19 @@ Public Class mainForm
             initLightWorksheets()
             initLightTables()
 
-            tabControl.SelectedIndex = 1
+            For i = 0 To cmb_category.Items.Count - 1
+                dt_sumLighting(i) = New DataTable
 
-            Console.WriteLine(cmb_category.SelectedIndex)
+                create_sumDatatable(r_Light_sumTbl(i), c_Light_sumTbl(i),
+            rng_Light_sumTbl(i), dt_sumLighting(i), tbl_Lighting_sumTables(i).Name)
+                'sumForm.dgv_sum.DataSource = mainForm.dt_sumLighting(i)
+
+            Next i
+
+            tabControl.SelectedIndex = 1
+            grbx_1.Visible = True
+            grbx_2.Visible = True
+            'Console.WriteLine(cmb_category.SelectedIndex)
 
         End If
     End Sub
@@ -569,6 +579,28 @@ Public Class mainForm
                 btn_vision.PerformClick()
         End Select
 
+    End Sub
+    '===================================================================================
+    '             === Cancel ===
+    '===================================================================================
+    Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
+        Dim excelFile = New FileInfo(sFileName_DB)
+
+        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+        obj_excel = Excel                            '   Global vars to use in function "Save"
+        obj_excelFile = excelFile
+
+        initLightWorksheets()
+        initLightTables()
+        clearControls()
+        unblockCompanyButtons()
+        unblockEditButtons()
+
+        btn_save.FlatStyle = FlatStyle.Standard
+
+        tabControl.SelectedIndex = 1
 
     End Sub
 
@@ -576,14 +608,11 @@ Public Class mainForm
     '             === Show summary ===
     '===================================================================================
     Private Sub btn_summary_Click(sender As Object, e As EventArgs) Handles btn_summary.Click
-
-        Dim i As Integer = cmb_category.SelectedIndex
-        sumForm.Show()
-
-        dt_sumLighting(i) = New DataTable
-
-        create_sumDatatable(r_Light_sumTbl(i), c_Light_sumTbl(i), rng_Light_sumTbl(i), dt_sumLighting(i), tbl_Lighting_sumTables(i).Name)
+        Dim i As Integer
+        i = cmb_category.SelectedIndex
+        Console.WriteLine(i)
         sumForm.dgv_sum.DataSource = dt_sumLighting(i)
+        sumForm.Show()
         format_sumDGV()
 
     End Sub

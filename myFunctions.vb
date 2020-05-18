@@ -23,6 +23,7 @@ Module myFunctions
         mainForm.lbl_qtyTotal.Text = ""
         mainForm.lbl_smeta_qty.Visible = False
 
+
     End Sub
     '===================================================================================
     '             === Prev record ===
@@ -121,7 +122,7 @@ Module myFunctions
         index = mainForm.DGV_light.CurrentRow.Index
 
         Try
-            For j = 0 To 3
+            For j = 0 To 4
                 sum = 0
                 qty = mainForm.tbl_Lighting_tables(i, j).Range.Value(index + 1, 4)
                 sum = sum + qty
@@ -171,6 +172,7 @@ Module myFunctions
         row.Item(0) = CInt(_dt.Rows(rCount - 1).Item(0)) + 1
 
         _dgv.DataSource = _dt
+
 
     End Sub
     '===================================================================================
@@ -228,11 +230,15 @@ Module myFunctions
             Case 1
 
                 Dim j As Integer
+
                 For j = 0 To mainForm.sCompany.Count - 1
-                    clearTable(_i, _j)
+
                     Dim startCell As String = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
                     Dim oldAddr As OfficeOpenXml.ExcelAddressBase
                     Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
+
+                    Console.WriteLine(mainForm.tbl_Lighting_tables(_i, j).Range.End.Row)
 
                     oldAddr = mainForm.tbl_Lighting_tables(_i, j).Address
                     newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)

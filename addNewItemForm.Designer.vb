@@ -90,6 +90,11 @@ Partial Class addNewItemForm
         Me.Label32 = New System.Windows.Forms.Label()
         Me.cmb_category_addform = New System.Windows.Forms.ComboBox()
         Me.Label33 = New System.Windows.Forms.Label()
+        Me.txt_qty_belimlight = New System.Windows.Forms.TextBox()
+        Me.txt_qty_PRlighting = New System.Windows.Forms.TextBox()
+        Me.txt_qty_blackout = New System.Windows.Forms.TextBox()
+        Me.txt_qty_vision = New System.Windows.Forms.TextBox()
+        Me.txt_qty_stage = New System.Windows.Forms.TextBox()
         Me.SuspendLayout()
         '
         'Label1
@@ -108,7 +113,7 @@ Partial Class addNewItemForm
         Me.txt_name_addform.Name = "txt_name_addform"
         Me.txt_name_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_name_addform.TabIndex = 1
-        Me.txt_name_addform.Text = " "
+        Me.txt_name_addform.Tag = "t"
         '
         'txt_qty_addform
         '
@@ -116,6 +121,7 @@ Partial Class addNewItemForm
         Me.txt_qty_addform.Name = "txt_qty_addform"
         Me.txt_qty_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_addform.TabIndex = 2
+        Me.txt_qty_addform.Tag = "q"
         Me.txt_qty_addform.Text = "0"
         '
         'Label2
@@ -144,7 +150,7 @@ Partial Class addNewItemForm
         Me.txt_belimlight1_addform.Name = "txt_belimlight1_addform"
         Me.txt_belimlight1_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_belimlight1_addform.TabIndex = 1
-        Me.txt_belimlight1_addform.Text = " "
+        Me.txt_belimlight1_addform.Tag = "t"
         '
         'txt_qty_belimlight1_addform
         '
@@ -153,6 +159,7 @@ Partial Class addNewItemForm
         Me.txt_qty_belimlight1_addform.Name = "txt_qty_belimlight1_addform"
         Me.txt_qty_belimlight1_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_belimlight1_addform.TabIndex = 2
+        Me.txt_qty_belimlight1_addform.Tag = "q"
         Me.txt_qty_belimlight1_addform.Text = "0"
         '
         'Label4
@@ -182,7 +189,7 @@ Partial Class addNewItemForm
         Me.txt_PRlighting1_addform.Name = "txt_PRlighting1_addform"
         Me.txt_PRlighting1_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_PRlighting1_addform.TabIndex = 1
-        Me.txt_PRlighting1_addform.Text = " "
+        Me.txt_PRlighting1_addform.Tag = "t"
         '
         'txt_qty_PRlighting1_addform
         '
@@ -191,6 +198,7 @@ Partial Class addNewItemForm
         Me.txt_qty_PRlighting1_addform.Name = "txt_qty_PRlighting1_addform"
         Me.txt_qty_PRlighting1_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_PRlighting1_addform.TabIndex = 2
+        Me.txt_qty_PRlighting1_addform.Tag = "q"
         Me.txt_qty_PRlighting1_addform.Text = "0"
         '
         'Label6
@@ -220,7 +228,7 @@ Partial Class addNewItemForm
         Me.txt_blackout1_addform.Name = "txt_blackout1_addform"
         Me.txt_blackout1_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_blackout1_addform.TabIndex = 1
-        Me.txt_blackout1_addform.Text = " "
+        Me.txt_blackout1_addform.Tag = "t"
         '
         'txt_qty_blackout1_addform
         '
@@ -229,6 +237,7 @@ Partial Class addNewItemForm
         Me.txt_qty_blackout1_addform.Name = "txt_qty_blackout1_addform"
         Me.txt_qty_blackout1_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_blackout1_addform.TabIndex = 2
+        Me.txt_qty_blackout1_addform.Tag = "q"
         Me.txt_qty_blackout1_addform.Text = "0"
         '
         'Label8
@@ -258,7 +267,7 @@ Partial Class addNewItemForm
         Me.txt_vision1_addform.Name = "txt_vision1_addform"
         Me.txt_vision1_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_vision1_addform.TabIndex = 1
-        Me.txt_vision1_addform.Text = " "
+        Me.txt_vision1_addform.Tag = "t"
         '
         'txt_qty_vision1_addform
         '
@@ -267,6 +276,7 @@ Partial Class addNewItemForm
         Me.txt_qty_vision1_addform.Name = "txt_qty_vision1_addform"
         Me.txt_qty_vision1_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_vision1_addform.TabIndex = 2
+        Me.txt_qty_vision1_addform.Tag = "q"
         Me.txt_qty_vision1_addform.Text = "0"
         '
         'Label10
@@ -296,7 +306,7 @@ Partial Class addNewItemForm
         Me.txt_stage1_addform.Name = "txt_stage1_addform"
         Me.txt_stage1_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_stage1_addform.TabIndex = 1
-        Me.txt_stage1_addform.Text = " "
+        Me.txt_stage1_addform.Tag = "t"
         '
         'txt_qty_stage1_addform
         '
@@ -305,6 +315,7 @@ Partial Class addNewItemForm
         Me.txt_qty_stage1_addform.Name = "txt_qty_stage1_addform"
         Me.txt_qty_stage1_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_stage1_addform.TabIndex = 2
+        Me.txt_qty_stage1_addform.Tag = "q"
         Me.txt_qty_stage1_addform.Text = "0"
         '
         'Label12
@@ -352,7 +363,7 @@ Partial Class addNewItemForm
         Me.txt_belimlight2_addform.Name = "txt_belimlight2_addform"
         Me.txt_belimlight2_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_belimlight2_addform.TabIndex = 1
-        Me.txt_belimlight2_addform.Text = " "
+        Me.txt_belimlight2_addform.Tag = "t"
         '
         'txt_qty_belimlight2_addform
         '
@@ -361,6 +372,7 @@ Partial Class addNewItemForm
         Me.txt_qty_belimlight2_addform.Name = "txt_qty_belimlight2_addform"
         Me.txt_qty_belimlight2_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_belimlight2_addform.TabIndex = 2
+        Me.txt_qty_belimlight2_addform.Tag = "q"
         Me.txt_qty_belimlight2_addform.Text = "0"
         '
         'Label14
@@ -390,7 +402,7 @@ Partial Class addNewItemForm
         Me.txt_belimlight3_addform.Name = "txt_belimlight3_addform"
         Me.txt_belimlight3_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_belimlight3_addform.TabIndex = 1
-        Me.txt_belimlight3_addform.Text = " "
+        Me.txt_belimlight3_addform.Tag = "t"
         '
         'txt_qty_belimlight3_addform
         '
@@ -399,6 +411,7 @@ Partial Class addNewItemForm
         Me.txt_qty_belimlight3_addform.Name = "txt_qty_belimlight3_addform"
         Me.txt_qty_belimlight3_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_belimlight3_addform.TabIndex = 2
+        Me.txt_qty_belimlight3_addform.Tag = "q"
         Me.txt_qty_belimlight3_addform.Text = "0"
         '
         'Label16
@@ -428,7 +441,7 @@ Partial Class addNewItemForm
         Me.txt_PRlighting2_addform.Name = "txt_PRlighting2_addform"
         Me.txt_PRlighting2_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_PRlighting2_addform.TabIndex = 1
-        Me.txt_PRlighting2_addform.Text = " "
+        Me.txt_PRlighting2_addform.Tag = "t"
         '
         'txt_qty_PRlighting2_addform
         '
@@ -437,6 +450,7 @@ Partial Class addNewItemForm
         Me.txt_qty_PRlighting2_addform.Name = "txt_qty_PRlighting2_addform"
         Me.txt_qty_PRlighting2_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_PRlighting2_addform.TabIndex = 2
+        Me.txt_qty_PRlighting2_addform.Tag = "q"
         Me.txt_qty_PRlighting2_addform.Text = "0"
         '
         'Label18
@@ -466,7 +480,7 @@ Partial Class addNewItemForm
         Me.txt_PRlighting3_addform.Name = "txt_PRlighting3_addform"
         Me.txt_PRlighting3_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_PRlighting3_addform.TabIndex = 1
-        Me.txt_PRlighting3_addform.Text = " "
+        Me.txt_PRlighting3_addform.Tag = "t"
         '
         'txt_qty_PRlighting3_addform
         '
@@ -475,6 +489,7 @@ Partial Class addNewItemForm
         Me.txt_qty_PRlighting3_addform.Name = "txt_qty_PRlighting3_addform"
         Me.txt_qty_PRlighting3_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_PRlighting3_addform.TabIndex = 2
+        Me.txt_qty_PRlighting3_addform.Tag = "q"
         Me.txt_qty_PRlighting3_addform.Text = "0"
         '
         'Label20
@@ -504,7 +519,7 @@ Partial Class addNewItemForm
         Me.txt_blackout2_addform.Name = "txt_blackout2_addform"
         Me.txt_blackout2_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_blackout2_addform.TabIndex = 1
-        Me.txt_blackout2_addform.Text = " "
+        Me.txt_blackout2_addform.Tag = "t"
         '
         'txt_qty_blackout2_addform
         '
@@ -513,6 +528,7 @@ Partial Class addNewItemForm
         Me.txt_qty_blackout2_addform.Name = "txt_qty_blackout2_addform"
         Me.txt_qty_blackout2_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_blackout2_addform.TabIndex = 2
+        Me.txt_qty_blackout2_addform.Tag = "q"
         Me.txt_qty_blackout2_addform.Text = "0"
         '
         'Label22
@@ -542,7 +558,7 @@ Partial Class addNewItemForm
         Me.txt_blackout3_addform.Name = "txt_blackout3_addform"
         Me.txt_blackout3_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_blackout3_addform.TabIndex = 1
-        Me.txt_blackout3_addform.Text = " "
+        Me.txt_blackout3_addform.Tag = "t"
         '
         'txt_qty_blackout3_addform
         '
@@ -551,6 +567,7 @@ Partial Class addNewItemForm
         Me.txt_qty_blackout3_addform.Name = "txt_qty_blackout3_addform"
         Me.txt_qty_blackout3_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_blackout3_addform.TabIndex = 2
+        Me.txt_qty_blackout3_addform.Tag = "q"
         Me.txt_qty_blackout3_addform.Text = "0"
         '
         'Label24
@@ -580,7 +597,7 @@ Partial Class addNewItemForm
         Me.txt_vision2_addform.Name = "txt_vision2_addform"
         Me.txt_vision2_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_vision2_addform.TabIndex = 1
-        Me.txt_vision2_addform.Text = " "
+        Me.txt_vision2_addform.Tag = "t"
         '
         'txt_qty_vision2_addform
         '
@@ -589,6 +606,7 @@ Partial Class addNewItemForm
         Me.txt_qty_vision2_addform.Name = "txt_qty_vision2_addform"
         Me.txt_qty_vision2_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_vision2_addform.TabIndex = 2
+        Me.txt_qty_vision2_addform.Tag = "q"
         Me.txt_qty_vision2_addform.Text = "0"
         '
         'Label26
@@ -618,7 +636,7 @@ Partial Class addNewItemForm
         Me.txt_vision3_addform.Name = "txt_vision3_addform"
         Me.txt_vision3_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_vision3_addform.TabIndex = 1
-        Me.txt_vision3_addform.Text = " "
+        Me.txt_vision3_addform.Tag = "t"
         '
         'txt_qty_vision3_addform
         '
@@ -627,6 +645,7 @@ Partial Class addNewItemForm
         Me.txt_qty_vision3_addform.Name = "txt_qty_vision3_addform"
         Me.txt_qty_vision3_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_vision3_addform.TabIndex = 2
+        Me.txt_qty_vision3_addform.Tag = "q"
         Me.txt_qty_vision3_addform.Text = "0"
         '
         'Label28
@@ -656,7 +675,7 @@ Partial Class addNewItemForm
         Me.txt_stage2_addform.Name = "txt_stage2_addform"
         Me.txt_stage2_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_stage2_addform.TabIndex = 1
-        Me.txt_stage2_addform.Text = " "
+        Me.txt_stage2_addform.Tag = "t"
         '
         'txt_qty_stage2_addform
         '
@@ -665,6 +684,7 @@ Partial Class addNewItemForm
         Me.txt_qty_stage2_addform.Name = "txt_qty_stage2_addform"
         Me.txt_qty_stage2_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_stage2_addform.TabIndex = 2
+        Me.txt_qty_stage2_addform.Tag = "q"
         Me.txt_qty_stage2_addform.Text = "0"
         '
         'Label30
@@ -694,7 +714,7 @@ Partial Class addNewItemForm
         Me.txt_stage3_addform.Name = "txt_stage3_addform"
         Me.txt_stage3_addform.Size = New System.Drawing.Size(490, 20)
         Me.txt_stage3_addform.TabIndex = 1
-        Me.txt_stage3_addform.Text = " "
+        Me.txt_stage3_addform.Tag = "t"
         '
         'txt_qty_stage3_addform
         '
@@ -703,6 +723,7 @@ Partial Class addNewItemForm
         Me.txt_qty_stage3_addform.Name = "txt_qty_stage3_addform"
         Me.txt_qty_stage3_addform.Size = New System.Drawing.Size(64, 20)
         Me.txt_qty_stage3_addform.TabIndex = 2
+        Me.txt_qty_stage3_addform.Tag = "q"
         Me.txt_qty_stage3_addform.Text = "0"
         '
         'Label32
@@ -734,12 +755,67 @@ Partial Class addNewItemForm
         Me.Label33.TabIndex = 19
         Me.Label33.Text = "Выбор категории"
         '
+        'txt_qty_belimlight
+        '
+        Me.txt_qty_belimlight.BackColor = System.Drawing.Color.FromArgb(CType(CType(252, Byte), Integer), CType(CType(228, Byte), Integer), CType(CType(214, Byte), Integer))
+        Me.txt_qty_belimlight.Location = New System.Drawing.Point(368, 176)
+        Me.txt_qty_belimlight.Name = "txt_qty_belimlight"
+        Me.txt_qty_belimlight.Size = New System.Drawing.Size(64, 20)
+        Me.txt_qty_belimlight.TabIndex = 20
+        Me.txt_qty_belimlight.Tag = "q"
+        Me.txt_qty_belimlight.Text = "0"
+        '
+        'txt_qty_PRlighting
+        '
+        Me.txt_qty_PRlighting.BackColor = System.Drawing.Color.FromArgb(CType(CType(221, Byte), Integer), CType(CType(235, Byte), Integer), CType(CType(247, Byte), Integer))
+        Me.txt_qty_PRlighting.Location = New System.Drawing.Point(368, 275)
+        Me.txt_qty_PRlighting.Name = "txt_qty_PRlighting"
+        Me.txt_qty_PRlighting.Size = New System.Drawing.Size(64, 20)
+        Me.txt_qty_PRlighting.TabIndex = 21
+        Me.txt_qty_PRlighting.Tag = "q"
+        Me.txt_qty_PRlighting.Text = "0"
+        '
+        'txt_qty_blackout
+        '
+        Me.txt_qty_blackout.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer), CType(CType(237, Byte), Integer))
+        Me.txt_qty_blackout.Location = New System.Drawing.Point(368, 371)
+        Me.txt_qty_blackout.Name = "txt_qty_blackout"
+        Me.txt_qty_blackout.Size = New System.Drawing.Size(64, 20)
+        Me.txt_qty_blackout.TabIndex = 22
+        Me.txt_qty_blackout.Tag = "q"
+        Me.txt_qty_blackout.Text = "0"
+        '
+        'txt_qty_vision
+        '
+        Me.txt_qty_vision.BackColor = System.Drawing.Color.FromArgb(CType(CType(226, Byte), Integer), CType(CType(239, Byte), Integer), CType(CType(218, Byte), Integer))
+        Me.txt_qty_vision.Location = New System.Drawing.Point(368, 470)
+        Me.txt_qty_vision.Name = "txt_qty_vision"
+        Me.txt_qty_vision.Size = New System.Drawing.Size(64, 20)
+        Me.txt_qty_vision.TabIndex = 23
+        Me.txt_qty_vision.Tag = "q"
+        Me.txt_qty_vision.Text = "0"
+        '
+        'txt_qty_stage
+        '
+        Me.txt_qty_stage.BackColor = System.Drawing.Color.FromArgb(CType(CType(237, Byte), Integer), CType(CType(226, Byte), Integer), CType(CType(246, Byte), Integer))
+        Me.txt_qty_stage.Location = New System.Drawing.Point(368, 569)
+        Me.txt_qty_stage.Name = "txt_qty_stage"
+        Me.txt_qty_stage.Size = New System.Drawing.Size(64, 20)
+        Me.txt_qty_stage.TabIndex = 24
+        Me.txt_qty_stage.Tag = "q"
+        Me.txt_qty_stage.Text = "0"
+        '
         'addNewItemForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.BackColor = System.Drawing.Color.LightSteelBlue
         Me.ClientSize = New System.Drawing.Size(800, 706)
+        Me.Controls.Add(Me.txt_qty_stage)
+        Me.Controls.Add(Me.txt_qty_vision)
+        Me.Controls.Add(Me.txt_qty_blackout)
+        Me.Controls.Add(Me.txt_qty_PRlighting)
+        Me.Controls.Add(Me.txt_qty_belimlight)
         Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.cmb_category_addform)
         Me.Controls.Add(Me.btn_close_addform)
@@ -883,4 +959,9 @@ Partial Class addNewItemForm
     Friend WithEvents Label32 As Label
     Friend WithEvents cmb_category_addform As ComboBox
     Friend WithEvents Label33 As Label
+    Friend WithEvents txt_qty_belimlight As TextBox
+    Friend WithEvents txt_qty_PRlighting As TextBox
+    Friend WithEvents txt_qty_blackout As TextBox
+    Friend WithEvents txt_qty_vision As TextBox
+    Friend WithEvents txt_qty_stage As TextBox
 End Class
