@@ -49,6 +49,7 @@ Partial Class mainForm
         Me.btn_prev = New System.Windows.Forms.Button()
         Me.OFD = New System.Windows.Forms.OpenFileDialog()
         Me.grbx_1 = New System.Windows.Forms.GroupBox()
+        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.btn_summary = New System.Windows.Forms.Button()
         Me.grbx_2 = New System.Windows.Forms.GroupBox()
         Me.btn_stage = New System.Windows.Forms.Button()
@@ -64,7 +65,6 @@ Partial Class mainForm
         Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
-        Me.btn_cancel = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -331,6 +331,17 @@ Partial Class mainForm
         Me.grbx_1.TabStop = False
         Me.grbx_1.Visible = False
         '
+        'btn_cancel
+        '
+        Me.btn_cancel.FlatAppearance.BorderColor = System.Drawing.Color.Red
+        Me.btn_cancel.FlatAppearance.BorderSize = 2
+        Me.btn_cancel.Location = New System.Drawing.Point(965, 19)
+        Me.btn_cancel.Name = "btn_cancel"
+        Me.btn_cancel.Size = New System.Drawing.Size(75, 23)
+        Me.btn_cancel.TabIndex = 14
+        Me.btn_cancel.Text = "Cancel"
+        Me.btn_cancel.UseVisualStyleBackColor = True
+        '
         'btn_summary
         '
         Me.btn_summary.Location = New System.Drawing.Point(209, 19)
@@ -498,17 +509,6 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Name = "lbl_qty_belimlight"
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
-        '
-        'btn_cancel
-        '
-        Me.btn_cancel.FlatAppearance.BorderColor = System.Drawing.Color.Red
-        Me.btn_cancel.FlatAppearance.BorderSize = 2
-        Me.btn_cancel.Location = New System.Drawing.Point(965, 19)
-        Me.btn_cancel.Name = "btn_cancel"
-        Me.btn_cancel.Size = New System.Drawing.Size(75, 23)
-        Me.btn_cancel.TabIndex = 14
-        Me.btn_cancel.Text = "Cancel"
-        Me.btn_cancel.UseVisualStyleBackColor = True
         '
         'mainForm
         '

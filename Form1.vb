@@ -491,7 +491,22 @@ Public Class mainForm
     '===================================================================================
     '             === UPDATE data in DB ===
     '===================================================================================
+    Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+        selEditModeIndex = 0
 
+        Dim i, j, index As Integer
+
+        i = cmb_category.SelectedIndex
+        j = selCompIndex
+        index = DGV_light.CurrentRow.Index
+
+        updateData(dt_Lighting(i, j), DGV_light, index)
+
+        btn_save.FlatStyle = FlatStyle.Flat
+        blockCompanyButtons()
+        blockEditButtons()
+
+    End Sub
     '===================================================================================
     '             === DELETE data from DB ===
     '===================================================================================
@@ -499,12 +514,12 @@ Public Class mainForm
 
         selEditModeIndex = 1
 
-        Dim i, j, index As Integer
+        Dim i, j, rowIndex As Integer
 
         i = cmb_category.SelectedIndex
         j = selCompIndex
-        index = DGV_light.CurrentRow.Index
-        deleteData(dt_Lighting(i, j), DGV_light, index)
+        rowIndex = DGV_light.CurrentRow.Index
+        deleteData(i, rowIndex)
 
         btn_save.FlatStyle = FlatStyle.Flat
         blockCompanyButtons()
@@ -558,23 +573,24 @@ Public Class mainForm
     '             === Cancel ===
     '===================================================================================
     Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
-        Dim excelFile = New FileInfo(sFileName_DB)
 
-        ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-        Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+        'Dim excelFile = New FileInfo(sFileName_DB)
 
-        obj_excel = Excel                            '   Global vars to use in function "Save"
-        obj_excelFile = excelFile
+        'ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        'Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
-        initLightWorksheets()
-        initLightTables()
-        clearControls()
+        'obj_excel = Excel                            '   Global vars to use in function "Save"
+        'obj_excelFile = excelFile
+
+        'initLightWorksheets()
+        'initLightTables()
+        'clearControls()
         unblockCompanyButtons()
         unblockEditButtons()
 
         btn_save.FlatStyle = FlatStyle.Standard
 
-        tabControl.SelectedIndex = 1
+        'tabControl.SelectedIndex = 1
 
     End Sub
 

@@ -120,6 +120,39 @@ Module dTable
 
     End Sub
     '===================================================================================      
+    '                === Update sumDatatable after UPDATE ===
+    '===================================================================================
+    Sub update_sumDatatable(_i As Integer)
+        Dim i As Integer
+        Dim dt0, dt1, dt2, dt3, dt4, dtSum As DataTable
+        Dim row As DataRow
+
+        i = mainForm.cmb_category.SelectedIndex
+
+        dtSum = mainForm.dt_sumLighting(i)
+
+        row = dtSum.Rows(_i)
+
+        dt0 = mainForm.dt_Lighting(i, 0)
+        dt1 = mainForm.dt_Lighting(i, 1)
+        dt2 = mainForm.dt_Lighting(i, 2)
+        dt3 = mainForm.dt_Lighting(i, 3)
+        dt4 = mainForm.dt_Lighting(i, 4)
+
+        row.Item(0) = dt0.Rows(_i).Item(0)
+        row.Item(1) = dt0.Rows(_i).Item(1)
+        row.Item(2) = dt0.Rows(_i).Item(2)
+        row.Item(3) = dt0.Rows(_i).Item(4) + dt0.Rows(_i).Item(6) + dt0.Rows(_i).Item(8)
+        row.Item(4) = dt1.Rows(_i).Item(4) + dt1.Rows(_i).Item(6) + dt1.Rows(_i).Item(8)
+        row.Item(5) = dt2.Rows(_i).Item(4) + dt2.Rows(_i).Item(6) + dt2.Rows(_i).Item(8)
+        row.Item(6) = dt3.Rows(_i).Item(4) + dt3.Rows(_i).Item(6) + dt3.Rows(_i).Item(8)
+        row.Item(7) = dt4.Rows(_i).Item(4) + dt4.Rows(_i).Item(6) + dt4.Rows(_i).Item(8)
+
+        mainForm.dt_sumLighting(i) = dtSum
+
+    End Sub
+
+    '===================================================================================      
     '                === Create datatable ===
     '===================================================================================
 

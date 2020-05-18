@@ -214,8 +214,6 @@ Module myFunctions
         row = _dt.Rows(_index)
         Dim sRow() As String
 
-
-
         sRow = New String() {
                 mainForm.rtb_fixtureName.Text,
                 mainForm.txt_qty.Text,
@@ -231,16 +229,28 @@ Module myFunctions
             row.Item(colIndex) = sRow(colIndex - 1)
         Next colIndex
         _dgv.DataSource = _dt
+
+        update_sumDatatable(_index)
+
     End Sub
 
     '===================================================================================
     '             === DELETE data from DB ===
     '===================================================================================
 
-    Sub deleteData(_dt As DataTable, _dgv As DataGridView, _index As Integer)
-        Dim rowCollection As DataRowCollection = _dt.Rows
-        rowCollection.RemoveAt(_index)
-        _dgv.DataSource = _dt
+    Sub deleteData(_catIndex As Integer, _rowIndex As Integer)
+        Dim rowCollection As DataRowCollection
+        Dim j As Integer
+
+        For j = 0 To mainForm.sCompany.Count - 1
+            rowCollection = mainForm.dt_Lighting(_catIndex, j).rows
+            rowCollection.RemoveAt(_rowIndex)
+        Next
+
+        rowCollection = mainForm.dt_sumLighting(_catIndex).rows
+        rowCollection.RemoveAt(_rowIndex)
+
+        mainForm.DGV_light.DataSource = mainForm.dt_Lighting(_catIndex, mainForm.selCompIndex)
     End Sub
 
     '===================================================================================
