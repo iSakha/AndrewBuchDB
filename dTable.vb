@@ -366,8 +366,8 @@ Module dTable
         Dim sRow As String
         'Index = mainForm.selectedCategoryIndex
         Dim dt As DataTable
-        iRow = New Integer() {addNewItemForm.qty_belimlight, addNewItemForm.qty_PRlighting,
-            addNewItemForm.qty_blackout, addNewItemForm.qty_vision, addNewItemForm.qty_stage}
+        iRow = New Integer() {newForm.qty_belimlight, newForm.qty_PRlighting,
+            newForm.qty_blackout, newForm.qty_vision, newForm.qty_stage}
 
         dt = mainForm.dt_sumLighting(i)
 

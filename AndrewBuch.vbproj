@@ -95,10 +95,10 @@
     <Import Include="System.Threading.Tasks" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="addNewItemForm.Designer.vb">
-      <DependentUpon>addNewItemForm.vb</DependentUpon>
+    <Compile Include="newForm.Designer.vb">
+      <DependentUpon>newForm.vb</DependentUpon>
     </Compile>
-    <Compile Include="addNewItemForm.vb">
+    <Compile Include="newForm.vb">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="declarations.vb" />
@@ -134,8 +134,8 @@
     <Compile Include="myFunctions.vb" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="addNewItemForm.resx">
-      <DependentUpon>addNewItemForm.vb</DependentUpon>
+    <EmbeddedResource Include="newForm.resx">
+      <DependentUpon>newForm.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.vb</DependentUpon>

@@ -173,36 +173,59 @@ Module myFunctions
     '===================================================================================
     '             === ADD data to DB ===
     '===================================================================================
-    Sub addData(_dt As DataTable, _dgv As DataGridView)
+    Sub addData(_catIndex As Integer)
 
+        Dim sRow(4, 7) As String
+        sRow = New String(4, 7) {}
         Dim rCount As Integer
-        Dim sRow() As String
-        rCount = _dt.Rows.Count
-
-        sRow = New String() {
-                mainForm.rtb_fixtureName.Text,
-                mainForm.txt_qty.Text,
-                mainForm.rtb_FirstName.Text,
-                mainForm.txt_qty1.Text,
-                mainForm.rtb_SecondName.Text,
-                mainForm.txt_qty2.Text,
-                mainForm.rtb_ThirdName.Text,
-                mainForm.txt_qty3.Text
-                }
-
-
+        Dim dt As DataTable
         Dim row As DataRow
 
-        row = _dt.Rows.Add()
+        sRow = {
+            {newForm.txt_name_addform.Text, newForm.txt_qty_addform.Text,
+            newForm.txt_belimlight1_addform.Text, newForm.txt_qty_belimlight1_addform.Text,
+            newForm.txt_belimlight2_addform.Text, newForm.txt_qty_belimlight2_addform.Text,
+            newForm.txt_belimlight3_addform.Text, newForm.txt_qty_belimlight3_addform.Text},
+            {newForm.txt_name_addform.Text, newForm.txt_qty_addform.Text,
+            newForm.txt_PRlighting1_addform.Text, newForm.txt_qty_PRlighting1_addform.Text,
+            newForm.txt_PRlighting2_addform.Text, newForm.txt_qty_PRlighting2_addform.Text,
+            newForm.txt_PRlighting3_addform.Text, newForm.txt_qty_PRlighting3_addform.Text},
+            {newForm.txt_name_addform.Text, newForm.txt_qty_addform.Text,
+            newForm.txt_blackout1_addform.Text, newForm.txt_qty_blackout1_addform.Text,
+            newForm.txt_blackout2_addform.Text, newForm.txt_qty_blackout2_addform.Text,
+            newForm.txt_blackout3_addform.Text, newForm.txt_qty_blackout3_addform.Text},
+            {newForm.txt_name_addform.Text, newForm.txt_qty_addform.Text,
+            newForm.txt_vision1_addform.Text, newForm.txt_qty_vision1_addform.Text,
+            newForm.txt_vision2_addform.Text, newForm.txt_qty_vision2_addform.Text,
+            newForm.txt_vision3_addform.Text, newForm.txt_qty_vision3_addform.Text},
+            {newForm.txt_name_addform.Text, newForm.txt_qty_addform.Text,
+            newForm.txt_stage1_addform.Text, newForm.txt_qty_stage1_addform.Text,
+            newForm.txt_stage2_addform.Text, newForm.txt_qty_stage2_addform.Text,
+            newForm.txt_stage3_addform.Text, newForm.txt_qty_stage3_addform.Text}
+        }
 
-        For i As Integer = 0 To sRow.Count - 1
-            row.Item(i + 1) = sRow(i)
-        Next i
 
-        row.Item(0) = CInt(_dt.Rows(rCount - 1).Item(0)) + 1
+        For j As Integer = 0 To mainForm.sCompany.Count - 1
 
-        _dgv.DataSource = _dt
+            dt = mainForm.dt_Lighting(_catIndex, j)
+            rCount = dt.Rows.Count
+            row = dt.Rows.Add()
 
+            row.Item(0) = CInt(dt.Rows(rCount - 1).Item(0)) + 1
+            row.Item(1) = sRow(j, 0)
+            row.Item(2) = CInt(sRow(j, 1))
+            row.Item(3) = sRow(j, 2)
+            row.Item(4) = CInt(sRow(j, 3))
+            row.Item(5) = sRow(j, 4)
+            row.Item(6) = CInt(sRow(j, 5))
+            row.Item(7) = sRow(j, 6)
+            row.Item(8) = CInt(sRow(j, 7))
+
+        Next j
+
+        rCount = mainForm.dt_sumLighting(_catIndex).Rows.Count
+        row = mainForm.dt_sumLighting(_catIndex).Rows.Add()
+        update_sumDatatable(rCount)
 
     End Sub
     '===================================================================================

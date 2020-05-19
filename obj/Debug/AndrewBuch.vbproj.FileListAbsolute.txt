@@ -13,4 +13,4 @@ C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\bin\De
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.mainForm.resources
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.vbproj.CopyComplete
 C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.sumForm.resources
-C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.addNewItemForm.resources
+C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\AndrewBuch\obj\Debug\AndrewBuch.newForm.resources

@@ -1,5 +1,5 @@
 ﻿<Global.Microsoft.VisualBasic.CompilerServices.DesignerGenerated()> _
-Partial Class addNewItemForm
+Partial Class newForm
     Inherits System.Windows.Forms.Form
 
     'Form overrides dispose to clean up the component list.
@@ -46,7 +46,7 @@ Partial Class addNewItemForm
         Me.txt_stage1_addform = New System.Windows.Forms.TextBox()
         Me.txt_qty_stage1_addform = New System.Windows.Forms.TextBox()
         Me.Label12 = New System.Windows.Forms.Label()
-        Me.btn_save_addform = New System.Windows.Forms.Button()
+        Me.btn_add_addform = New System.Windows.Forms.Button()
         Me.btn_close_addform = New System.Windows.Forms.Button()
         Me.Label13 = New System.Windows.Forms.Label()
         Me.txt_belimlight2_addform = New System.Windows.Forms.TextBox()
@@ -328,14 +328,14 @@ Partial Class addNewItemForm
         Me.Label12.TabIndex = 3
         Me.Label12.Text = "Количество"
         '
-        'btn_save_addform
+        'btn_add_addform
         '
-        Me.btn_save_addform.Location = New System.Drawing.Point(283, 678)
-        Me.btn_save_addform.Name = "btn_save_addform"
-        Me.btn_save_addform.Size = New System.Drawing.Size(75, 23)
-        Me.btn_save_addform.TabIndex = 4
-        Me.btn_save_addform.Text = "Save"
-        Me.btn_save_addform.UseVisualStyleBackColor = True
+        Me.btn_add_addform.Location = New System.Drawing.Point(283, 678)
+        Me.btn_add_addform.Name = "btn_add_addform"
+        Me.btn_add_addform.Size = New System.Drawing.Size(75, 23)
+        Me.btn_add_addform.TabIndex = 4
+        Me.btn_add_addform.Text = "Add"
+        Me.btn_add_addform.UseVisualStyleBackColor = True
         '
         'btn_close_addform
         '
@@ -819,7 +819,7 @@ Partial Class addNewItemForm
         Me.Controls.Add(Me.Label33)
         Me.Controls.Add(Me.cmb_category_addform)
         Me.Controls.Add(Me.btn_close_addform)
-        Me.Controls.Add(Me.btn_save_addform)
+        Me.Controls.Add(Me.btn_add_addform)
         Me.Controls.Add(Me.Label32)
         Me.Controls.Add(Me.Label30)
         Me.Controls.Add(Me.Label12)
@@ -915,7 +915,7 @@ Partial Class addNewItemForm
     Friend WithEvents txt_stage1_addform As TextBox
     Friend WithEvents txt_qty_stage1_addform As TextBox
     Friend WithEvents Label12 As Label
-    Friend WithEvents btn_save_addform As Button
+    Friend WithEvents btn_add_addform As Button
     Friend WithEvents btn_close_addform As Button
     Friend WithEvents Label13 As Label
     Friend WithEvents txt_belimlight2_addform As TextBox

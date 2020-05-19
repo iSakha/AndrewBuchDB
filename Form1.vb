@@ -484,8 +484,8 @@ Public Class mainForm
         blockCompanyButtons()
         blockEditButtons()
 
-        addNewItemForm.Show()
-        addNewItemForm.cmb_category_addform.SelectedIndex = i
+        newForm.Show()
+        newForm.cmb_category_addform.SelectedIndex = i
 
     End Sub
     '===================================================================================
