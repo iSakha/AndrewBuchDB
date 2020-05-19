@@ -474,9 +474,9 @@ Public Class mainForm
     '             === ADD data to DB ===
     '===================================================================================
     Private Sub btn_add_Click(sender As Object, e As EventArgs) Handles btn_add.Click
-
+        btn_save.Enabled = True
         Dim i As Integer
-
+        selEditModeIndex = 2
         i = cmb_category.SelectedIndex
         selectedCategoryIndex = i
 
@@ -492,6 +492,7 @@ Public Class mainForm
     '             === UPDATE data in DB ===
     '===================================================================================
     Private Sub btn_update_Click(sender As Object, e As EventArgs) Handles btn_update.Click
+        btn_save.Enabled = True
         selEditModeIndex = 0
 
         Dim i, j, index As Integer
@@ -511,6 +512,7 @@ Public Class mainForm
     '             === DELETE data from DB ===
     '===================================================================================
     Private Sub btn_del_Click(sender As Object, e As EventArgs) Handles btn_del.Click
+        btn_save.Enabled = True
 
         selEditModeIndex = 1
 

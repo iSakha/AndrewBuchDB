@@ -247,6 +247,15 @@ Module myFunctions
                 mainForm.rtb_ThirdName.Text,
                 mainForm.txt_qty3.Text
             }
+        '   Chek null values in textboxes
+
+        For i As Integer = 1 To sRow.Count - 1 Step 2
+            If sRow(i) = "" Then
+                MsgBox("Поле количества приборов не может быть пустым!")
+                mainForm.btn_save.Enabled = False
+                Exit Sub
+            End If
+        Next i
 
         For colIndex As Integer = 1 To 8
             row.Item(colIndex) = sRow(colIndex - 1)
@@ -282,11 +291,15 @@ Module myFunctions
 
     Sub saveData(_i As Integer, _j As Integer)
 
+        Dim startCell As String
+        Dim oldAddr As OfficeOpenXml.ExcelAddressBase
+        Dim newAddr As OfficeOpenXml.ExcelAddressBase
+
         Select Case mainForm.selEditModeIndex
 
             '           "Update" selected
             Case 0
-                Dim startCell As String = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
+                startCell = mainForm.tbl_Lighting_tables(_i, _j).Address.Start.Address
                 mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, _j), True)
 
             '           "Delete" selected
@@ -296,12 +309,11 @@ Module myFunctions
 
                 For j = 0 To mainForm.sCompany.Count - 1
 
-                    Dim startCell As String = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
-                    Dim oldAddr As OfficeOpenXml.ExcelAddressBase
-                    Dim newAddr As OfficeOpenXml.ExcelAddressBase
+                    startCell = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
 
 
-                    Console.WriteLine(mainForm.tbl_Lighting_tables(_i, j).Range.End.Row)
+
+                    'Console.WriteLine(mainForm.tbl_Lighting_tables(_i, j).Range.End.Row)
 
                     oldAddr = mainForm.tbl_Lighting_tables(_i, j).Address
                     newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)
@@ -311,14 +323,25 @@ Module myFunctions
                     mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, j), True)
                 Next j
 
+                startCell = mainForm.tbl_Lighting_sumTables(_i).Address.Start.Address
+
+
+                oldAddr = mainForm.tbl_Lighting_sumTables(_i).Address
+                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row - 1, oldAddr.End.Column)
+                mainForm.tbl_Lighting_sumTables(_i).TableXml.InnerXml = mainForm.tbl_Lighting_sumTables(_i).
+                        TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_sumLighting(_i), True)
+
+
+
             '           "Add" selected
 
             Case 2
                 Dim j As Integer
                 For j = 0 To mainForm.sCompany.Count - 1
-                    Dim startCell As String = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
-                    Dim oldAddr As OfficeOpenXml.ExcelAddressBase
-                    Dim newAddr As OfficeOpenXml.ExcelAddressBase
+                    startCell = mainForm.tbl_Lighting_tables(_i, j).Address.Start.Address
+
 
                     oldAddr = mainForm.tbl_Lighting_tables(_i, j).Address
                     newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
@@ -327,6 +350,17 @@ Module myFunctions
 
                     mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_Lighting(_i, j), True)
                 Next j
+
+                startCell = mainForm.tbl_Lighting_sumTables(_i).Address.Start.Address
+
+
+                oldAddr = mainForm.tbl_Lighting_sumTables(_i).Address
+                newAddr = New ExcelAddressBase(oldAddr.Start.Row, oldAddr.Start.Column, oldAddr.End.Row + 1, oldAddr.End.Column)
+                mainForm.tbl_Lighting_sumTables(_i).TableXml.InnerXml = mainForm.tbl_Lighting_sumTables(_i).
+                        TableXml.InnerXml.Replace(oldAddr.ToString(), newAddr.ToString())
+
+                mainForm.wsLight(_i).Cells(startCell).LoadFromDataTable(mainForm.dt_sumLighting(_i), True)
+
         End Select
 
         mainForm.obj_excel.SaveAs(mainForm.obj_excelFile)
