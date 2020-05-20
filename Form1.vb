@@ -576,23 +576,11 @@ Public Class mainForm
     '===================================================================================
     Private Sub btn_cancel_Click(sender As Object, e As EventArgs) Handles btn_cancel.Click
 
-        'Dim excelFile = New FileInfo(sFileName_DB)
-
-        'ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-        'Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
-
-        'obj_excel = Excel                            '   Global vars to use in function "Save"
-        'obj_excelFile = excelFile
-
-        'initLightWorksheets()
-        'initLightTables()
-        'clearControls()
         unblockCompanyButtons()
         unblockEditButtons()
 
         btn_save.FlatStyle = FlatStyle.Standard
 
-        'tabControl.SelectedIndex = 1
 
     End Sub
 
