@@ -1,32 +1,43 @@
-﻿Module declarations
+﻿Imports OfficeOpenXml
+Imports OfficeOpenXml.Table
+Imports System.IO
+Module declarations
 
-    Sub initLightWorksheets()
+    Sub initWorksheets(_tabIndex As Integer)
 
-        mainForm.wsMovHeads = mainForm.obj_excel.Workbook.Worksheets(0)
-        mainForm.wsStrobes = mainForm.obj_excel.Workbook.Worksheets(1)
-        mainForm.wsBlinders = mainForm.obj_excel.Workbook.Worksheets(2)
-        mainForm.wsArch = mainForm.obj_excel.Workbook.Worksheets(3)
-        mainForm.wsLED = mainForm.obj_excel.Workbook.Worksheets(4)
-        mainForm.wsSmoke = mainForm.obj_excel.Workbook.Worksheets(5)
-        mainForm.wsConsoles = mainForm.obj_excel.Workbook.Worksheets(6)
-        mainForm.wsIntercom = mainForm.obj_excel.Workbook.Worksheets(7)
+        Select Case _tabIndex
+            Case 1
 
-        mainForm.wsLight = {mainForm.wsMovHeads,
-                            mainForm.wsStrobes,
-                            mainForm.wsBlinders,
-                            mainForm.wsArch,
-                            mainForm.wsLED,
-                            mainForm.wsSmoke,
-                            mainForm.wsConsoles,
-                            mainForm.wsIntercom}
+                mainForm.wsLight = {mainForm.obj_excel.Workbook.Worksheets(0),
+                            mainForm.obj_excel.Workbook.Worksheets(1),
+                            mainForm.obj_excel.Workbook.Worksheets(2),
+                            mainForm.obj_excel.Workbook.Worksheets(3),
+                            mainForm.obj_excel.Workbook.Worksheets(4),
+                            mainForm.obj_excel.Workbook.Worksheets(5),
+                            mainForm.obj_excel.Workbook.Worksheets(6),
+                            mainForm.obj_excel.Workbook.Worksheets(7)}
 
+            Case 2
 
+                mainForm.wsScreen = {mainForm.obj_excel.Workbook.Worksheets(0),
+                                mainForm.obj_excel.Workbook.Worksheets(1),
+                                mainForm.obj_excel.Workbook.Worksheets(2),
+                                mainForm.obj_excel.Workbook.Worksheets(3),
+                                mainForm.obj_excel.Workbook.Worksheets(4),
+                                mainForm.obj_excel.Workbook.Worksheets(5),
+                                mainForm.obj_excel.Workbook.Worksheets(6),
+                                mainForm.obj_excel.Workbook.Worksheets(7)}
+        End Select
 
     End Sub
 
-    Sub initLightTables()
+    Sub initExcelTables(_tabIndex As Integer)
 
-        mainForm.tbl_Lighting_tables = {
+        Select Case _tabIndex
+
+            Case 1
+
+                mainForm.tbl_Lighting_tables = {
             {mainForm.wsLight(0).Tables.Item("movHeads_belimlight"), mainForm.wsLight(0).Tables.
             Item("movHeads_PRLighting"), mainForm.wsLight(0).Tables.Item("movHeads_blackout"),
             mainForm.wsLight(0).Tables.Item("movHeads_vision"), mainForm.wsLight(0).Tables.Item("movHeads_stage")},
@@ -53,73 +64,50 @@
             mainForm.wsLight(7).Tables.Item("intercom_vision"), mainForm.wsLight(7).Tables.Item("intercom_stage")}
         }
 
-        mainForm.tbl_movHeads = mainForm.wsLight(0).Tables.Item("movHeads_tbl")
-        mainForm.tbl_strobes = mainForm.wsLight(1).Tables.Item("strobes_tbl")
-        mainForm.tbl_blinders = mainForm.wsLight(2).Tables.Item("blinders_tbl")
-        mainForm.tbl_arch = mainForm.wsLight(3).Tables.Item("arch_tbl")
-        mainForm.tbl_LED = mainForm.wsLight(4).Tables.Item("LED_tbl")
-        mainForm.tbl_smoke = mainForm.wsLight(5).Tables.Item("smoke_tbl")
-        mainForm.tbl_consoles = mainForm.wsLight(6).Tables.Item("consoles_tbl")
-        mainForm.tbl_intercom = mainForm.wsLight(7).Tables.Item("intercom_tbl")
+                mainForm.tbl_Lighting_sumTables = {mainForm.wsLight(0).Tables.Item("movHeads_tbl"), mainForm.wsLight(1).Tables.
+                    Item("strobes_tbl"), mainForm.wsLight(2).Tables.Item("blinders_tbl"), mainForm.wsLight(3).Tables.
+                    Item("arch_tbl"), mainForm.wsLight(4).Tables.Item("LED_tbl"), mainForm.wsLight(5).Tables.
+                    Item("smoke_tbl"), mainForm.wsLight(6).Tables.Item("consoles_tbl"), mainForm.wsLight(7).Tables.Item("intercom_tbl")}
 
-        mainForm.tbl_Lighting_sumTables = {mainForm.tbl_movHeads, mainForm.tbl_strobes, mainForm.tbl_blinders,
-            mainForm.tbl_arch, mainForm.tbl_LED, mainForm.tbl_smoke, mainForm.tbl_consoles, mainForm.tbl_intercom}
+            Case 2
 
+                mainForm.tbl_Screen_tables = {
+            {mainForm.wsScreen(0).Tables.Item("modules_belimlight"), mainForm.wsScreen(0).Tables.
+            Item("modules_PRLighting"), mainForm.wsScreen(0).Tables.Item("modules_blackout"),
+            mainForm.wsScreen(0).Tables.Item("modules_vision"), mainForm.wsScreen(0).Tables.Item("modules_stage")},
+            {mainForm.wsScreen(1).Tables.Item("servers_belimlight"), mainForm.wsScreen(1).Tables.
+            Item("servers_PRLighting"), mainForm.wsScreen(1).Tables.Item("servers_blackout"),
+            mainForm.wsScreen(1).Tables.Item("servers_vision"), mainForm.wsScreen(1).Tables.Item("servers_stage")},
+            {mainForm.wsScreen(2).Tables.Item("controllers1_belimlight"), mainForm.wsScreen(2).Tables.
+            Item("controllers1_PRLighting"), mainForm.wsScreen(2).Tables.Item("controllers1_blackout"),
+            mainForm.wsScreen(2).Tables.Item("controllers1_vision"), mainForm.wsScreen(2).Tables.Item("controllers1_stage")},
+            {mainForm.wsScreen(3).Tables.Item("controllers2_belimlight"), mainForm.wsScreen(3).Tables.
+            Item("controllers2_PRLighting"), mainForm.wsScreen(3).Tables.Item("controllers2_blackout"),
+            mainForm.wsScreen(3).Tables.Item("controllers2_vision"), mainForm.wsScreen(3).Tables.Item("controllers2_stage")},
+            {mainForm.wsScreen(4).Tables.Item("projectors_belimlight"), mainForm.wsScreen(4).Tables.
+            Item("projectors_PRLighting"), mainForm.wsScreen(4).Tables.Item("projectors_blackout"),
+            mainForm.wsScreen(4).Tables.Item("projectors_vision"), mainForm.wsScreen(4).Tables.Item("projectors_stage")},
+            {mainForm.wsScreen(5).Tables.Item("construction_belimlight"), mainForm.wsScreen(5).Tables.
+            Item("construction_PRLighting"), mainForm.wsScreen(5).Tables.Item("construction_blackout"),
+            mainForm.wsScreen(5).Tables.Item("construction_vision"), mainForm.wsScreen(5).Tables.Item("construction_stage")},
+            {mainForm.wsScreen(6).Tables.Item("lightingdesks_belimlight"), mainForm.wsScreen(6).
+            Tables.Item("lightingdesks_PRLighting"), mainForm.wsScreen(6).Tables.Item("lightingdesks_blackout"),
+            mainForm.wsScreen(6).Tables.Item("lightingdesks_vision"), mainForm.wsScreen(6).Tables.Item("lightingdesks_stage")},
+            {mainForm.wsScreen(7).Tables.Item("cameras_belimlight"), mainForm.wsScreen(7).Tables.
+            Item("cameras_PRLighting"), mainForm.wsScreen(7).Tables.Item("cameras_blackout"),
+            mainForm.wsScreen(7).Tables.Item("cameras_vision"), mainForm.wsScreen(7).Tables.Item("cameras_stage")}}
 
+                mainForm.tbl_Screen_sumTables = {mainForm.wsScreen(0).Tables.Item("modules_tbl"), mainForm.wsScreen(1).Tables.
+                    Item("servers_tbl"), mainForm.wsScreen(2).Tables.Item("controllers1_tbl"), mainForm.wsScreen(3).Tables.
+                    Item("controllers2_tbl"), mainForm.wsScreen(4).Tables.Item("projectors_tbl"), mainForm.wsScreen(5).Tables.
+                    Item("construction_tbl"), mainForm.wsScreen(6).Tables.Item("lightingdesks_tbl"), mainForm.wsScreen(7).Tables.Item("cameras_tbl")}
+        End Select
     End Sub
-    Sub initDatatables()
 
-        mainForm.dt_Lighting = {
-            {mainForm.dt_movHeads_belimlight, mainForm.dt_movHeads_PRLighting,
-            mainForm.dt_movHeads_blackout, mainForm.dt_movHeads_vision, mainForm.dt_movHeads_stage},
-            {mainForm.dt_strobes_belimlight, mainForm.dt_strobes_PRLighting,
-            mainForm.dt_strobes_blackout, mainForm.dt_strobes_vision, mainForm.dt_strobes_stage},
-            {mainForm.dt_blinders_belimlight, mainForm.dt_blinders_PRLighting,
-            mainForm.dt_blinders_blackout, mainForm.dt_blinders_vision, mainForm.dt_blinders_stage},
-            {mainForm.dt_arch_belimlight, mainForm.dt_arch_PRLighting,
-            mainForm.dt_arch_blackout, mainForm.dt_arch_vision, mainForm.dt_arch_stage},
-            {mainForm.dt_LED_belimlight, mainForm.dt_LED_PRLighting,
-            mainForm.dt_LED_blackout, mainForm.dt_LED_vision, mainForm.dt_LED_stage},
-            {mainForm.dt_smoke_belimlight, mainForm.dt_smoke_PRLighting,
-            mainForm.dt_smoke_blackout, mainForm.dt_smoke_vision, mainForm.dt_smoke_stage},
-            {mainForm.dt_consoles_belimlight, mainForm.dt_consoles_PRLighting,
-            mainForm.dt_consoles_blackout, mainForm.dt_consoles_vision, mainForm.dt_consoles_stage},
-            {mainForm.dt_intercom_belimlight, mainForm.dt_intercom_PRLighting,
-            mainForm.dt_intercom_blackout, mainForm.dt_intercom_vision, mainForm.dt_intercom_stage}
-            }
-
-
-        mainForm.dt_sumLighting = {mainForm.dt_movHeads, mainForm.dt_strobes, mainForm.dt_blinders,
-            mainForm.dt_arch, mainForm.dt_LED, mainForm.dt_smoke, mainForm.dt_consoles, mainForm.dt_intercom}
-
-    End Sub
     Sub initLabels()
         mainForm.lblSumQty = {mainForm.lbl_qty_belimlight, mainForm.lbl_qty_PRLighting,
             mainForm.lbl_qty_blackout, mainForm.lbl_qty_vision, mainForm.lbl_qty_stage}
     End Sub
-    Sub tempSub_1()
-        Dim i, j As Integer
 
-        For i = 0 To 7
-
-            For j = 0 To 4
-
-                mainForm.r_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Rows
-                mainForm.c_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Columns
-                mainForm.adr_Light_tbl(i, j) = mainForm.tbl_Lighting_tables(i, j).Address.Address
-                mainForm.rng_Light_tbl(i, j) = mainForm.wsLight(i).Cells(mainForm.adr_Light_tbl(i, j))
-
-            Next j
-            'Console.WriteLine(mainForm.tbl_Lighting_sumTables(0).Name)
-            mainForm.r_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Rows
-            mainForm.c_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Columns
-            mainForm.adr_Light_sumTbl(i) = mainForm.tbl_Lighting_sumTables(i).Address.Address
-            mainForm.rng_Light_sumTbl(i) = mainForm.wsLight(i).Cells(mainForm.adr_Light_sumTbl(i))
-
-        Next i
-
-
-
-    End Sub
 
 End Module

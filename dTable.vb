@@ -8,58 +8,59 @@ Module dTable
     '===================================================================================
     Sub create_sumDatatable(_i As Integer)
 
-        Dim i, j As Integer
-        Dim adr As String
-        Dim rCount, cCount As Integer
-        Dim dt As DataTable
-        Dim row As DataRow
-        Dim rng As ExcelRange
-        Dim xlTable As ExcelTable
+        'Dim i, j As Integer
+        'Dim adr As String
+        'Dim rCount, cCount As Integer
+        'Dim dt As DataTable
+        'Dim row As DataRow
+        'Dim rng As ExcelRange
+        'Dim xlTable As ExcelTable
 
 
-        xlTable = mainForm.tbl_Lighting_sumTables(_i)
-        rCount = xlTable.Address.Rows
-        cCount = xlTable.Address.Columns
-        adr = xlTable.Address.Address
-        rng = mainForm.wsLight(_i).Cells(adr)
+        'xlTable = mainForm.tbl_Lighting_sumTables(_i)
+        'rCount = xlTable.Address.Rows
+        'cCount = xlTable.Address.Columns
+        'adr = xlTable.Address.Address
+        'rng = mainForm.wsLight(_i).Cells(adr)
 
-        dt = New DataTable
+        'dt = New DataTable
 
-        'Adding the Columns
-        For i = 0 To cCount - 1
-            dt.Columns.Add(rng.Value(0, i))
-        Next i
-        dt.TableName = xlTable.Name
+        ''Adding the Columns
+        'For i = 0 To cCount - 1
+        '    dt.Columns.Add(rng.Value(0, i))
+        'Next i
+        'dt.TableName = xlTable.Name
 
-        dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
-        dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
-        dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
-        dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
-        dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
-        dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
-        dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
-        dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
+        'dt.Columns(0).DataType = System.Type.GetType("System.Int32")               ' #
+        'dt.Columns(1).DataType = System.Type.GetType("System.String")              ' Fixture
+        'dt.Columns(2).DataType = System.Type.GetType("System.Int32")               ' Q-ty
+        'dt.Columns(3).DataType = System.Type.GetType("System.Int32")               ' BelImlight
+        'dt.Columns(4).DataType = System.Type.GetType("System.Int32")               ' PRLightigTouring
+        'dt.Columns(5).DataType = System.Type.GetType("System.Int32")               ' BlackOut
+        'dt.Columns(6).DataType = System.Type.GetType("System.Int32")               ' Vision
+        'dt.Columns(7).DataType = System.Type.GetType("System.Int32")               ' Stage
 
-        'Add Rows from Excel table
+        ''Add Rows from Excel table
 
-        For i = 1 To rCount - 1
+        'For i = 1 To rCount - 1
 
-            row = dt.Rows.Add()
+        '    row = dt.Rows.Add()
 
-            For j = 0 To cCount - 1
+        '    For j = 0 To cCount - 1
 
-                row.Item(j) = rng.Value(i, j)
+        '        row.Item(j) = rng.Value(i, j)
 
-            Next j
+        '    Next j
 
-        Next i
+        'Next i
 
-        mainForm.dt_sumLighting(_i) = dt
+        'mainForm.dt_sumLighting(_i) = dt
 
 
     End Sub
 
     Sub create_sumDatatable_v2(_i As Integer)
+
         Dim i, j As Integer
         Dim adr As String
         Dim rCount, cCount As Integer
@@ -166,61 +167,121 @@ Module dTable
         Dim rng As ExcelRange
         Dim xlTable As ExcelTable
 
-        xlTable = mainForm.tbl_Lighting_tables(_i, _j)
-        rCount = xlTable.Address.Rows
-        cCount = xlTable.Address.Columns
-        adr = xlTable.Address.Address
-        rng = mainForm.wsLight(_i).Cells(adr)
+        Select Case mainForm.tabControl.SelectedIndex
+            Case 1
+                xlTable = mainForm.tbl_Lighting_tables(_i, _j)
+                rCount = xlTable.Address.Rows
+                cCount = xlTable.Address.Columns
+                adr = xlTable.Address.Address
+                rng = mainForm.wsLight(_i).Cells(adr)
 
-        dt = New DataTable
+                dt = New DataTable
 
-        'Adding the Columns
-        For i = 0 To cCount - 1
-            dt.Columns.Add(rng.Value(0, i))
-        Next i
-        dt.TableName = xlTable.Name
+                'Adding the Columns
+                For i = 0 To cCount - 1
+                    dt.Columns.Add(rng.Value(0, i))
+                Next i
+                dt.TableName = xlTable.Name
 
-        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(1).DataType = System.Type.GetType("System.String")
-        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(3).DataType = System.Type.GetType("System.String")
-        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(5).DataType = System.Type.GetType("System.String")
-        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(7).DataType = System.Type.GetType("System.String")
-        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(1).DataType = System.Type.GetType("System.String")
+                dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(3).DataType = System.Type.GetType("System.String")
+                dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(5).DataType = System.Type.GetType("System.String")
+                dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(7).DataType = System.Type.GetType("System.String")
+                dt.Columns(8).DataType = System.Type.GetType("System.Int32")
 
 
-        'Add Rows from Excel table
+                'Add Rows from Excel table
 
-        For i = 1 To rCount - 1
-            row = dt.Rows.Add()
+                For i = 1 To rCount - 1
+                    row = dt.Rows.Add()
 
-            For j = 0 To cCount - 1
+                    For j = 0 To cCount - 1
 
-                If rng.Value(i, j) = Nothing Then
-                    Select Case j
-                        Case 3
-                            row.Item(j) = ""
-                        Case 4
-                            row.Item(j) = 0
-                        Case 5
-                            row.Item(j) = ""
-                        Case 6
-                            row.Item(j) = 0
-                        Case 7
-                            row.Item(j) = ""
-                        Case 8
-                            row.Item(j) = 0
-                    End Select
-                Else
-                    row.Item(j) = rng.Value(i, j)
-                End If
+                        If rng.Value(i, j) = Nothing Then
+                            Select Case j
+                                Case 3
+                                    row.Item(j) = ""
+                                Case 4
+                                    row.Item(j) = 0
+                                Case 5
+                                    row.Item(j) = ""
+                                Case 6
+                                    row.Item(j) = 0
+                                Case 7
+                                    row.Item(j) = ""
+                                Case 8
+                                    row.Item(j) = 0
+                            End Select
+                        Else
+                            row.Item(j) = rng.Value(i, j)
+                        End If
 
-            Next j
-        Next i
+                    Next j
+                Next i
 
-        mainForm.dt_Lighting(_i, _j) = dt
+                mainForm.dt_Lighting(_i, _j) = dt
+
+            Case 2
+                xlTable = mainForm.tbl_Screen_tables(_i, _j)
+                rCount = xlTable.Address.Rows
+                cCount = xlTable.Address.Columns
+                adr = xlTable.Address.Address
+                rng = mainForm.wsScreen(_i).Cells(adr)
+                Console.WriteLine(mainForm.tbl_Screen_tables(_i, _j).Name)
+                dt = New DataTable
+
+                'Adding the Columns
+                For i = 0 To cCount - 1
+                    dt.Columns.Add(rng.Value(0, i))
+                Next i
+                dt.TableName = xlTable.Name
+
+                dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(1).DataType = System.Type.GetType("System.String")
+                dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(3).DataType = System.Type.GetType("System.String")
+                dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(5).DataType = System.Type.GetType("System.String")
+                dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+                dt.Columns(7).DataType = System.Type.GetType("System.String")
+                dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+
+
+                'Add Rows from Excel table
+
+                For i = 1 To rCount - 1
+                    row = dt.Rows.Add()
+
+                    For j = 0 To cCount - 1
+
+                        If rng.Value(i, j) = Nothing Then
+                            Select Case j
+                                Case 3
+                                    row.Item(j) = ""
+                                Case 4
+                                    row.Item(j) = 0
+                                Case 5
+                                    row.Item(j) = ""
+                                Case 6
+                                    row.Item(j) = 0
+                                Case 7
+                                    row.Item(j) = ""
+                                Case 8
+                                    row.Item(j) = 0
+                            End Select
+                        Else
+                            row.Item(j) = rng.Value(i, j)
+                        End If
+
+                    Next j
+                Next i
+
+                mainForm.dt_Screen(_i, _j) = dt
+        End Select
 
     End Sub
     '===================================================================================      
@@ -228,28 +289,54 @@ Module dTable
     '===================================================================================
     Sub DGV_format(_dtName As String, _color As Color)
 
-        mainForm.DGV_light.Columns(0).Width = 40                ' #
-        mainForm.DGV_light.Columns(1).Width = 175               ' Fixture
-        mainForm.DGV_light.Columns(2).Width = 40                ' Q-ty
-        mainForm.DGV_light.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(3).Width = 220               ' BelImlight_1  (PRLightigTouring, BlackOut, Vision, Stage)
-        mainForm.DGV_light.Columns(4).Width = 40                ' Q-ty_1
-        mainForm.DGV_light.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(5).Width = 220               ' BelImlight_2  (PRLightigTouring, BlackOut, Vision, Stage)
-        mainForm.DGV_light.Columns(6).Width = 40                ' Q-ty_2
-        mainForm.DGV_light.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
-        mainForm.DGV_light.Columns(7).Width = 180               ' BelImlight_3  (PRLightigTouring, BlackOut, Vision, Stage)
-        mainForm.DGV_light.Columns(8).Width = 40                ' Q-ty_3
-        mainForm.DGV_light.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+        Select Case mainForm.tabControl.SelectedIndex
 
-        For i = 0 To mainForm.DGV_light.Rows.Count - 2
+            Case 1
+                mainForm.DGV_light.Columns(0).Width = 40                ' #
+                mainForm.DGV_light.Columns(1).Width = 175               ' Fixture
+                mainForm.DGV_light.Columns(2).Width = 40                ' Q-ty
+                mainForm.DGV_light.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_light.Columns(3).Width = 220               ' BelImlight_1  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_light.Columns(4).Width = 40                ' Q-ty_1
+                mainForm.DGV_light.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_light.Columns(5).Width = 220               ' BelImlight_2  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_light.Columns(6).Width = 40                ' Q-ty_2
+                mainForm.DGV_light.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_light.Columns(7).Width = 180               ' BelImlight_3  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_light.Columns(8).Width = 40                ' Q-ty_3
+                mainForm.DGV_light.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
 
-            'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
-            mainForm.DGV_light.RowsDefaultCellStyle.BackColor = _color
-            mainForm.DGV_light.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
+                For i = 0 To mainForm.DGV_light.Rows.Count - 2
 
-        Next i
+                    'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
+                    mainForm.DGV_light.RowsDefaultCellStyle.BackColor = _color
+                    mainForm.DGV_light.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
 
+                Next i
+
+            Case 2
+                mainForm.DGV_screen.Columns(0).Width = 40                ' #
+                mainForm.DGV_screen.Columns(1).Width = 175               ' Fixture
+                mainForm.DGV_screen.Columns(2).Width = 40                ' Q-ty
+                mainForm.DGV_screen.Columns(2).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_screen.Columns(3).Width = 220               ' BelImlight_1  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_screen.Columns(4).Width = 40                ' Q-ty_1
+                mainForm.DGV_screen.Columns(4).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_screen.Columns(5).Width = 220               ' BelImlight_2  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_screen.Columns(6).Width = 40                ' Q-ty_2
+                mainForm.DGV_screen.Columns(6).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+                mainForm.DGV_screen.Columns(7).Width = 180               ' BelImlight_3  (PRLightigTouring, BlackOut, Vision, Stage)
+                mainForm.DGV_screen.Columns(8).Width = 40                ' Q-ty_3
+                mainForm.DGV_screen.Columns(8).DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter
+
+                For i = 0 To mainForm.DGV_screen.Rows.Count - 2
+
+                    'mainForm.DGV_in.Rows(i).Cells(1).Value = Date.FromOADate(mainForm.DGV_in.Rows(i).Cells(1).Value)
+                    mainForm.DGV_screen.RowsDefaultCellStyle.BackColor = _color
+                    mainForm.DGV_screen.AlternatingRowsDefaultCellStyle.BackColor = Color.FromArgb(250, 250, 250)
+
+                Next i
+        End Select
     End Sub
     Sub format_sumDGV()
 

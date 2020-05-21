@@ -6,14 +6,21 @@ Module myFunctions
     '===================================================================================
     '             === Load database ===
     '===================================================================================
-    Sub loadDataBase()
-        mainForm.sDir_DB = Directory.GetCurrentDirectory()
+    Sub loadDataBaseFolder()
 
-        mainForm.OFD.InitialDirectory = mainForm.sDir_DB
-        mainForm.OFD.Title = "Select .omdb file"
+        mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
+        If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
+            mainForm.sDir_DB = mainForm.FBD.SelectedPath
+        End If
 
-        If mainForm.OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
-            mainForm.sFileName_DB = mainForm.OFD.FileName
+    End Sub
+    Sub load_dbFile(_fileName As String)
+
+        If Not (mainForm.sDir_DB = Nothing) Then
+
+            mainForm.sFileName_DB = mainForm.sDir_DB & _fileName
+
+            Console.WriteLine(mainForm.sFileName_DB)
 
             Dim excelFile = New FileInfo(mainForm.sFileName_DB)
 
@@ -22,10 +29,9 @@ Module myFunctions
 
             mainForm.obj_excel = Excel                            '   Global vars to use in function "Save"
             mainForm.obj_excelFile = excelFile
-
         End If
-    End Sub
 
+    End Sub
 
 
 

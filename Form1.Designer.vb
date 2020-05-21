@@ -65,12 +65,16 @@ Partial Class mainForm
         Me.lbl_qty_PRLighting = New System.Windows.Forms.Label()
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
+        Me.FBD = New System.Windows.Forms.FolderBrowserDialog()
+        Me.DGV_screen = New System.Windows.Forms.DataGridView()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DGV_light, System.ComponentModel.ISupportInitialize).BeginInit()
+        Me.TabPage2.SuspendLayout()
         Me.grbx_1.SuspendLayout()
         Me.grbx_2.SuspendLayout()
+        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabControl
@@ -210,6 +214,7 @@ Partial Class mainForm
         '
         'TabPage2
         '
+        Me.TabPage2.Controls.Add(Me.DGV_screen)
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
@@ -510,6 +515,14 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
         '
+        'DGV_screen
+        '
+        Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
+        Me.DGV_screen.Name = "DGV_screen"
+        Me.DGV_screen.Size = New System.Drawing.Size(1056, 394)
+        Me.DGV_screen.TabIndex = 4
+        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
@@ -525,9 +538,11 @@ Partial Class mainForm
         Me.TabPage1.ResumeLayout(False)
         Me.TabPage1.PerformLayout()
         CType(Me.DGV_light, System.ComponentModel.ISupportInitialize).EndInit()
+        Me.TabPage2.ResumeLayout(False)
         Me.grbx_1.ResumeLayout(False)
         Me.grbx_2.ResumeLayout(False)
         Me.grbx_2.PerformLayout()
+        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -575,4 +590,6 @@ Partial Class mainForm
     Friend WithEvents lbl_qty_stage As Label
     Friend WithEvents btn_summary As Button
     Friend WithEvents btn_cancel As Button
+    Friend WithEvents FBD As FolderBrowserDialog
+    Friend WithEvents DGV_screen As DataGridView
 End Class
