@@ -10,7 +10,6 @@ Public Class mainForm
     Public wsLight() As ExcelWorksheet
     Public wsScreen() As ExcelWorksheet
 
-    Public wsDatabase() As ExcelWorksheet
     '=================================  ExcelTable  ========================================================
 
     Public tbl_Lighting_tables(7, 4) As ExcelTable
@@ -70,6 +69,10 @@ Public Class mainForm
     Public editMode() As String = {"Update", "Delete", "Add"}
     Public selEditModeIndex As Integer = 0
     Public selectedCategoryIndex As Integer
+
+    Public dbFiles, wsCategory, xlTables, fileNames As Collection
+    Public test As Dictionary(Of String, Collection)
+
 
     '===================================================================================      
     '                === Load button ===
@@ -432,5 +435,89 @@ Public Class mainForm
         format_sumDGV()
 
     End Sub
+    '===================================================================================
+    '             === T E S T   B U T T O N ===
+    '===================================================================================
+    Private Sub btn_tst_Click(sender As Object, e As EventArgs) Handles btn_tst.Click
 
+
+        '-------------------------------------------------------------------------------------------
+        '               Open file from openFileDialog
+        '-------------------------------------------------------------------------------------------
+
+        'sDir_DB = Directory.GetCurrentDirectory()
+
+        'OFD.InitialDirectory = sDir_DB
+        'OFD.Title = "Select .omdb file"
+        'If OFD.ShowDialog() = System.Windows.Forms.DialogResult.OK Then
+
+        '    sFileName_DB = OFD.FileName
+
+        '    Dim excelFile = New FileInfo(sFileName_DB)
+
+        '    ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        '    Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+        '    Dim xlTable As ExcelTable
+        '    Dim ws As ExcelWorksheet
+
+        'For i As Integer = 0 To Excel.Workbook.Worksheets.Count - 1
+        '    ws = Excel.Workbook.Worksheets(i)
+
+        '    For j As Integer = 0 To ws.Tables.Count - 1
+        '        xlTable = ws.Tables.Item(j)
+        '        Console.WriteLine(xlTable.Name)
+        '    Next j
+
+        'Next i
+        'End If
+        '-------------------------------------------------------------------------------------------
+        '               Open folder from Folder browser
+        '-------------------------------------------------------------------------------------------
+        sDir_DB = "C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\database"
+
+        Dim cat As String
+        Dim i As Integer = 1
+        dbFiles = New Collection
+        fileNames = New Collection
+        test = New Dictionary(Of String, Collection)
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles _
+            (sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
+
+            sFileName_DB = CStr(foundFile)
+
+            Dim SplitFileName_DB() As String
+            SplitFileName_DB = Split(sFileName_DB, "\")
+            cat = SplitFileName_DB(SplitFileName_DB.Count - 1)
+            Console.WriteLine(cat)
+            SplitFileName_DB = Split(cat, ".")
+            cat = SplitFileName_DB(0)
+            Console.WriteLine(cat)
+            fileNames.Add(cat)
+            Dim excelFile = New FileInfo(sFileName_DB)
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+            dbFiles.Add(excelFile)
+
+            Console.WriteLine(dbFiles.Item(i))
+            Dim j As Integer = 0
+            Dim ws As ExcelWorksheet
+            wsCategory = New Collection
+            For j = 0 To Excel.Workbook.Worksheets.Count - 1
+                ws = Excel.Workbook.Worksheets(j)
+                wsCategory.Add(ws)
+
+                Console.WriteLine(ws)
+            Next j
+
+            i = i + 1
+            test.Add(cat, wsCategory)
+
+        Next
+
+        Console.WriteLine(test.Item(fileNames(2)).Item(3))
+
+    End Sub
 End Class

@@ -13,6 +13,21 @@ Module myFunctions
             mainForm.sDir_DB = mainForm.FBD.SelectedPath
         End If
 
+
+        'Dim i As Integer = 1
+        'mainForm.dbFiles = New Collection
+        'For Each foundFile As String In My.Computer.FileSystem.GetFiles _
+        '    (mainForm.sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
+        '    mainForm.dbFiles.Add(foundFile)
+        '    Console.WriteLine(mainForm.dbFiles.Item(i))
+        '    i = i + 1
+        'Next
+
+        'For i = 1 To mainForm.dbFiles.Count
+        '    For Each ws As ExcelWorksheet In mainForm.dbFiles(i)
+        '        mainForm.wsCategory.Add(mainForm.dbFiles.Item(i))
+        '    Next ws
+        'Next i
     End Sub
     Sub load_dbFile(_fileName As String)
 

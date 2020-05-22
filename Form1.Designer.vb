@@ -37,6 +37,7 @@ Partial Class mainForm
         Me.DGV_light = New System.Windows.Forms.DataGridView()
         Me.lbl_category = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
+        Me.DGV_screen = New System.Windows.Forms.DataGridView()
         Me.TabPage4 = New System.Windows.Forms.TabPage()
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
@@ -66,15 +67,15 @@ Partial Class mainForm
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
         Me.FBD = New System.Windows.Forms.FolderBrowserDialog()
-        Me.DGV_screen = New System.Windows.Forms.DataGridView()
+        Me.btn_tst = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
         CType(Me.DGV_light, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.TabPage2.SuspendLayout()
+        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.grbx_1.SuspendLayout()
         Me.grbx_2.SuspendLayout()
-        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).BeginInit()
         Me.SuspendLayout()
         '
         'tabControl
@@ -94,6 +95,7 @@ Partial Class mainForm
         '
         'TabPage3
         '
+        Me.TabPage3.Controls.Add(Me.btn_tst)
         Me.TabPage3.Controls.Add(Me.btn_loadDB)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
@@ -222,6 +224,14 @@ Partial Class mainForm
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Экран"
         Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'DGV_screen
+        '
+        Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
+        Me.DGV_screen.Name = "DGV_screen"
+        Me.DGV_screen.Size = New System.Drawing.Size(1056, 394)
+        Me.DGV_screen.TabIndex = 4
         '
         'TabPage4
         '
@@ -515,13 +525,14 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
         '
-        'DGV_screen
+        'btn_tst
         '
-        Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
-        Me.DGV_screen.Name = "DGV_screen"
-        Me.DGV_screen.Size = New System.Drawing.Size(1056, 394)
-        Me.DGV_screen.TabIndex = 4
+        Me.btn_tst.Location = New System.Drawing.Point(375, 103)
+        Me.btn_tst.Name = "btn_tst"
+        Me.btn_tst.Size = New System.Drawing.Size(75, 23)
+        Me.btn_tst.TabIndex = 1
+        Me.btn_tst.Text = "Test"
+        Me.btn_tst.UseVisualStyleBackColor = True
         '
         'mainForm
         '
@@ -539,10 +550,10 @@ Partial Class mainForm
         Me.TabPage1.PerformLayout()
         CType(Me.DGV_light, System.ComponentModel.ISupportInitialize).EndInit()
         Me.TabPage2.ResumeLayout(False)
+        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.grbx_1.ResumeLayout(False)
         Me.grbx_2.ResumeLayout(False)
         Me.grbx_2.PerformLayout()
-        CType(Me.DGV_screen, System.ComponentModel.ISupportInitialize).EndInit()
         Me.ResumeLayout(False)
 
     End Sub
@@ -592,4 +603,5 @@ Partial Class mainForm
     Friend WithEvents btn_cancel As Button
     Friend WithEvents FBD As FolderBrowserDialog
     Friend WithEvents DGV_screen As DataGridView
+    Friend WithEvents btn_tst As Button
 End Class
