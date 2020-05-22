@@ -4,8 +4,8 @@ Imports System.IO
 
 Public Class mainForm
 
-    Public sDir_DB As String
-    Public sFileName_DB As String
+    Public sDir_DB As String                        ' database folder
+    Public sFileName_DB As String                   ' full path to database file
 
     Public wsLight() As ExcelWorksheet
     Public wsScreen() As ExcelWorksheet
@@ -71,7 +71,7 @@ Public Class mainForm
     Public selectedCategoryIndex As Integer
 
     Public dbFiles, wsCategory, xlTables, fileNames As Collection
-    Public test As Dictionary(Of String, Collection)
+    Public mainDict As Dictionary(Of String, Collection)
 
 
     '===================================================================================      
@@ -480,7 +480,8 @@ Public Class mainForm
         Dim i As Integer = 1
         dbFiles = New Collection
         fileNames = New Collection
-        test = New Dictionary(Of String, Collection)
+        mainDict = New Dictionary(Of String, Collection)
+
         For Each foundFile As String In My.Computer.FileSystem.GetFiles _
             (sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
 
@@ -513,11 +514,18 @@ Public Class mainForm
             Next j
 
             i = i + 1
-            test.Add(cat, wsCategory)
+            mainDict.Add(cat, wsCategory)
 
         Next
+        '  fileNames(2) -  ScreenDB,  Item(3) - third item in wsCategory collection
+        '   with key = ScreenDB, i.e. worksheet "Controllers_1" from workbook "ScreenDB.xlsx"
+        Console.WriteLine(mainDict.Item(fileNames(2)).Item(3))
 
-        Console.WriteLine(test.Item(fileNames(2)).Item(3))
+        Dim testXlTable As ExcelTable
 
+        testXlTable = mainDict.Item(fileNames(2)).Item(3).Tables.Item(2)
+
+        Console.WriteLine(testXlTable.Name)
     End Sub
+
 End Class

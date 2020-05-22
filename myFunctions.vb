@@ -8,26 +8,83 @@ Module myFunctions
     '===================================================================================
     Sub loadDataBaseFolder()
 
+        '   1.   Get database folder over Folder browser
+
         mainForm.FBD.SelectedPath = Directory.GetCurrentDirectory()
         If (mainForm.FBD.ShowDialog() = DialogResult.OK) Then
             mainForm.sDir_DB = mainForm.FBD.SelectedPath
         End If
 
+        '   2.   Get list of database files , names of each file, list of worksheets in each file
 
-        'Dim i As Integer = 1
-        'mainForm.dbFiles = New Collection
-        'For Each foundFile As String In My.Computer.FileSystem.GetFiles _
-        '    (mainForm.sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
-        '    mainForm.dbFiles.Add(foundFile)
-        '    Console.WriteLine(mainForm.dbFiles.Item(i))
-        '    i = i + 1
-        'Next
+        Dim cat As String                           ' variable to get name of database file
 
-        'For i = 1 To mainForm.dbFiles.Count
-        '    For Each ws As ExcelWorksheet In mainForm.dbFiles(i)
-        '        mainForm.wsCategory.Add(mainForm.dbFiles.Item(i))
-        '    Next ws
-        'Next i
+        Dim i As Integer = 1
+
+        mainForm.dbFiles = New Collection           ' collection of database files in db folder
+        mainForm.fileNames = New Collection         ' collection of names of each file
+
+        mainForm.mainDict = New Dictionary(Of String, Collection)
+
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles _
+            (mainForm.sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
+
+            '   Extract file name from full path
+
+            mainForm.sFileName_DB = CStr(foundFile)         ' full path to database file
+            Dim SplitFileName_DB() As String
+            SplitFileName_DB = Split(mainForm.sFileName_DB, "\")
+            cat = SplitFileName_DB(SplitFileName_DB.Count - 1)
+            SplitFileName_DB = Split(cat, ".")
+            cat = SplitFileName_DB(0)
+
+            mainForm.fileNames.Add(cat)             ' add name of each file to name collection
+
+            '   Create collection of Excel files
+
+            Dim excelFile = New FileInfo(mainForm.sFileName_DB)
+
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+
+            mainForm.dbFiles.Add(excelFile)
+
+            '   Create collection of Excel sheets in each file (i.e. categories)
+
+            Dim j As Integer = 0
+            Dim ws As ExcelWorksheet
+
+            mainForm.wsCategory = New Collection
+
+            For j = 0 To Excel.Workbook.Worksheets.Count - 1
+                ws = Excel.Workbook.Worksheets(j)
+                mainForm.wsCategory.Add(ws)
+
+            Next j
+
+            i = i + 1
+
+            ' Create main dictionary where key value is name of file,
+            ' and value is collection of worksheets
+            mainForm.mainDict.Add(cat, mainForm.wsCategory)
+        Next
+
+        ' Now we can test it to print all files,worksheets and excel tables
+
+        i = 0
+        For Each foundFile As String In My.Computer.FileSystem.GetFiles _
+            (mainForm.sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
+
+            Console.WriteLine(mainForm.fileNames(i + 1))
+            Dim category As String
+            Dim k As Integer = 0
+            For Each ws As ExcelWorksheet In mainForm.wsCategory
+                category = mainForm.mainDict.Item(mainForm.fileNames(i + 1)).Item(k + 1).Name
+                Console.WriteLine(vbTab & category)
+                k = k + 1
+            Next ws
+            i = i + 1
+        Next foundFile
     End Sub
     Sub load_dbFile(_fileName As String)
 
