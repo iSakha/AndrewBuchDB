@@ -69,7 +69,9 @@ Module myFunctions
             mainForm.mainDict.Add(cat, mainForm.wsCategory)
         Next
 
+        '------------------------------------------------------------------------
         ' Now we can test it to print all files,worksheets and excel tables
+        '------------------------------------------------------------------------
 
         i = 0
         For Each foundFile As String In My.Computer.FileSystem.GetFiles _
@@ -86,22 +88,74 @@ Module myFunctions
             i = i + 1
         Next foundFile
     End Sub
-    Sub load_dbFile(_fileName As String)
+    Sub load_dbFile(_tabIndex As Integer)
 
-        If Not (mainForm.sDir_DB = Nothing) Then
+        'If Not (mainForm.sDir_DB = Nothing) Then
 
-            mainForm.sFileName_DB = mainForm.sDir_DB & _fileName
+        '    ' mainForm.sFileName_DB = mainForm.sDir_DB & _fileName
 
-            Console.WriteLine(mainForm.sFileName_DB)
+        '    ' Console.WriteLine(mainForm.sFileName_DB)
 
-            Dim excelFile = New FileInfo(mainForm.sFileName_DB)
+        '    Dim excelFile = New FileInfo(mainForm.sFileName_DB)
 
-            ExcelPackage.LicenseContext = LicenseContext.NonCommercial
-            Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
+        '    ExcelPackage.LicenseContext = LicenseContext.NonCommercial
+        '    Dim Excel As ExcelPackage = New ExcelPackage(excelFile)
 
-            mainForm.obj_excel = Excel                            '   Global vars to use in function "Save"
-            mainForm.obj_excelFile = excelFile
-        End If
+        '    mainForm.obj_excel = Excel                            '   Global vars to use in function "Save"
+        '    mainForm.obj_excelFile = excelFile
+        'End If
+
+        ' 1. Add items (categories) to categoryComboBox
+
+        Dim category As String
+        Dim k As Integer = 0
+        Dim ws As ExcelWorksheet
+        mainForm.cmb_category.Items.Clear()
+        For Each ws In mainForm.wsCategory
+            category = mainForm.mainDict.Item(mainForm.fileNames(_tabIndex)).Item(k + 1).Name
+            Console.WriteLine(_tabIndex)
+            Console.WriteLine(mainForm.mainDict.Keys(_tabIndex))
+            mainForm.cmb_category.Items.Add(category)
+            k = k + 1
+        Next ws
+
+        ' 2. Get all excel tables from selected file (tab index)
+
+        mainForm.xlTablesDict = New Dictionary(Of String, Collection)
+        mainForm.xlTables = New Collection
+        Dim xlTbl As ExcelTable
+        Dim i, j As Integer
+
+        For i = 1 To mainForm.fileNames.Count
+            For j = 1 To mainForm.wsCategory.Count
+                ws = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j)
+                mainForm.xlTables = New Collection
+                For Each tbl As ExcelTable In ws.Tables
+                    mainForm.xlTables.Add(tbl)
+                    Console.WriteLine(tbl.Name)
+                Next tbl
+                mainForm.xlTablesDict.Add(ws.Name, mainForm.xlTables)
+            Next j
+
+        Next i
+
+        '------------------------------------------------------------------------
+        ' Now we can test it to print all excel tables from xlTablesDict
+        '------------------------------------------------------------------------
+        For i = 1 To mainForm.fileNames.Count
+            Console.WriteLine(mainForm.fileNames(i))
+            For j = 1 To mainForm.wsCategory.Count
+                ws = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j)
+                Dim cat As String = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j).Name
+                Dim tblName As String
+                Console.WriteLine(vbTab & cat)
+                For Each tbl As ExcelTable In ws.Tables
+                    tblName = tbl.Name
+                    Console.WriteLine(vbTab & vbTab & tblName)
+                Next tbl
+            Next j
+
+            Next i
 
     End Sub
 

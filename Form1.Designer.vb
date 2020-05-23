@@ -24,6 +24,7 @@ Partial Class mainForm
     Private Sub InitializeComponent()
         Me.tabControl = New System.Windows.Forms.TabControl()
         Me.TabPage3 = New System.Windows.Forms.TabPage()
+        Me.btn_tst = New System.Windows.Forms.Button()
         Me.btn_loadDB = New System.Windows.Forms.Button()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
         Me.txt_qty3 = New System.Windows.Forms.TextBox()
@@ -67,7 +68,6 @@ Partial Class mainForm
         Me.btn_vision = New System.Windows.Forms.Button()
         Me.lbl_qty_belimlight = New System.Windows.Forms.Label()
         Me.FBD = New System.Windows.Forms.FolderBrowserDialog()
-        Me.btn_tst = New System.Windows.Forms.Button()
         Me.tabControl.SuspendLayout()
         Me.TabPage3.SuspendLayout()
         Me.TabPage1.SuspendLayout()
@@ -90,7 +90,7 @@ Partial Class mainForm
         Me.tabControl.Location = New System.Drawing.Point(0, 0)
         Me.tabControl.Name = "tabControl"
         Me.tabControl.SelectedIndex = 0
-        Me.tabControl.Size = New System.Drawing.Size(1067, 515)
+        Me.tabControl.Size = New System.Drawing.Size(1067, 453)
         Me.tabControl.TabIndex = 0
         '
         'TabPage3
@@ -104,6 +104,15 @@ Partial Class mainForm
         Me.TabPage3.Text = "Menu"
         Me.TabPage3.UseVisualStyleBackColor = True
         '
+        'btn_tst
+        '
+        Me.btn_tst.Location = New System.Drawing.Point(375, 103)
+        Me.btn_tst.Name = "btn_tst"
+        Me.btn_tst.Size = New System.Drawing.Size(75, 23)
+        Me.btn_tst.TabIndex = 1
+        Me.btn_tst.Text = "Test"
+        Me.btn_tst.UseVisualStyleBackColor = True
+        '
         'btn_loadDB
         '
         Me.btn_loadDB.Location = New System.Drawing.Point(72, 114)
@@ -115,27 +124,19 @@ Partial Class mainForm
         '
         'TabPage1
         '
-        Me.TabPage1.Controls.Add(Me.txt_qty3)
-        Me.TabPage1.Controls.Add(Me.txt_qty2)
-        Me.TabPage1.Controls.Add(Me.txt_qty1)
-        Me.TabPage1.Controls.Add(Me.txt_qty)
-        Me.TabPage1.Controls.Add(Me.rtb_fixtureName)
-        Me.TabPage1.Controls.Add(Me.rtb_ThirdName)
-        Me.TabPage1.Controls.Add(Me.rtb_SecondName)
-        Me.TabPage1.Controls.Add(Me.rtb_FirstName)
         Me.TabPage1.Controls.Add(Me.DGV_light)
         Me.TabPage1.Controls.Add(Me.lbl_category)
         Me.TabPage1.Location = New System.Drawing.Point(4, 22)
         Me.TabPage1.Name = "TabPage1"
         Me.TabPage1.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage1.Size = New System.Drawing.Size(1059, 489)
+        Me.TabPage1.Size = New System.Drawing.Size(1059, 427)
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Свет"
         Me.TabPage1.UseVisualStyleBackColor = True
         '
         'txt_qty3
         '
-        Me.txt_qty3.Location = New System.Drawing.Point(1002, 428)
+        Me.txt_qty3.Location = New System.Drawing.Point(1000, 479)
         Me.txt_qty3.Name = "txt_qty3"
         Me.txt_qty3.Size = New System.Drawing.Size(55, 20)
         Me.txt_qty3.TabIndex = 13
@@ -143,7 +144,7 @@ Partial Class mainForm
         '
         'txt_qty2
         '
-        Me.txt_qty2.Location = New System.Drawing.Point(739, 428)
+        Me.txt_qty2.Location = New System.Drawing.Point(737, 479)
         Me.txt_qty2.Name = "txt_qty2"
         Me.txt_qty2.Size = New System.Drawing.Size(55, 20)
         Me.txt_qty2.TabIndex = 12
@@ -151,7 +152,7 @@ Partial Class mainForm
         '
         'txt_qty1
         '
-        Me.txt_qty1.Location = New System.Drawing.Point(473, 428)
+        Me.txt_qty1.Location = New System.Drawing.Point(471, 479)
         Me.txt_qty1.Name = "txt_qty1"
         Me.txt_qty1.Size = New System.Drawing.Size(55, 20)
         Me.txt_qty1.TabIndex = 11
@@ -159,7 +160,7 @@ Partial Class mainForm
         '
         'txt_qty
         '
-        Me.txt_qty.Location = New System.Drawing.Point(208, 428)
+        Me.txt_qty.Location = New System.Drawing.Point(206, 479)
         Me.txt_qty.Name = "txt_qty"
         Me.txt_qty.Size = New System.Drawing.Size(55, 20)
         Me.txt_qty.TabIndex = 10
@@ -167,7 +168,7 @@ Partial Class mainForm
         '
         'rtb_fixtureName
         '
-        Me.rtb_fixtureName.Location = New System.Drawing.Point(4, 408)
+        Me.rtb_fixtureName.Location = New System.Drawing.Point(2, 459)
         Me.rtb_fixtureName.Name = "rtb_fixtureName"
         Me.rtb_fixtureName.Size = New System.Drawing.Size(199, 65)
         Me.rtb_fixtureName.TabIndex = 9
@@ -175,7 +176,7 @@ Partial Class mainForm
         '
         'rtb_ThirdName
         '
-        Me.rtb_ThirdName.Location = New System.Drawing.Point(799, 408)
+        Me.rtb_ThirdName.Location = New System.Drawing.Point(797, 459)
         Me.rtb_ThirdName.Name = "rtb_ThirdName"
         Me.rtb_ThirdName.Size = New System.Drawing.Size(199, 65)
         Me.rtb_ThirdName.TabIndex = 7
@@ -183,7 +184,7 @@ Partial Class mainForm
         '
         'rtb_SecondName
         '
-        Me.rtb_SecondName.Location = New System.Drawing.Point(534, 408)
+        Me.rtb_SecondName.Location = New System.Drawing.Point(532, 459)
         Me.rtb_SecondName.Name = "rtb_SecondName"
         Me.rtb_SecondName.Size = New System.Drawing.Size(199, 65)
         Me.rtb_SecondName.TabIndex = 6
@@ -191,7 +192,7 @@ Partial Class mainForm
         '
         'rtb_FirstName
         '
-        Me.rtb_FirstName.Location = New System.Drawing.Point(269, 408)
+        Me.rtb_FirstName.Location = New System.Drawing.Point(267, 459)
         Me.rtb_FirstName.Name = "rtb_FirstName"
         Me.rtb_FirstName.Size = New System.Drawing.Size(199, 65)
         Me.rtb_FirstName.TabIndex = 5
@@ -202,7 +203,7 @@ Partial Class mainForm
         Me.DGV_light.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_light.Location = New System.Drawing.Point(0, 6)
         Me.DGV_light.Name = "DGV_light"
-        Me.DGV_light.Size = New System.Drawing.Size(1056, 394)
+        Me.DGV_light.Size = New System.Drawing.Size(1056, 425)
         Me.DGV_light.TabIndex = 3
         '
         'lbl_category
@@ -220,7 +221,7 @@ Partial Class mainForm
         Me.TabPage2.Location = New System.Drawing.Point(4, 22)
         Me.TabPage2.Name = "TabPage2"
         Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1059, 489)
+        Me.TabPage2.Size = New System.Drawing.Size(1059, 427)
         Me.TabPage2.TabIndex = 1
         Me.TabPage2.Text = "Экран"
         Me.TabPage2.UseVisualStyleBackColor = True
@@ -230,7 +231,7 @@ Partial Class mainForm
         Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
         Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
         Me.DGV_screen.Name = "DGV_screen"
-        Me.DGV_screen.Size = New System.Drawing.Size(1056, 394)
+        Me.DGV_screen.Size = New System.Drawing.Size(1056, 415)
         Me.DGV_screen.TabIndex = 4
         '
         'TabPage4
@@ -525,23 +526,22 @@ Partial Class mainForm
         Me.lbl_qty_belimlight.Size = New System.Drawing.Size(0, 25)
         Me.lbl_qty_belimlight.TabIndex = 26
         '
-        'btn_tst
-        '
-        Me.btn_tst.Location = New System.Drawing.Point(375, 103)
-        Me.btn_tst.Name = "btn_tst"
-        Me.btn_tst.Size = New System.Drawing.Size(75, 23)
-        Me.btn_tst.TabIndex = 1
-        Me.btn_tst.Text = "Test"
-        Me.btn_tst.UseVisualStyleBackColor = True
-        '
         'mainForm
         '
         Me.AutoScaleDimensions = New System.Drawing.SizeF(6.0!, 13.0!)
         Me.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font
         Me.ClientSize = New System.Drawing.Size(1068, 736)
+        Me.Controls.Add(Me.txt_qty3)
         Me.Controls.Add(Me.grbx_2)
+        Me.Controls.Add(Me.txt_qty2)
         Me.Controls.Add(Me.grbx_1)
+        Me.Controls.Add(Me.txt_qty1)
         Me.Controls.Add(Me.tabControl)
+        Me.Controls.Add(Me.txt_qty)
+        Me.Controls.Add(Me.rtb_SecondName)
+        Me.Controls.Add(Me.rtb_fixtureName)
+        Me.Controls.Add(Me.rtb_FirstName)
+        Me.Controls.Add(Me.rtb_ThirdName)
         Me.Name = "mainForm"
         Me.Text = "mainForm"
         Me.tabControl.ResumeLayout(False)
@@ -555,6 +555,7 @@ Partial Class mainForm
         Me.grbx_2.ResumeLayout(False)
         Me.grbx_2.PerformLayout()
         Me.ResumeLayout(False)
+        Me.PerformLayout()
 
     End Sub
 

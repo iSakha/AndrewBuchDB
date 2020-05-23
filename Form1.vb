@@ -18,6 +18,8 @@ Public Class mainForm
     Public tbl_Screen_tables(7, 4) As ExcelTable
     Public tbl_Screen_sumTables(7) As ExcelTable
 
+
+
     '=================================  DataTable  ========================================================
 
     Public dt_Lighting(7, 4) As Object
@@ -71,7 +73,8 @@ Public Class mainForm
     Public selectedCategoryIndex As Integer
 
     Public dbFiles, wsCategory, xlTables, fileNames As Collection
-    Public mainDict As Dictionary(Of String, Collection)
+    Public mainDict As Dictionary(Of String, Collection)        'key - filename,collection - categories(Excel worksheets)
+    Public xlTablesDict As Dictionary(Of String, Collection)    'key - category, collection - xlTables
 
 
     '===================================================================================      
@@ -87,40 +90,34 @@ Public Class mainForm
     '===================================================================================
     Private Sub tabControl_SelectedIndexChanged(sender As Object, e As EventArgs) Handles tabControl.SelectedIndexChanged
 
-        cmb_category.SelectedIndex = 0
 
-        Select Case tabControl.SelectedIndex
+        If tabControl.SelectedIndex > 0 Then
 
-            Case 0
-                'load_dbFile("\LightingDB.xlsx")
-            Case 1
-                load_dbFile("\LightingDB.xlsx")
-            Case 2
-                load_dbFile("\ScreenDB.xlsx")
+            load_dbFile(tabControl.SelectedIndex)
+            cmb_category.SelectedIndex = 0
 
-        End Select
+        End If
+        'Console.WriteLine(obj_excel.Workbook.Worksheets(0).name)
 
-        Console.WriteLine(obj_excel.Workbook.Worksheets(0).name)
+        'initWorksheets(tabControl.SelectedIndex)               '   declarations.vb
 
-        initWorksheets(tabControl.SelectedIndex)               '   declarations.vb
+        'initExcelTables(tabControl.SelectedIndex)                   '   declarations.vb
 
-        initExcelTables(tabControl.SelectedIndex)                   '   declarations.vb
-
-        initLabels()                        '   declarations.vb
+        'initLabels()                        '   declarations.vb
 
 
         '----------------------         Create datatables           ------------------------------
         '-----------------------------------------------------------------------------------------
         'For i As Integer = 0 To cmb_category.Items.Count - 1
-        For i As Integer = 0 To 1
+        'For i As Integer = 0 To 1
 
-            For j As Integer = 0 To sCompany.Count - 1
-                create_datatable(i, j)
+        '    For j As Integer = 0 To sCompany.Count - 1
+        '        create_datatable(i, j)
 
-            Next j
-            'create_sumDatatable(i)
-            'create_sumDatatable_v2(i)
-        Next i
+        '    Next j
+        '    'create_sumDatatable(i)
+        '    'create_sumDatatable_v2(i)
+        'Next i
 
 
         grbx_1.Visible = True
@@ -136,32 +133,32 @@ Public Class mainForm
         btn_prev.Enabled = True
         btn_next.Enabled = True
         writeZeroInQtyTxt()
-        Dim c As Color = Color.FromArgb(252, 228, 214)
+        'Dim c As Color = Color.FromArgb(252, 228, 214)
 
-        Dim i As Integer
+        'Dim i As Integer
 
-        i = cmb_category.SelectedIndex
+        'i = cmb_category.SelectedIndex
 
-        Select Case tabControl.SelectedIndex
+        'Select Case tabControl.SelectedIndex
 
-            Case 1
-                DGV_light.DataSource = dt_Lighting(i, 0)
-                DGV_format(tbl_Lighting_tables(i, 0).Name, c)
-                DGV_light.Rows(0).Cells(0).Selected = True
+        '    Case 1
+        '        DGV_light.DataSource = dt_Lighting(i, 0)
+        '        DGV_format(tbl_Lighting_tables(i, 0).Name, c)
+        '        DGV_light.Rows(0).Cells(0).Selected = True
 
-            Case 2
-                DGV_screen.DataSource = dt_Screen(i, 0)
-                DGV_format(tbl_Screen_tables(i, 0).Name, c)
-                DGV_screen.Rows(0).Cells(0).Selected = True
+        '    Case 2
+        '        DGV_screen.DataSource = dt_Screen(i, 0)
+        '        DGV_format(tbl_Screen_tables(i, 0).Name, c)
+        '        DGV_screen.Rows(0).Cells(0).Selected = True
 
-        End Select
+        'End Select
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+        'rtb_fixtureName.BackColor = c
+        'rtb_FirstName.BackColor = c
+        'rtb_SecondName.BackColor = c
+        'rtb_ThirdName.BackColor = c
 
-
+        create_datatable(cmb_category.SelectedItem, 1)
 
         clearControls()
 
@@ -476,11 +473,12 @@ Public Class mainForm
         '-------------------------------------------------------------------------------------------
         sDir_DB = "C:\Users\Sakha\OneDrive\Visual Studio 2019\PROJECTS\AndrewBuch\database"
 
-        Dim cat As String
+        Dim name As String
         Dim i As Integer = 1
         dbFiles = New Collection
         fileNames = New Collection
         mainDict = New Dictionary(Of String, Collection)
+        Dim ws As ExcelWorksheet
 
         For Each foundFile As String In My.Computer.FileSystem.GetFiles _
             (sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
@@ -489,12 +487,12 @@ Public Class mainForm
 
             Dim SplitFileName_DB() As String
             SplitFileName_DB = Split(sFileName_DB, "\")
-            cat = SplitFileName_DB(SplitFileName_DB.Count - 1)
-            Console.WriteLine(cat)
-            SplitFileName_DB = Split(cat, ".")
-            cat = SplitFileName_DB(0)
-            Console.WriteLine(cat)
-            fileNames.Add(cat)
+            name = SplitFileName_DB(SplitFileName_DB.Count - 1)
+            Console.WriteLine(name)
+            SplitFileName_DB = Split(name, ".")
+            name = SplitFileName_DB(0)
+            Console.WriteLine(name)
+            fileNames.Add(name)
             Dim excelFile = New FileInfo(sFileName_DB)
 
             ExcelPackage.LicenseContext = LicenseContext.NonCommercial
@@ -504,28 +502,46 @@ Public Class mainForm
 
             Console.WriteLine(dbFiles.Item(i))
             Dim j As Integer = 0
-            Dim ws As ExcelWorksheet
+
             wsCategory = New Collection
             For j = 0 To Excel.Workbook.Worksheets.Count - 1
                 ws = Excel.Workbook.Worksheets(j)
                 wsCategory.Add(ws)
 
-                Console.WriteLine(ws)
+                'Console.WriteLine(ws)
             Next j
 
             i = i + 1
-            mainDict.Add(cat, wsCategory)
+            mainDict.Add(name, wsCategory)
 
         Next
         '  fileNames(2) -  ScreenDB,  Item(3) - third item in wsCategory collection
         '   with key = ScreenDB, i.e. worksheet "Controllers_1" from workbook "ScreenDB.xlsx"
-        Console.WriteLine(mainDict.Item(fileNames(2)).Item(3))
+        'Console.WriteLine(mainDict.Item(fileNames(2)).Item(3))
 
-        Dim testXlTable As ExcelTable
+        Dim xlTbl As ExcelTable
 
-        testXlTable = mainDict.Item(fileNames(2)).Item(3).Tables.Item(2)
+        xlTablesDict = New Dictionary(Of String, Collection)
 
-        Console.WriteLine(testXlTable.Name)
+
+        For i = 1 To fileNames.Count
+            For j = 1 To wsCategory.Count
+
+                ws = mainDict.Item(fileNames(i)).Item(j)
+                xlTables = New Collection
+                For Each tbl As ExcelTable In ws.Tables
+
+                    xlTables.Add(tbl)
+                    Console.WriteLine(tbl.Name)
+                Next tbl
+                xlTablesDict.Add(ws.Name, xlTables)
+            Next j
+
+        Next i
+
+        xlTbl = mainDict.Item(fileNames(2)).Item(3).Tables.Item(2)
+
+        'Console.WriteLine(xlTbl.Name)
     End Sub
 
 End Class
