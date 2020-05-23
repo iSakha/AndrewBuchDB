@@ -157,142 +157,86 @@ Module dTable
     '                === Create datatable ===
     '===================================================================================
 
-    Sub create_datatable(_category As String, _companyName As Integer)
+    Sub create_datatable(_category As String, _companyNumber As Integer)
 
-        'Dim i, j As Integer
-        'Dim adr As String
-        'Dim rCount, cCount As Integer
-        'Dim dt As DataTable
-        'Dim row As DataRow
-        'Dim rng As ExcelRange
-        'Dim xlTable As ExcelTable
+        Dim i, j As Integer
+        Dim adr As String
+        Dim rCount, cCount As Integer
+        Dim dt As DataTable
+        Dim row As DataRow
+        Dim rng As ExcelRange
+        Dim xlTable As ExcelTable
+        Dim ws As ExcelWorksheet
 
-        'Select Case mainForm.tabControl.SelectedIndex
-        '    Case 1
-        '        xlTable = mainForm.tbl_Lighting_tables(_i, _j)
-        '        rCount = xlTable.Address.Rows
-        '        cCount = xlTable.Address.Columns
-        '        adr = xlTable.Address.Address
-        '        rng = mainForm.wsLight(_i).Cells(adr)
+        xlTable = mainForm.xlTablesDict.Item(_category).Item(_companyNumber + 1)
+        rCount = xlTable.Address.Rows
+        cCount = 9
+        adr = xlTable.Address.Address
+        ws = mainForm.mainDict.Item(mainForm.fileNames(mainForm.tabControl.
+        SelectedIndex)).Item(mainForm.cmb_category.SelectedIndex + 1)
+        rng = ws.Cells(adr)
 
-        '        dt = New DataTable
+        dt = New DataTable
 
-        '        'Adding the Columns
-        '        For i = 0 To cCount - 1
-        '            dt.Columns.Add(rng.Value(0, i))
-        '        Next i
-        '        dt.TableName = xlTable.Name
-
-        '        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(1).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(3).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(5).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(7).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
-
-
-        '        'Add Rows from Excel table
-
-        '        For i = 1 To rCount - 1
-        '            row = dt.Rows.Add()
-
-        '            For j = 0 To cCount - 1
-
-        '                If rng.Value(i, j) = Nothing Then
-        '                    Select Case j
-        '                        Case 3
-        '                            row.Item(j) = ""
-        '                        Case 4
-        '                            row.Item(j) = 0
-        '                        Case 5
-        '                            row.Item(j) = ""
-        '                        Case 6
-        '                            row.Item(j) = 0
-        '                        Case 7
-        '                            row.Item(j) = ""
-        '                        Case 8
-        '                            row.Item(j) = 0
-        '                    End Select
-        '                Else
-        '                    row.Item(j) = rng.Value(i, j)
-        '                End If
-
-        '            Next j
-        '        Next i
-
-        '        mainForm.dt_Lighting(_i, _j) = dt
-
-        '    Case 2
-        '        xlTable = mainForm.tbl_Screen_tables(_i, _j)
-        '        rCount = xlTable.Address.Rows
-        '        cCount = xlTable.Address.Columns
-        '        adr = xlTable.Address.Address
-        '        rng = mainForm.wsScreen(_i).Cells(adr)
-        '        Console.WriteLine(mainForm.tbl_Screen_tables(_i, _j).Name)
-        '        dt = New DataTable
-
-        '        'Adding the Columns
-        '        For i = 0 To cCount - 1
-        '            dt.Columns.Add(rng.Value(0, i))
-        '        Next i
-        '        dt.TableName = xlTable.Name
-
-        '        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(1).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(3).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(5).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        '        dt.Columns(7).DataType = System.Type.GetType("System.String")
-        '        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
-
-
-        '        'Add Rows from Excel table
-
-        '        For i = 1 To rCount - 1
-        '            row = dt.Rows.Add()
-
-        '            For j = 0 To cCount - 1
-
-        '                If rng.Value(i, j) = Nothing Then
-        '                    Select Case j
-        '                        Case 3
-        '                            row.Item(j) = ""
-        '                        Case 4
-        '                            row.Item(j) = 0
-        '                        Case 5
-        '                            row.Item(j) = ""
-        '                        Case 6
-        '                            row.Item(j) = 0
-        '                        Case 7
-        '                            row.Item(j) = ""
-        '                        Case 8
-        '                            row.Item(j) = 0
-        '                    End Select
-        '                Else
-        '                    row.Item(j) = rng.Value(i, j)
-        '                End If
-
-        '            Next j
-        '        Next i
-
-        '        mainForm.dt_Screen(_i, _j) = dt
-        'End Select
-        ' Console.WriteLine(mainForm.xlTablesDict.Item(_category))
-        For i As Integer = 1 To mainForm.xlTablesDict.Keys.Count
-            Console.WriteLine(mainForm.xlTablesDict.Keys(i - 1))
+        'Adding the Columns
+        For i = 0 To cCount - 1
+            dt.Columns.Add(rng.Value(0, i))
         Next i
-        'Console.WriteLine(mainForm.xlTablesDict.Item(_category).Item(_companyName).Name)
+        dt.TableName = xlTable.Name
+
+        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(1).DataType = System.Type.GetType("System.String")
+        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(3).DataType = System.Type.GetType("System.String")
+        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(5).DataType = System.Type.GetType("System.String")
+        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+        dt.Columns(7).DataType = System.Type.GetType("System.String")
+        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+
+
+        'Add Rows from Excel table
+
+        For i = 1 To rCount - 1
+            row = dt.Rows.Add()
+
+            For j = 0 To cCount - 1
+
+                If rng.Value(i, j) = Nothing Then
+                    Select Case j
+                        Case 3
+                            row.Item(j) = ""
+                        Case 4
+                            row.Item(j) = 0
+                        Case 5
+                            row.Item(j) = ""
+                        Case 6
+                            row.Item(j) = 0
+                        Case 7
+                            row.Item(j) = ""
+                        Case 8
+                            row.Item(j) = 0
+                    End Select
+                Else
+                    row.Item(j) = rng.Value(i, j)
+                End If
+
+            Next j
+        Next i
+
+        mainForm.dt_Lighting(mainForm.cmb_category.SelectedIndex, _companyNumber - 1) = dt
+
+
+
+        Console.WriteLine(mainForm.xlTablesDict.Item(_category).Item(_companyNumber + 1).name)
+
+
 
     End Sub
     '===================================================================================      
     '                === Format DataGridView ===
     '===================================================================================
-    Sub DGV_format(_dtName As String, _color As Color)
+    Sub DGV_format(_color As Color)
 
         Select Case mainForm.tabControl.SelectedIndex
 

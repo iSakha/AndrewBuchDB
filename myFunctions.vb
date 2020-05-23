@@ -123,7 +123,7 @@ Module myFunctions
 
         mainForm.xlTablesDict = New Dictionary(Of String, Collection)
         mainForm.xlTables = New Collection
-        Dim xlTbl As ExcelTable
+
         Dim i, j As Integer
 
         For i = 1 To mainForm.fileNames.Count

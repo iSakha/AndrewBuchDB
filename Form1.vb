@@ -133,147 +133,150 @@ Public Class mainForm
         btn_prev.Enabled = True
         btn_next.Enabled = True
         writeZeroInQtyTxt()
-        'Dim c As Color = Color.FromArgb(252, 228, 214)
+        Dim c As Color = Color.FromArgb(252, 228, 214)
 
-        'Dim i As Integer
-
-        'i = cmb_category.SelectedIndex
-
-        'Select Case tabControl.SelectedIndex
-
-        '    Case 1
-        '        DGV_light.DataSource = dt_Lighting(i, 0)
-        '        DGV_format(tbl_Lighting_tables(i, 0).Name, c)
-        '        DGV_light.Rows(0).Cells(0).Selected = True
-
-        '    Case 2
-        '        DGV_screen.DataSource = dt_Screen(i, 0)
-        '        DGV_format(tbl_Screen_tables(i, 0).Name, c)
-        '        DGV_screen.Rows(0).Cells(0).Selected = True
-
-        'End Select
-
-        'rtb_fixtureName.BackColor = c
-        'rtb_FirstName.BackColor = c
-        'rtb_SecondName.BackColor = c
-        'rtb_ThirdName.BackColor = c
-
-        create_datatable(cmb_category.SelectedItem, 1)
-
-        clearControls()
-
-    End Sub
-
-    '===================================================================================      
-    '                === PRLighting button ===
-    '===================================================================================
-    Private Sub btn_prLight_Click_1(sender As Object, e As EventArgs) Handles btn_prLight.Click
-
-        selCompIndex = 1
-        btn_prev.Enabled = True
-        btn_next.Enabled = True
-        writeZeroInQtyTxt()
-        Dim c As Color = Color.FromArgb(221, 235, 247)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 1)
 
         Dim i As Integer
 
         i = cmb_category.SelectedIndex
 
-        DGV_light.DataSource = dt_Lighting(i, 1)
-        DGV_format(tbl_Lighting_tables(i, 1).Name, c)
+        Select Case tabControl.SelectedIndex
+
+            Case 1
+                DGV_light.DataSource = dt_Lighting(i, 0)
+                DGV_format(c)
+                DGV_light.Rows(0).Cells(0).Selected = True
+
+            Case 2
+                DGV_screen.DataSource = dt_Screen(i, 0)
+                DGV_format(c)
+                DGV_screen.Rows(0).Cells(0).Selected = True
+
+        End Select
 
         rtb_fixtureName.BackColor = c
         rtb_FirstName.BackColor = c
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
-        DGV_light.Rows(0).Cells(0).Selected = True
+
+
+
         clearControls()
 
     End Sub
 
-    '===================================================================================      
-    '                === Blackout button ===
-    '===================================================================================
-    Private Sub btn_blackOut_Click_1(sender As Object, e As EventArgs) Handles btn_blackOut.Click
+    ''===================================================================================      
+    ''                === PRLighting button ===
+    ''===================================================================================
+    'Private Sub btn_prLight_Click_1(sender As Object, e As EventArgs) Handles btn_prLight.Click
 
-        selCompIndex = 2
-        btn_prev.Enabled = True
-        btn_next.Enabled = True
-        writeZeroInQtyTxt()
-        Dim c As Color = Color.FromArgb(237, 237, 237)
+    '    selCompIndex = 1
+    '    btn_prev.Enabled = True
+    '    btn_next.Enabled = True
+    '    writeZeroInQtyTxt()
+    '    Dim c As Color = Color.FromArgb(221, 235, 247)
 
-        Dim i As Integer
+    '    Dim i As Integer
 
-        i = cmb_category.SelectedIndex
+    '    i = cmb_category.SelectedIndex
 
-        DGV_light.DataSource = dt_Lighting(i, 2)
-        DGV_format(tbl_Lighting_tables(i, 2).Name, c)
+    '    DGV_light.DataSource = dt_Lighting(i, 1)
+    '    DGV_format(tbl_Lighting_tables(i, 1).Name, c)
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+    '    rtb_fixtureName.BackColor = c
+    '    rtb_FirstName.BackColor = c
+    '    rtb_SecondName.BackColor = c
+    '    rtb_ThirdName.BackColor = c
 
-        DGV_light.Rows(0).Cells(0).Selected = True
-        clearControls()
+    '    DGV_light.Rows(0).Cells(0).Selected = True
+    '    clearControls()
 
-    End Sub
+    'End Sub
 
-    '===================================================================================      
-    '                === Vision button ===  
-    '===================================================================================
-    Private Sub btn_vision_Click_1(sender As Object, e As EventArgs) Handles btn_vision.Click
+    ''===================================================================================      
+    ''                === Blackout button ===
+    ''===================================================================================
+    'Private Sub btn_blackOut_Click_1(sender As Object, e As EventArgs) Handles btn_blackOut.Click
 
-        selCompIndex = 3
-        btn_prev.Enabled = True
-        btn_next.Enabled = True
-        writeZeroInQtyTxt()
-        Dim c As Color = Color.FromArgb(226, 239, 218)
+    '    selCompIndex = 2
+    '    btn_prev.Enabled = True
+    '    btn_next.Enabled = True
+    '    writeZeroInQtyTxt()
+    '    Dim c As Color = Color.FromArgb(237, 237, 237)
 
-        Dim i As Integer
+    '    Dim i As Integer
 
-        i = cmb_category.SelectedIndex
+    '    i = cmb_category.SelectedIndex
 
-        DGV_light.DataSource = dt_Lighting(i, 3)
-        DGV_format(tbl_Lighting_tables(i, 3).Name, c)
+    '    DGV_light.DataSource = dt_Lighting(i, 2)
+    '    DGV_format(tbl_Lighting_tables(i, 2).Name, c)
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+    '    rtb_fixtureName.BackColor = c
+    '    rtb_FirstName.BackColor = c
+    '    rtb_SecondName.BackColor = c
+    '    rtb_ThirdName.BackColor = c
 
-        DGV_light.Rows(0).Cells(0).Selected = True
-        clearControls()
+    '    DGV_light.Rows(0).Cells(0).Selected = True
+    '    clearControls()
 
-    End Sub
-    '===================================================================================      
-    '                === Stage button ===  
-    '===================================================================================
-    Private Sub btn_stage_Click(sender As Object, e As EventArgs) Handles btn_stage.Click
+    'End Sub
 
-        selCompIndex = 4
-        btn_prev.Enabled = True
-        btn_next.Enabled = True
-        writeZeroInQtyTxt()
-        Dim c As Color = Color.FromArgb(237, 226, 246)
+    ''===================================================================================      
+    ''                === Vision button ===  
+    ''===================================================================================
+    'Private Sub btn_vision_Click_1(sender As Object, e As EventArgs) Handles btn_vision.Click
 
-        Dim i As Integer
+    '    selCompIndex = 3
+    '    btn_prev.Enabled = True
+    '    btn_next.Enabled = True
+    '    writeZeroInQtyTxt()
+    '    Dim c As Color = Color.FromArgb(226, 239, 218)
 
-        i = cmb_category.SelectedIndex
+    '    Dim i As Integer
 
-        DGV_light.DataSource = dt_Lighting(i, 4)
-        DGV_format(tbl_Lighting_tables(i, 4).Name, c)
+    '    i = cmb_category.SelectedIndex
 
-        rtb_fixtureName.BackColor = c
-        rtb_FirstName.BackColor = c
-        rtb_SecondName.BackColor = c
-        rtb_ThirdName.BackColor = c
+    '    DGV_light.DataSource = dt_Lighting(i, 3)
+    '    DGV_format(tbl_Lighting_tables(i, 3).Name, c)
 
-        DGV_light.Rows(0).Cells(0).Selected = True
-        clearControls()
+    '    rtb_fixtureName.BackColor = c
+    '    rtb_FirstName.BackColor = c
+    '    rtb_SecondName.BackColor = c
+    '    rtb_ThirdName.BackColor = c
 
-    End Sub
+    '    DGV_light.Rows(0).Cells(0).Selected = True
+    '    clearControls()
+
+    'End Sub
+    ''===================================================================================      
+    ''                === Stage button ===  
+    ''===================================================================================
+    'Private Sub btn_stage_Click(sender As Object, e As EventArgs) Handles btn_stage.Click
+
+    '    selCompIndex = 4
+    '    btn_prev.Enabled = True
+    '    btn_next.Enabled = True
+    '    writeZeroInQtyTxt()
+    '    Dim c As Color = Color.FromArgb(237, 226, 246)
+
+    '    Dim i As Integer
+
+    '    i = cmb_category.SelectedIndex
+
+    '    DGV_light.DataSource = dt_Lighting(i, 4)
+    '    DGV_format(tbl_Lighting_tables(i, 4).Name, c)
+
+    '    rtb_fixtureName.BackColor = c
+    '    rtb_FirstName.BackColor = c
+    '    rtb_SecondName.BackColor = c
+    '    rtb_ThirdName.BackColor = c
+
+    '    DGV_light.Rows(0).Cells(0).Selected = True
+    '    clearControls()
+
+    'End Sub
 
     '===================================================================================
     '             === Select category ===
