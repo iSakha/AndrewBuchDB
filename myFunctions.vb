@@ -77,17 +77,20 @@ Module myFunctions
         For Each foundFile As String In My.Computer.FileSystem.GetFiles _
             (mainForm.sDir_DB, Microsoft.VisualBasic.FileIO.SearchOption.SearchAllSubDirectories, "*.xlsx")
 
-            Console.WriteLine(mainForm.fileNames(i + 1))
+            'Console.WriteLine(mainForm.fileNames(i + 1))
             Dim category As String
             Dim k As Integer = 0
             For Each ws As ExcelWorksheet In mainForm.wsCategory
                 category = mainForm.mainDict.Item(mainForm.fileNames(i + 1)).Item(k + 1).Name
-                Console.WriteLine(vbTab & category)
+                'Console.WriteLine(vbTab & category)
                 k = k + 1
             Next ws
             i = i + 1
         Next foundFile
     End Sub
+    '===================================================================================
+    '             === Get dictionary of all excel tables ===
+    '===================================================================================
     Sub load_dbFile(_tabIndex As Integer)
 
         'If Not (mainForm.sDir_DB = Nothing) Then
@@ -113,8 +116,8 @@ Module myFunctions
         mainForm.cmb_category.Items.Clear()
         For Each ws In mainForm.wsCategory
             category = mainForm.mainDict.Item(mainForm.fileNames(_tabIndex)).Item(k + 1).Name
-            Console.WriteLine(_tabIndex)
-            Console.WriteLine(mainForm.mainDict.Keys(_tabIndex))
+            'Console.WriteLine(_tabIndex)
+            'Console.WriteLine(mainForm.mainDict.Keys(_tabIndex - 1))
             mainForm.cmb_category.Items.Add(category)
             k = k + 1
         Next ws
@@ -132,7 +135,7 @@ Module myFunctions
                 mainForm.xlTables = New Collection
                 For Each tbl As ExcelTable In ws.Tables
                     mainForm.xlTables.Add(tbl)
-                    Console.WriteLine(tbl.Name)
+                    'Console.WriteLine(tbl.Name)
                 Next tbl
                 mainForm.xlTablesDict.Add(ws.Name, mainForm.xlTables)
             Next j
@@ -192,27 +195,28 @@ Module myFunctions
 
         Dim index As Integer
         Dim selectedRow As DataGridViewRow
+        Dim i As Integer = mainForm.tabControl.SelectedIndex - 1
 
-        index = mainForm.DGV_light.CurrentRow.Index
+        index = mainForm.dgv(i).CurrentRow.Index
 
-        mainForm.DGV_light.ClearSelection()
+        mainForm.dgv(i).ClearSelection()
         sumForm.dgv_sum.ClearSelection()
-        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-        mainForm.DGV_light.Rows(index).Selected = True
+        mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
+        mainForm.dgv(i).Rows(index).Selected = True
 
 
         If index = 0 Then
-            index = mainForm.DGV_light.Rows.Count - 1
+            index = mainForm.dgv(i).Rows.Count - 1
         End If
 
         Try
 
             index = index - 1
-            mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-            mainForm.DGV_light.Rows(index).Selected = True
+            mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
+            mainForm.dgv(i).Rows(index).Selected = True
             sumForm.dgv_sum.Rows(index).Selected = True
 
-            selectedRow = mainForm.DGV_light.Rows(index)
+            selectedRow = mainForm.dgv(i).Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
@@ -226,7 +230,7 @@ Module myFunctions
 
         End Try
 
-        calcQuantity()
+        'calcQuantity()
 
     End Sub
     '===================================================================================
@@ -235,26 +239,27 @@ Module myFunctions
     Sub nextRecord()
         Dim index As Integer
         Dim selectedRow As DataGridViewRow
+        Dim i As Integer = mainForm.tabControl.SelectedIndex - 1
 
-        index = mainForm.DGV_light.CurrentRow.Index
+        index = mainForm.dgv(i).CurrentRow.Index
 
-        mainForm.DGV_light.ClearSelection()
+        mainForm.dgv(i).ClearSelection()
         sumForm.dgv_sum.ClearSelection()
-        mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-        mainForm.DGV_light.Rows(index).Selected = True
+        mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
+        mainForm.dgv(i).Rows(index).Selected = True
 
-        If index = mainForm.DGV_light.Rows.Count - 2 Then
+        If index = mainForm.dgv(i).Rows.Count - 2 Then
             index = -1
         End If
 
         Try
 
             index = index + 1
-            mainForm.DGV_light.CurrentCell = mainForm.DGV_light.Item(0, index)
-            mainForm.DGV_light.Rows(index).Selected = True
+            mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
+            mainForm.dgv(i).Rows(index).Selected = True
             sumForm.dgv_sum.Rows(index).Selected = True
 
-            selectedRow = mainForm.DGV_light.Rows(index)
+            selectedRow = mainForm.dgv(i).Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
@@ -268,7 +273,7 @@ Module myFunctions
 
         End Try
 
-        calcQuantity()
+        'calcQuantity()
     End Sub
     '===================================================================================
     '             === Calculate quantity ===

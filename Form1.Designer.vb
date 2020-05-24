@@ -27,14 +27,6 @@ Partial Class mainForm
         Me.btn_tst = New System.Windows.Forms.Button()
         Me.btn_loadDB = New System.Windows.Forms.Button()
         Me.TabPage1 = New System.Windows.Forms.TabPage()
-        Me.txt_qty3 = New System.Windows.Forms.TextBox()
-        Me.txt_qty2 = New System.Windows.Forms.TextBox()
-        Me.txt_qty1 = New System.Windows.Forms.TextBox()
-        Me.txt_qty = New System.Windows.Forms.TextBox()
-        Me.rtb_fixtureName = New System.Windows.Forms.RichTextBox()
-        Me.rtb_ThirdName = New System.Windows.Forms.RichTextBox()
-        Me.rtb_SecondName = New System.Windows.Forms.RichTextBox()
-        Me.rtb_FirstName = New System.Windows.Forms.RichTextBox()
         Me.DGV_light = New System.Windows.Forms.DataGridView()
         Me.lbl_category = New System.Windows.Forms.Label()
         Me.TabPage2 = New System.Windows.Forms.TabPage()
@@ -43,6 +35,14 @@ Partial Class mainForm
         Me.TabPage5 = New System.Windows.Forms.TabPage()
         Me.TabPage6 = New System.Windows.Forms.TabPage()
         Me.TabPage7 = New System.Windows.Forms.TabPage()
+        Me.txt_qty3 = New System.Windows.Forms.TextBox()
+        Me.txt_qty2 = New System.Windows.Forms.TextBox()
+        Me.txt_qty1 = New System.Windows.Forms.TextBox()
+        Me.txt_qty = New System.Windows.Forms.TextBox()
+        Me.rtb_fixtureName = New System.Windows.Forms.RichTextBox()
+        Me.rtb_ThirdName = New System.Windows.Forms.RichTextBox()
+        Me.rtb_SecondName = New System.Windows.Forms.RichTextBox()
+        Me.rtb_FirstName = New System.Windows.Forms.RichTextBox()
         Me.btn_save = New System.Windows.Forms.Button()
         Me.btn_update = New System.Windows.Forms.Button()
         Me.btn_del = New System.Windows.Forms.Button()
@@ -99,7 +99,7 @@ Partial Class mainForm
         Me.TabPage3.Controls.Add(Me.btn_loadDB)
         Me.TabPage3.Location = New System.Drawing.Point(4, 22)
         Me.TabPage3.Name = "TabPage3"
-        Me.TabPage3.Size = New System.Drawing.Size(1059, 489)
+        Me.TabPage3.Size = New System.Drawing.Size(1059, 427)
         Me.TabPage3.TabIndex = 2
         Me.TabPage3.Text = "Menu"
         Me.TabPage3.UseVisualStyleBackColor = True
@@ -133,6 +133,78 @@ Partial Class mainForm
         Me.TabPage1.TabIndex = 0
         Me.TabPage1.Text = "Свет"
         Me.TabPage1.UseVisualStyleBackColor = True
+        '
+        'DGV_light
+        '
+        Me.DGV_light.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_light.Location = New System.Drawing.Point(0, 6)
+        Me.DGV_light.Name = "DGV_light"
+        Me.DGV_light.Size = New System.Drawing.Size(1056, 425)
+        Me.DGV_light.TabIndex = 3
+        '
+        'lbl_category
+        '
+        Me.lbl_category.AutoSize = True
+        Me.lbl_category.Location = New System.Drawing.Point(24, 4)
+        Me.lbl_category.Name = "lbl_category"
+        Me.lbl_category.Size = New System.Drawing.Size(60, 13)
+        Me.lbl_category.TabIndex = 1
+        Me.lbl_category.Text = "Категория"
+        '
+        'TabPage2
+        '
+        Me.TabPage2.Controls.Add(Me.DGV_screen)
+        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage2.Name = "TabPage2"
+        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
+        Me.TabPage2.Size = New System.Drawing.Size(1059, 427)
+        Me.TabPage2.TabIndex = 1
+        Me.TabPage2.Text = "Экран"
+        Me.TabPage2.UseVisualStyleBackColor = True
+        '
+        'DGV_screen
+        '
+        Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
+        Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
+        Me.DGV_screen.Name = "DGV_screen"
+        Me.DGV_screen.Size = New System.Drawing.Size(1056, 415)
+        Me.DGV_screen.TabIndex = 4
+        '
+        'TabPage4
+        '
+        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage4.Name = "TabPage4"
+        Me.TabPage4.Size = New System.Drawing.Size(1059, 427)
+        Me.TabPage4.TabIndex = 3
+        Me.TabPage4.Text = "Коммутация"
+        Me.TabPage4.UseVisualStyleBackColor = True
+        '
+        'TabPage5
+        '
+        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage5.Name = "TabPage5"
+        Me.TabPage5.Size = New System.Drawing.Size(1059, 427)
+        Me.TabPage5.TabIndex = 4
+        Me.TabPage5.Text = "Фермы,моторы"
+        Me.TabPage5.UseVisualStyleBackColor = True
+        '
+        'TabPage6
+        '
+        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage6.Name = "TabPage6"
+        Me.TabPage6.Size = New System.Drawing.Size(1059, 427)
+        Me.TabPage6.TabIndex = 5
+        Me.TabPage6.Text = "Конструктив"
+        Me.TabPage6.UseVisualStyleBackColor = True
+        '
+        'TabPage7
+        '
+        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
+        Me.TabPage7.Name = "TabPage7"
+        Me.TabPage7.Size = New System.Drawing.Size(1059, 427)
+        Me.TabPage7.TabIndex = 6
+        Me.TabPage7.Text = "Звук"
+        Me.TabPage7.UseVisualStyleBackColor = True
         '
         'txt_qty3
         '
@@ -197,78 +269,6 @@ Partial Class mainForm
         Me.rtb_FirstName.Size = New System.Drawing.Size(199, 65)
         Me.rtb_FirstName.TabIndex = 5
         Me.rtb_FirstName.Text = ""
-        '
-        'DGV_light
-        '
-        Me.DGV_light.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_light.Location = New System.Drawing.Point(0, 6)
-        Me.DGV_light.Name = "DGV_light"
-        Me.DGV_light.Size = New System.Drawing.Size(1056, 425)
-        Me.DGV_light.TabIndex = 3
-        '
-        'lbl_category
-        '
-        Me.lbl_category.AutoSize = True
-        Me.lbl_category.Location = New System.Drawing.Point(24, 4)
-        Me.lbl_category.Name = "lbl_category"
-        Me.lbl_category.Size = New System.Drawing.Size(60, 13)
-        Me.lbl_category.TabIndex = 1
-        Me.lbl_category.Text = "Категория"
-        '
-        'TabPage2
-        '
-        Me.TabPage2.Controls.Add(Me.DGV_screen)
-        Me.TabPage2.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage2.Name = "TabPage2"
-        Me.TabPage2.Padding = New System.Windows.Forms.Padding(3)
-        Me.TabPage2.Size = New System.Drawing.Size(1059, 427)
-        Me.TabPage2.TabIndex = 1
-        Me.TabPage2.Text = "Экран"
-        Me.TabPage2.UseVisualStyleBackColor = True
-        '
-        'DGV_screen
-        '
-        Me.DGV_screen.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize
-        Me.DGV_screen.Location = New System.Drawing.Point(0, 6)
-        Me.DGV_screen.Name = "DGV_screen"
-        Me.DGV_screen.Size = New System.Drawing.Size(1056, 415)
-        Me.DGV_screen.TabIndex = 4
-        '
-        'TabPage4
-        '
-        Me.TabPage4.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage4.Name = "TabPage4"
-        Me.TabPage4.Size = New System.Drawing.Size(1059, 489)
-        Me.TabPage4.TabIndex = 3
-        Me.TabPage4.Text = "Коммутация"
-        Me.TabPage4.UseVisualStyleBackColor = True
-        '
-        'TabPage5
-        '
-        Me.TabPage5.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage5.Name = "TabPage5"
-        Me.TabPage5.Size = New System.Drawing.Size(1059, 489)
-        Me.TabPage5.TabIndex = 4
-        Me.TabPage5.Text = "Фермы,моторы"
-        Me.TabPage5.UseVisualStyleBackColor = True
-        '
-        'TabPage6
-        '
-        Me.TabPage6.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage6.Name = "TabPage6"
-        Me.TabPage6.Size = New System.Drawing.Size(1059, 489)
-        Me.TabPage6.TabIndex = 5
-        Me.TabPage6.Text = "Конструктив"
-        Me.TabPage6.UseVisualStyleBackColor = True
-        '
-        'TabPage7
-        '
-        Me.TabPage7.Location = New System.Drawing.Point(4, 22)
-        Me.TabPage7.Name = "TabPage7"
-        Me.TabPage7.Size = New System.Drawing.Size(1059, 489)
-        Me.TabPage7.TabIndex = 6
-        Me.TabPage7.Text = "Звук"
-        Me.TabPage7.UseVisualStyleBackColor = True
         '
         'btn_save
         '

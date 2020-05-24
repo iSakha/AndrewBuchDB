@@ -22,11 +22,14 @@ Public Class mainForm
 
     '=================================  DataTable  ========================================================
 
-    Public dt_Lighting(7, 4) As Object
+    'Public dt_Lighting(7, 4) As Object
     Public dt_sumLighting(7) As Object
 
-    Public dt_Screen(7, 4) As Object
+    'Public dt_Screen(7, 4) As Object
     Public dt_sumScreen(7) As Object
+
+    Public dtColl As Collection
+    Public dtDict As Dictionary(Of Integer, Collection)
 
     '=================================  Rows and columns  ==================================================
 
@@ -67,6 +70,7 @@ Public Class mainForm
     Public selCompIndex As Integer = 0
 
     Public lblSumQty() As Object
+    Public dgv() As Object
 
     Public editMode() As String = {"Update", "Delete", "Add"}
     Public selEditModeIndex As Integer = 0
@@ -83,7 +87,10 @@ Public Class mainForm
     Private Sub btn_loadDB_Click(sender As Object, e As EventArgs) Handles btn_loadDB.Click
 
         loadDataBaseFolder()                      '   myFunctions.vb
-
+        initLabels()                              '   declarations.vb
+        initDGV()                                 '   declarations.vb
+        'dt_Lighting(7, 4) = New Object
+        'dt_Screen(7, 4) = New Object
     End Sub
     '===================================================================================
     '             === Select page ===
@@ -97,28 +104,6 @@ Public Class mainForm
             cmb_category.SelectedIndex = 0
 
         End If
-        'Console.WriteLine(obj_excel.Workbook.Worksheets(0).name)
-
-        'initWorksheets(tabControl.SelectedIndex)               '   declarations.vb
-
-        'initExcelTables(tabControl.SelectedIndex)                   '   declarations.vb
-
-        'initLabels()                        '   declarations.vb
-
-
-        '----------------------         Create datatables           ------------------------------
-        '-----------------------------------------------------------------------------------------
-        'For i As Integer = 0 To cmb_category.Items.Count - 1
-        'For i As Integer = 0 To 1
-
-        '    For j As Integer = 0 To sCompany.Count - 1
-        '        create_datatable(i, j)
-
-        '    Next j
-        '    'create_sumDatatable(i)
-        '    'create_sumDatatable_v2(i)
-        'Next i
-
 
         grbx_1.Visible = True
         grbx_2.Visible = True
@@ -135,148 +120,150 @@ Public Class mainForm
         writeZeroInQtyTxt()
         Dim c As Color = Color.FromArgb(252, 228, 214)
 
+        '           dTable.vb
         create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 1)
 
-        Dim i As Integer
+        Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
+        j = tabControl.SelectedIndex
 
-        Select Case tabControl.SelectedIndex
 
-            Case 1
-                DGV_light.DataSource = dt_Lighting(i, 0)
-                DGV_format(c)
-                DGV_light.Rows(0).Cells(0).Selected = True
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        DGV_format(c)
 
-            Case 2
-                DGV_screen.DataSource = dt_Screen(i, 0)
-                DGV_format(c)
-                DGV_screen.Rows(0).Cells(0).Selected = True
-
-        End Select
 
         rtb_fixtureName.BackColor = c
         rtb_FirstName.BackColor = c
         rtb_SecondName.BackColor = c
         rtb_ThirdName.BackColor = c
 
+        clearControls()
 
+    End Sub
 
+    '===================================================================================      
+    '                === PRLighting button ===
+    '===================================================================================
+    Private Sub btn_prLight_Click_1(sender As Object, e As EventArgs) Handles btn_prLight.Click
+
+        selCompIndex = 1
+        btn_prev.Enabled = True
+        btn_next.Enabled = True
+        writeZeroInQtyTxt()
+        Dim c As Color = Color.FromArgb(221, 235, 247)
+
+        '           dTable.vb
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 2)
+
+        Dim i, j As Integer
+
+        i = cmb_category.SelectedIndex
+        j = tabControl.SelectedIndex
+
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        DGV_format(c)
+
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
         clearControls()
 
     End Sub
 
-    ''===================================================================================      
-    ''                === PRLighting button ===
-    ''===================================================================================
-    'Private Sub btn_prLight_Click_1(sender As Object, e As EventArgs) Handles btn_prLight.Click
+    '===================================================================================      
+    '                === Blackout button ===
+    '===================================================================================
+    Private Sub btn_blackOut_Click_1(sender As Object, e As EventArgs) Handles btn_blackOut.Click
 
-    '    selCompIndex = 1
-    '    btn_prev.Enabled = True
-    '    btn_next.Enabled = True
-    '    writeZeroInQtyTxt()
-    '    Dim c As Color = Color.FromArgb(221, 235, 247)
+        selCompIndex = 2
+        btn_prev.Enabled = True
+        btn_next.Enabled = True
+        writeZeroInQtyTxt()
+        Dim c As Color = Color.FromArgb(237, 237, 237)
 
-    '    Dim i As Integer
+        '           dTable.vb
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 3)
 
-    '    i = cmb_category.SelectedIndex
+        Dim i, j As Integer
 
-    '    DGV_light.DataSource = dt_Lighting(i, 1)
-    '    DGV_format(tbl_Lighting_tables(i, 1).Name, c)
+        i = cmb_category.SelectedIndex
+        j = tabControl.SelectedIndex
 
-    '    rtb_fixtureName.BackColor = c
-    '    rtb_FirstName.BackColor = c
-    '    rtb_SecondName.BackColor = c
-    '    rtb_ThirdName.BackColor = c
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        DGV_format(c)
 
-    '    DGV_light.Rows(0).Cells(0).Selected = True
-    '    clearControls()
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
-    'End Sub
+        clearControls()
 
-    ''===================================================================================      
-    ''                === Blackout button ===
-    ''===================================================================================
-    'Private Sub btn_blackOut_Click_1(sender As Object, e As EventArgs) Handles btn_blackOut.Click
+    End Sub
 
-    '    selCompIndex = 2
-    '    btn_prev.Enabled = True
-    '    btn_next.Enabled = True
-    '    writeZeroInQtyTxt()
-    '    Dim c As Color = Color.FromArgb(237, 237, 237)
+    '===================================================================================      
+    '                === Vision button ===  
+    '===================================================================================
+    Private Sub btn_vision_Click_1(sender As Object, e As EventArgs) Handles btn_vision.Click
 
-    '    Dim i As Integer
+        selCompIndex = 3
+        btn_prev.Enabled = True
+        btn_next.Enabled = True
+        writeZeroInQtyTxt()
+        Dim c As Color = Color.FromArgb(226, 239, 218)
 
-    '    i = cmb_category.SelectedIndex
+        '           dTable.vb
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 4)
 
-    '    DGV_light.DataSource = dt_Lighting(i, 2)
-    '    DGV_format(tbl_Lighting_tables(i, 2).Name, c)
+        Dim i, j As Integer
 
-    '    rtb_fixtureName.BackColor = c
-    '    rtb_FirstName.BackColor = c
-    '    rtb_SecondName.BackColor = c
-    '    rtb_ThirdName.BackColor = c
+        i = cmb_category.SelectedIndex
+        j = tabControl.SelectedIndex
 
-    '    DGV_light.Rows(0).Cells(0).Selected = True
-    '    clearControls()
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        DGV_format(c)
 
-    'End Sub
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
-    ''===================================================================================      
-    ''                === Vision button ===  
-    ''===================================================================================
-    'Private Sub btn_vision_Click_1(sender As Object, e As EventArgs) Handles btn_vision.Click
+        clearControls()
 
-    '    selCompIndex = 3
-    '    btn_prev.Enabled = True
-    '    btn_next.Enabled = True
-    '    writeZeroInQtyTxt()
-    '    Dim c As Color = Color.FromArgb(226, 239, 218)
+    End Sub
+    '===================================================================================      
+    '                === Stage button ===  
+    '===================================================================================
+    Private Sub btn_stage_Click(sender As Object, e As EventArgs) Handles btn_stage.Click
 
-    '    Dim i As Integer
+        selCompIndex = 4
+        btn_prev.Enabled = True
+        btn_next.Enabled = True
+        writeZeroInQtyTxt()
+        Dim c As Color = Color.FromArgb(237, 226, 246)
 
-    '    i = cmb_category.SelectedIndex
+        '           dTable.vb
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 5)
 
-    '    DGV_light.DataSource = dt_Lighting(i, 3)
-    '    DGV_format(tbl_Lighting_tables(i, 3).Name, c)
+        Dim i, j As Integer
 
-    '    rtb_fixtureName.BackColor = c
-    '    rtb_FirstName.BackColor = c
-    '    rtb_SecondName.BackColor = c
-    '    rtb_ThirdName.BackColor = c
+        i = cmb_category.SelectedIndex
+        j = tabControl.SelectedIndex
 
-    '    DGV_light.Rows(0).Cells(0).Selected = True
-    '    clearControls()
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        DGV_format(c)
 
-    'End Sub
-    ''===================================================================================      
-    ''                === Stage button ===  
-    ''===================================================================================
-    'Private Sub btn_stage_Click(sender As Object, e As EventArgs) Handles btn_stage.Click
+        rtb_fixtureName.BackColor = c
+        rtb_FirstName.BackColor = c
+        rtb_SecondName.BackColor = c
+        rtb_ThirdName.BackColor = c
 
-    '    selCompIndex = 4
-    '    btn_prev.Enabled = True
-    '    btn_next.Enabled = True
-    '    writeZeroInQtyTxt()
-    '    Dim c As Color = Color.FromArgb(237, 226, 246)
+        clearControls()
 
-    '    Dim i As Integer
-
-    '    i = cmb_category.SelectedIndex
-
-    '    DGV_light.DataSource = dt_Lighting(i, 4)
-    '    DGV_format(tbl_Lighting_tables(i, 4).Name, c)
-
-    '    rtb_fixtureName.BackColor = c
-    '    rtb_FirstName.BackColor = c
-    '    rtb_SecondName.BackColor = c
-    '    rtb_ThirdName.BackColor = c
-
-    '    DGV_light.Rows(0).Cells(0).Selected = True
-    '    clearControls()
-
-    'End Sub
+    End Sub
 
     '===================================================================================
     '             === Select category ===
@@ -284,7 +271,8 @@ Public Class mainForm
 
     Private Sub cmb_category_SelectedIndexChanged_1(sender As Object, e As EventArgs) Handles cmb_category.SelectedIndexChanged
         clearControls()
-        DGV_light.DataSource = Nothing
+        dgv(0).DataSource = Nothing
+        dgv(1).DataSource = Nothing
         btn_prev.Enabled = False
         btn_next.Enabled = False
     End Sub
@@ -294,7 +282,12 @@ Public Class mainForm
     '===================================================================================
     Private Sub DGV_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_light.CellClick
         dgv_clickCell(sender, e)
-        calcQuantity()
+        'calcQuantity()
+    End Sub
+
+    Private Sub DGV_screen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_screen.CellClick
+        dgv_clickCell(sender, e)
+        'calcQuantity()
     End Sub
 
     '===================================================================================
@@ -366,6 +359,7 @@ Public Class mainForm
         blockCompanyButtons()
         blockEditButtons()
     End Sub
+
     '===================================================================================
     '             === SAVE data to DB ===
     '===================================================================================
@@ -545,6 +539,9 @@ Public Class mainForm
         xlTbl = mainDict.Item(fileNames(2)).Item(3).Tables.Item(2)
 
         'Console.WriteLine(xlTbl.Name)
+
+
+
     End Sub
 
 End Class
