@@ -18,18 +18,25 @@ Public Class mainForm
     Public tbl_Screen_tables(7, 4) As ExcelTable
     Public tbl_Screen_sumTables(7) As ExcelTable
 
+    Public xlTables As Collection
+    Public xlTablesDict As Dictionary(Of String, Collection)    'key - category, collection - xlTables
 
+    Public xl_sumTables As Collection
+    Public xl_sumTablesDict As Dictionary(Of String, Collection) 'key - category, collection - xl_sumTables
 
     '=================================  DataTable  ========================================================
 
-    'Public dt_Lighting(7, 4) As Object
+    Public dt_Lighting(7, 4) As Object
     Public dt_sumLighting(7) As Object
 
-    'Public dt_Screen(7, 4) As Object
+    Public dt_Screen(7, 4) As Object
     Public dt_sumScreen(7) As Object
 
     Public dtColl As Collection
-    Public dtDict As Dictionary(Of Integer, Collection)
+    Public dtDict As Dictionary(Of Integer, Collection)    'key -  number of category, collection - dtColl
+
+    Public dt_sum As Collection
+    Public dt_sumDict As Dictionary(Of Integer, Collection) 'key -  number of category, collection - dt_sum
 
     '=================================  Rows and columns  ==================================================
 
@@ -76,9 +83,8 @@ Public Class mainForm
     Public selEditModeIndex As Integer = 0
     Public selectedCategoryIndex As Integer
 
-    Public dbFiles, wsCategory, xlTables, fileNames As Collection
+    Public dbFiles, wsCategory, fileNames As Collection
     Public mainDict As Dictionary(Of String, Collection)        'key - filename,collection - categories(Excel worksheets)
-    Public xlTablesDict As Dictionary(Of String, Collection)    'key - category, collection - xlTables
 
 
     '===================================================================================      
@@ -89,8 +95,7 @@ Public Class mainForm
         loadDataBaseFolder()                      '   myFunctions.vb
         initLabels()                              '   declarations.vb
         initDGV()                                 '   declarations.vb
-        'dt_Lighting(7, 4) = New Object
-        'dt_Screen(7, 4) = New Object
+
     End Sub
     '===================================================================================
     '             === Select page ===
@@ -121,7 +126,7 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(252, 228, 214)
 
         '           dTable.vb
-        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 1)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex))
 
         Dim i, j As Integer
 
@@ -154,14 +159,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(221, 235, 247)
 
         '           dTable.vb
-        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 2)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex))
 
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
         j = tabControl.SelectedIndex
 
-        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(2)
         DGV_format(c)
 
         rtb_fixtureName.BackColor = c
@@ -185,14 +190,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(237, 237, 237)
 
         '           dTable.vb
-        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 3)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex))
 
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
         j = tabControl.SelectedIndex
 
-        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(3)
         DGV_format(c)
 
         rtb_fixtureName.BackColor = c
@@ -216,14 +221,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(226, 239, 218)
 
         '           dTable.vb
-        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 4)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex))
 
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
         j = tabControl.SelectedIndex
 
-        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(4)
         DGV_format(c)
 
         rtb_fixtureName.BackColor = c
@@ -246,14 +251,14 @@ Public Class mainForm
         Dim c As Color = Color.FromArgb(237, 226, 246)
 
         '           dTable.vb
-        create_datatable(cmb_category.Items(cmb_category.SelectedIndex), 5)
+        create_datatable(cmb_category.Items(cmb_category.SelectedIndex))
 
         Dim i, j As Integer
 
         i = cmb_category.SelectedIndex
         j = tabControl.SelectedIndex
 
-        dgv(j - 1).DataSource = dtDict.Item(j).Item(1)
+        dgv(j - 1).DataSource = dtDict.Item(j).Item(5)
         DGV_format(c)
 
         rtb_fixtureName.BackColor = c
@@ -281,26 +286,33 @@ Public Class mainForm
     '             === CellClick on DGV ===
     '===================================================================================
     Private Sub DGV_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_light.CellClick
+
         dgv_clickCell(sender, e)
-        'calcQuantity()
+        calcQuantity()
     End Sub
 
     Private Sub DGV_screen_CellClick(sender As Object, e As DataGridViewCellEventArgs) Handles DGV_screen.CellClick
+
         dgv_clickCell(sender, e)
-        'calcQuantity()
+        calcQuantity()
     End Sub
 
     '===================================================================================
     '             === Prev record ===
     '===================================================================================
     Private Sub btn_prev_Click(sender As Object, e As EventArgs) Handles btn_prev.Click
+
         prevRecord()
+        calcQuantity()
+
     End Sub
     '===================================================================================
     '             === Next record ===
     '===================================================================================
     Private Sub btn_next_Click(sender As Object, e As EventArgs) Handles btn_next.Click
+
         nextRecord()
+        calcQuantity()
     End Sub
     '===================================================================================
     '             === ADD data to DB ===
@@ -333,7 +345,7 @@ Public Class mainForm
         j = selCompIndex
         index = DGV_light.CurrentRow.Index
 
-        updateData(dt_Lighting(i, j), DGV_light, index)
+        '       updateData(dt_Lighting(i, j), DGV_light, index)
 
         btn_save.FlatStyle = FlatStyle.Flat
         blockCompanyButtons()
@@ -388,7 +400,7 @@ Public Class mainForm
         obj_excel = Excel                            '   Global vars to use in function "Save"
         obj_excelFile = excelFile
 
-        initWorksheets(tabControl.SelectedIndex)
+
         initExcelTables(tabControl.SelectedIndex)
         formatExcelTable(i, j)
 
@@ -421,18 +433,37 @@ Public Class mainForm
     '             === Show summary ===
     '===================================================================================
     Private Sub btn_summary_Click(sender As Object, e As EventArgs) Handles btn_summary.Click
-        Dim i As Integer
-        i = cmb_category.SelectedIndex
-        Console.WriteLine(i)
-        sumForm.dgv_sum.DataSource = dt_sumLighting(i)
-        sumForm.Show()
-        format_sumDGV()
+        Dim i, j As Integer
 
+
+
+        'i = cmb_category.SelectedIndex
+        'Console.WriteLine(i)
+        'sumForm.dgv_sum.DataSource = dt_sumLighting(i)
+        'sumForm.Show()
+        'format_sumDGV()
+        For i = 1 To dbFiles.Count
+            For j = 1 To dbFiles.Item(j).worksheets.count
+                Console.WriteLine(fileNames(i))
+            Next j
+        Next i
     End Sub
     '===================================================================================
     '             === T E S T   B U T T O N ===
     '===================================================================================
     Private Sub btn_tst_Click(sender As Object, e As EventArgs) Handles btn_tst.Click
+
+        'Console.WriteLine(wsCategory.Count)
+        Console.WriteLine(mainDict.Keys(0))
+        Console.WriteLine(fileNames(1))
+        For Each key As String In mainDict.Keys
+            Console.WriteLine(key)
+            For Each item As KeyValuePair(Of String, Collection) In mainDict
+                Console.WriteLine("hello")
+            Next item
+        Next key
+            Dim cat As String = mainDict.Item(fileNames(1)).Item(6).Name
+        Console.WriteLine(cat)
 
 
         '-------------------------------------------------------------------------------------------

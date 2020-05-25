@@ -3,26 +3,6 @@ Imports OfficeOpenXml.Table
 Imports System.IO
 Module declarations
 
-    Sub initWorksheets(_tabIndex As Integer)
-
-        Select Case _tabIndex
-            Case 1
-
-                'mainForm.wsLight = {mainForm.obj_excel.Workbook.Worksheets(0),
-                '            mainForm.obj_excel.Workbook.Worksheets(1),
-                '            mainForm.obj_excel.Workbook.Worksheets(2),
-                '            mainForm.obj_excel.Workbook.Worksheets(3),
-                '            mainForm.obj_excel.Workbook.Worksheets(4),
-                '            mainForm.obj_excel.Workbook.Worksheets(5),
-                '            mainForm.obj_excel.Workbook.Worksheets(6),
-                '            mainForm.obj_excel.Workbook.Worksheets(7)}
-
-            Case 2
-
-
-        End Select
-
-    End Sub
 
     Sub initExcelTables(_tabIndex As Integer)
 

@@ -125,7 +125,10 @@ Module myFunctions
         ' 2. Get all excel tables from selected file (tab index)
 
         mainForm.xlTablesDict = New Dictionary(Of String, Collection)
-        mainForm.xlTables = New Collection
+        ' mainForm.xlTables = New Collection
+
+        mainForm.xl_sumTablesDict = New Dictionary(Of String, Collection)
+
 
         Dim i, j As Integer
 
@@ -133,28 +136,33 @@ Module myFunctions
             For j = 1 To mainForm.wsCategory.Count
                 ws = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j)
                 mainForm.xlTables = New Collection
+                mainForm.xl_sumTables = New Collection
                 For Each tbl As ExcelTable In ws.Tables
                     mainForm.xlTables.Add(tbl)
                     'Console.WriteLine(tbl.Name)
                 Next tbl
+                Dim xl_sumTbl As ExcelTable
+                xl_sumTbl = ws.Tables.Item(0)
+                Console.WriteLine(xl_sumTbl.Name)
+                mainForm.xl_sumTables.Add(xl_sumTbl)
                 mainForm.xlTablesDict.Add(ws.Name, mainForm.xlTables)
             Next j
-
+            mainForm.xl_sumTablesDict.Add(ws.Name, mainForm.xl_sumTables)
         Next i
 
         '------------------------------------------------------------------------
         ' Now we can test it to print all excel tables from xlTablesDict
         '------------------------------------------------------------------------
         For i = 1 To mainForm.fileNames.Count
-            Console.WriteLine(mainForm.fileNames(i))
+            'Console.WriteLine(mainForm.fileNames(i))
             For j = 1 To mainForm.wsCategory.Count
                 ws = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j)
                 Dim cat As String = mainForm.mainDict.Item(mainForm.fileNames(i)).Item(j).Name
                 Dim tblName As String
-                Console.WriteLine(vbTab & cat)
+                'Console.WriteLine(vbTab & cat)
                 For Each tbl As ExcelTable In ws.Tables
                     tblName = tbl.Name
-                    Console.WriteLine(vbTab & vbTab & tblName)
+                    'Console.WriteLine(vbTab & vbTab & tblName)
                 Next tbl
             Next j
 
@@ -200,7 +208,7 @@ Module myFunctions
         index = mainForm.dgv(i).CurrentRow.Index
 
         mainForm.dgv(i).ClearSelection()
-        sumForm.dgv_sum.ClearSelection()
+        'sumForm.dgv_sum.ClearSelection()
         mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
         mainForm.dgv(i).Rows(index).Selected = True
 
@@ -209,16 +217,16 @@ Module myFunctions
             index = mainForm.dgv(i).Rows.Count - 1
         End If
 
-        Try
 
-            index = index - 1
+
+        index = index - 1
             mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
             mainForm.dgv(i).Rows(index).Selected = True
-            sumForm.dgv_sum.Rows(index).Selected = True
+        'sumForm.dgv_sum.Rows(index).Selected = True
 
-            selectedRow = mainForm.dgv(i).Rows(index)
+        selectedRow = mainForm.dgv(i).Rows(index)
 
-            mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
+        mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
             mainForm.rtb_FirstName.Text = selectedRow.Cells(3).Value.ToString
             mainForm.txt_qty1.Text = selectedRow.Cells(4).Value.ToString
@@ -226,9 +234,7 @@ Module myFunctions
             mainForm.txt_qty2.Text = selectedRow.Cells(6).Value.ToString
             mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
             mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
-        Catch
 
-        End Try
 
         'calcQuantity()
 
@@ -244,7 +250,7 @@ Module myFunctions
         index = mainForm.dgv(i).CurrentRow.Index
 
         mainForm.dgv(i).ClearSelection()
-        sumForm.dgv_sum.ClearSelection()
+        'sumForm.dgv_sum.ClearSelection()
         mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
         mainForm.dgv(i).Rows(index).Selected = True
 
@@ -252,14 +258,14 @@ Module myFunctions
             index = -1
         End If
 
-        Try
 
-            index = index + 1
+
+        index = index + 1
             mainForm.dgv(i).CurrentCell = mainForm.dgv(i).Item(0, index)
             mainForm.dgv(i).Rows(index).Selected = True
-            sumForm.dgv_sum.Rows(index).Selected = True
+        'sumForm.dgv_sum.Rows(index).Selected = True
 
-            selectedRow = mainForm.dgv(i).Rows(index)
+        selectedRow = mainForm.dgv(i).Rows(index)
 
             mainForm.rtb_fixtureName.Text = selectedRow.Cells(1).Value.ToString
             mainForm.txt_qty.Text = selectedRow.Cells(2).Value.ToString
@@ -269,11 +275,8 @@ Module myFunctions
             mainForm.txt_qty2.Text = selectedRow.Cells(6).Value.ToString
             mainForm.rtb_ThirdName.Text = selectedRow.Cells(7).Value.ToString
             mainForm.txt_qty3.Text = selectedRow.Cells(8).Value.ToString
-        Catch
 
-        End Try
 
-        'calcQuantity()
     End Sub
     '===================================================================================
     '             === Calculate quantity ===
@@ -285,23 +288,25 @@ Module myFunctions
 
         i = mainForm.cmb_category.SelectedIndex
 
-        index = mainForm.DGV_light.CurrentRow.Index
+        index = mainForm.dgv(mainForm.tabControl.SelectedIndex - 1).CurrentRow.Index
 
-        Try
-            For j = 0 To mainForm.sCompany.Count - 1
-                sum = 0
-                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(4)
-                sum = sum + qty
-                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(6)
-                sum = sum + qty
-                qty = mainForm.dt_Lighting(i, j).Rows(index).Item(8)
-                sum = sum + qty
+        For j = 0 To mainForm.sCompany.Count - 1
+            sum = 0
 
-                mainForm.lblSumQty(j).Text = sum
+            qty = mainForm.dtDict.Item(mainForm.tabControl.SelectedIndex).Item(j + 1).Rows(index).Item(4)
+            sum = sum + qty
 
-            Next j
-        Catch
-        End Try
+            qty = mainForm.dtDict.Item(mainForm.tabControl.SelectedIndex).Item(j + 1).Rows(index).Item(6)
+            sum = sum + qty
+
+            qty = mainForm.dtDict.Item(mainForm.tabControl.SelectedIndex).Item(j + 1).Rows(index).Item(8)
+            sum = sum + qty
+
+            mainForm.lblSumQty(j).Text = sum
+            mainForm.lblSumQty(j).Visible = True
+
+        Next j
+
         mainForm.lbl_qtyTotal.Text = mainForm.txt_qty.Text
         mainForm.lbl_smeta_qty.Visible = True
 
@@ -344,9 +349,9 @@ Module myFunctions
 
         For j As Integer = 0 To mainForm.sCompany.Count - 1
 
-            dt = mainForm.dt_Lighting(_catIndex, j)
-            rCount = dt.Rows.Count
-            row = dt.Rows.Add()
+            'dt = mainForm.dt_Lighting(_catIndex, j)
+            'rCount = dt.Rows.Count
+            'row = dt.Rows.Add()
 
             row.Item(0) = CInt(dt.Rows(rCount - 1).Item(0)) + 1
             row.Item(1) = sRow(j, 0)
@@ -362,7 +367,7 @@ Module myFunctions
 
         rCount = mainForm.dt_sumLighting(_catIndex).Rows.Count
         row = mainForm.dt_sumLighting(_catIndex).Rows.Add()
-        update_sumDatatable(rCount)
+        'update_sumDatatable(rCount)
 
     End Sub
     '===================================================================================
@@ -399,7 +404,7 @@ Module myFunctions
         Next colIndex
         _dgv.DataSource = _dt
 
-        update_sumDatatable(_index)
+        ' update_sumDatatable(_index)
 
     End Sub
 
@@ -412,14 +417,14 @@ Module myFunctions
         Dim j As Integer
 
         For j = 0 To mainForm.sCompany.Count - 1
-            rowCollection = mainForm.dt_Lighting(_catIndex, j).rows
+            '        rowCollection = mainForm.dt_Lighting(_catIndex, j).rows
             rowCollection.RemoveAt(_rowIndex)
         Next
 
         rowCollection = mainForm.dt_sumLighting(_catIndex).rows
         rowCollection.RemoveAt(_rowIndex)
 
-        mainForm.DGV_light.DataSource = mainForm.dt_Lighting(_catIndex, mainForm.selCompIndex)
+        ' mainForm.DGV_light.DataSource = mainForm.dt_Lighting(_catIndex, mainForm.selCompIndex)
     End Sub
 
     '===================================================================================

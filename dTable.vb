@@ -6,7 +6,7 @@ Module dTable
     '===================================================================================      
     '                === Create datatable ===
     '===================================================================================
-    Sub create_datatable(_category As String, _companyNumber As Integer)
+    Sub create_datatable(_category As String)
 
         Dim i, j As Integer
         Dim adr As String
@@ -17,68 +17,75 @@ Module dTable
         Dim xlTable As ExcelTable
         Dim ws As ExcelWorksheet
 
-        xlTable = mainForm.xlTablesDict.Item(_category).Item(_companyNumber + 1)
-        rCount = xlTable.Address.Rows
-        cCount = 9
-        adr = xlTable.Address.Address
-        ws = mainForm.mainDict.Item(mainForm.fileNames(mainForm.tabControl.
-        SelectedIndex)).Item(mainForm.cmb_category.SelectedIndex + 1)
-        rng = ws.Cells(adr)
-
-        dt = New DataTable
-
-        'Adding the Columns
-        For i = 0 To cCount - 1
-            dt.Columns.Add(rng.Value(0, i))
-        Next i
-        dt.TableName = xlTable.Name
-
-        dt.Columns(0).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(1).DataType = System.Type.GetType("System.String")
-        dt.Columns(2).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(3).DataType = System.Type.GetType("System.String")
-        dt.Columns(4).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(5).DataType = System.Type.GetType("System.String")
-        dt.Columns(6).DataType = System.Type.GetType("System.Int32")
-        dt.Columns(7).DataType = System.Type.GetType("System.String")
-        dt.Columns(8).DataType = System.Type.GetType("System.Int32")
-
-
-        'Add Rows from Excel table
-
-        For i = 1 To rCount - 1
-            row = dt.Rows.Add()
-
-            For j = 0 To cCount - 1
-
-                If rng.Value(i, j) = Nothing Then
-                    Select Case j
-                        Case 3
-                            row.Item(j) = ""
-                        Case 4
-                            row.Item(j) = 0
-                        Case 5
-                            row.Item(j) = ""
-                        Case 6
-                            row.Item(j) = 0
-                        Case 7
-                            row.Item(j) = ""
-                        Case 8
-                            row.Item(j) = 0
-                    End Select
-                Else
-                    row.Item(j) = rng.Value(i, j)
-                End If
-
-            Next j
-        Next i
-
         mainForm.dtColl = New Collection
-        mainForm.dtColl.Add(dt)
-
         mainForm.dtDict = New Dictionary(Of Integer, Collection)
-        mainForm.dtDict.Add(mainForm.tabControl.SelectedIndex, mainForm.dtColl)
 
+        For k As Integer = 1 To mainForm.sCompany.Count
+
+            xlTable = mainForm.xlTablesDict.Item(_category).Item(k + 1)
+            rCount = xlTable.Address.Rows
+            ' Console.WriteLine(xlTable.Name)
+            cCount = 9
+            adr = xlTable.Address.Address
+            ' Console.WriteLine(adr)
+            ws = mainForm.mainDict.Item(mainForm.fileNames(mainForm.tabControl.
+            SelectedIndex)).Item(mainForm.cmb_category.SelectedIndex + 1)
+
+            rng = ws.Cells(adr)
+
+            dt = New DataTable
+
+            'Adding the Columns
+            For i = 0 To cCount - 1
+                dt.Columns.Add(rng.Value(0, i))
+            Next i
+            dt.TableName = xlTable.Name
+
+            dt.Columns(0).DataType = System.Type.GetType("System.Int32")
+            dt.Columns(1).DataType = System.Type.GetType("System.String")
+            dt.Columns(2).DataType = System.Type.GetType("System.Int32")
+            dt.Columns(3).DataType = System.Type.GetType("System.String")
+            dt.Columns(4).DataType = System.Type.GetType("System.Int32")
+            dt.Columns(5).DataType = System.Type.GetType("System.String")
+            dt.Columns(6).DataType = System.Type.GetType("System.Int32")
+            dt.Columns(7).DataType = System.Type.GetType("System.String")
+            dt.Columns(8).DataType = System.Type.GetType("System.Int32")
+
+
+            'Add Rows from Excel table
+
+            For i = 1 To rCount - 1
+                row = dt.Rows.Add()
+
+                For j = 0 To cCount - 1
+
+                    If rng.Value(i, j) = Nothing Then
+                        Select Case j
+                            Case 3
+                                row.Item(j) = ""
+                            Case 4
+                                row.Item(j) = 0
+                            Case 5
+                                row.Item(j) = ""
+                            Case 6
+                                row.Item(j) = 0
+                            Case 7
+                                row.Item(j) = ""
+                            Case 8
+                                row.Item(j) = 0
+                        End Select
+                    Else
+                        row.Item(j) = rng.Value(i, j)
+                    End If
+
+                Next j
+            Next i
+
+
+            mainForm.dtColl.Add(dt)
+
+        Next k
+        mainForm.dtDict.Add(mainForm.tabControl.SelectedIndex, mainForm.dtColl)
     End Sub
 
     Sub create_sumDatatable_v2(_i As Integer)
@@ -98,11 +105,11 @@ Module dTable
         adr = xlTable.Address.Address
         rng = mainForm.wsLight(_i).Cells(adr)
 
-        dt0 = mainForm.dt_Lighting(_i, 0)
-        dt1 = mainForm.dt_Lighting(_i, 1)
-        dt2 = mainForm.dt_Lighting(_i, 2)
-        dt3 = mainForm.dt_Lighting(_i, 3)
-        dt4 = mainForm.dt_Lighting(_i, 4)
+        'dt0 = mainForm.dt_Lighting(_i, 0)
+        'dt1 = mainForm.dt_Lighting(_i, 1)
+        'dt2 = mainForm.dt_Lighting(_i, 2)
+        'dt3 = mainForm.dt_Lighting(_i, 3)
+        'dt4 = mainForm.dt_Lighting(_i, 4)
 
         dtSum = New DataTable
 
@@ -127,14 +134,14 @@ Module dTable
 
             row = dtSum.Rows.Add()
 
-            row.Item(0) = dt0.Rows(i - 1).Item(0)
-            row.Item(1) = dt0.Rows(i - 1).Item(1)
-            row.Item(2) = dt0.Rows(i - 1).Item(2)
-            row.Item(3) = dt0.Rows(i - 1).Item(4) + dt0.Rows(i - 1).Item(6) + dt0.Rows(i - 1).Item(8)
-            row.Item(4) = dt1.Rows(i - 1).Item(4) + dt1.Rows(i - 1).Item(6) + dt1.Rows(i - 1).Item(8)
-            row.Item(5) = dt2.Rows(i - 1).Item(4) + dt2.Rows(i - 1).Item(6) + dt2.Rows(i - 1).Item(8)
-            row.Item(6) = dt3.Rows(i - 1).Item(4) + dt3.Rows(i - 1).Item(6) + dt3.Rows(i - 1).Item(8)
-            row.Item(7) = dt4.Rows(i - 1).Item(4) + dt4.Rows(i - 1).Item(6) + dt4.Rows(i - 1).Item(8)
+            'row.Item(0) = dt0.Rows(i - 1).Item(0)
+            'row.Item(1) = dt0.Rows(i - 1).Item(1)
+            'row.Item(2) = dt0.Rows(i - 1).Item(2)
+            'row.Item(3) = dt0.Rows(i - 1).Item(4) + dt0.Rows(i - 1).Item(6) + dt0.Rows(i - 1).Item(8)
+            'row.Item(4) = dt1.Rows(i - 1).Item(4) + dt1.Rows(i - 1).Item(6) + dt1.Rows(i - 1).Item(8)
+            'row.Item(5) = dt2.Rows(i - 1).Item(4) + dt2.Rows(i - 1).Item(6) + dt2.Rows(i - 1).Item(8)
+            'row.Item(6) = dt3.Rows(i - 1).Item(4) + dt3.Rows(i - 1).Item(6) + dt3.Rows(i - 1).Item(8)
+            'row.Item(7) = dt4.Rows(i - 1).Item(4) + dt4.Rows(i - 1).Item(6) + dt4.Rows(i - 1).Item(8)
 
         Next i
 
@@ -145,35 +152,35 @@ Module dTable
     '===================================================================================      
     '                === Update sumDatatable after UPDATE ===
     '===================================================================================
-    Sub update_sumDatatable(_i As Integer)
-        Dim i As Integer
-        Dim dt0, dt1, dt2, dt3, dt4, dtSum As DataTable
-        Dim row As DataRow
+    'Sub update_sumDatatable(_i As Integer)
+    '    Dim i As Integer
+    '    Dim dt0, dt1, dt2, dt3, dt4, dtSum As DataTable
+    '    Dim row As DataRow
 
-        i = mainForm.cmb_category.SelectedIndex
+    '    i = mainForm.cmb_category.SelectedIndex
 
-        dtSum = mainForm.dt_sumLighting(i)
+    '    dtSum = mainForm.dt_sumLighting(i)
 
-        row = dtSum.Rows(_i)
+    '    row = dtSum.Rows(_i)
 
-        dt0 = mainForm.dt_Lighting(i, 0)
-        dt1 = mainForm.dt_Lighting(i, 1)
-        dt2 = mainForm.dt_Lighting(i, 2)
-        dt3 = mainForm.dt_Lighting(i, 3)
-        dt4 = mainForm.dt_Lighting(i, 4)
+    '    'dt0 = mainForm.dt_Lighting(i, 0)
+    '    'dt1 = mainForm.dt_Lighting(i, 1)
+    '    'dt2 = mainForm.dt_Lighting(i, 2)
+    '    'dt3 = mainForm.dt_Lighting(i, 3)
+    '    'dt4 = mainForm.dt_Lighting(i, 4)
 
-        row.Item(0) = dt0.Rows(_i).Item(0)
-        row.Item(1) = dt0.Rows(_i).Item(1)
-        row.Item(2) = dt0.Rows(_i).Item(2)
-        row.Item(3) = dt0.Rows(_i).Item(4) + dt0.Rows(_i).Item(6) + dt0.Rows(_i).Item(8)
-        row.Item(4) = dt1.Rows(_i).Item(4) + dt1.Rows(_i).Item(6) + dt1.Rows(_i).Item(8)
-        row.Item(5) = dt2.Rows(_i).Item(4) + dt2.Rows(_i).Item(6) + dt2.Rows(_i).Item(8)
-        row.Item(6) = dt3.Rows(_i).Item(4) + dt3.Rows(_i).Item(6) + dt3.Rows(_i).Item(8)
-        row.Item(7) = dt4.Rows(_i).Item(4) + dt4.Rows(_i).Item(6) + dt4.Rows(_i).Item(8)
+    '    row.Item(0) = dt0.Rows(_i).Item(0)
+    '    row.Item(1) = dt0.Rows(_i).Item(1)
+    '    row.Item(2) = dt0.Rows(_i).Item(2)
+    '    row.Item(3) = dt0.Rows(_i).Item(4) + dt0.Rows(_i).Item(6) + dt0.Rows(_i).Item(8)
+    '    row.Item(4) = dt1.Rows(_i).Item(4) + dt1.Rows(_i).Item(6) + dt1.Rows(_i).Item(8)
+    '    row.Item(5) = dt2.Rows(_i).Item(4) + dt2.Rows(_i).Item(6) + dt2.Rows(_i).Item(8)
+    '    row.Item(6) = dt3.Rows(_i).Item(4) + dt3.Rows(_i).Item(6) + dt3.Rows(_i).Item(8)
+    '    row.Item(7) = dt4.Rows(_i).Item(4) + dt4.Rows(_i).Item(6) + dt4.Rows(_i).Item(8)
 
-        mainForm.dt_sumLighting(i) = dtSum
+    '    mainForm.dt_sumLighting(i) = dtSum
 
-    End Sub
+    'End Sub
 
 
     '===================================================================================      
